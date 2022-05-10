@@ -30,10 +30,10 @@
 // Exercícios de escrita de código
 // 1. Faça um programa que:
 //a) Pergunte a idade do usuário
-/*let idadeUsuario = Number(prompt("Qual é a sua idade? "))
+let idadeUsuario = Number(prompt("Qual é a sua idade? "))
 
 //b) Pergunte a idade do seu melhor amigo ou da sua melhor amiga
-let idadeMelhorAmimigo = Number(prompt("Qual é a idade do seu melhor amigo? "))
+let idadeMelhorAmimigo = Number(prompt("Qual é a idade do seu melhor amigo (a)? "))
 
 //c) Imprima no console a seguinte mensagem: "Sua idade é maior do que a do seu melhor amigo (a)?", seguido pela resposta (`true` ou `false`)
 const maiorIdadeUsuario = idadeUsuario > idadeMelhorAmimigo 
@@ -71,10 +71,10 @@ console.log("Sua idade em dias é: ", idadeEmDias)
 
 // c) A idade do usuário em horas
 let idadeEmHoras = idadeEmDias * 24
-console.log("Sua idade em horas é: ", idadeEmHoras)*/
+console.log("Sua idade em horas é: ", idadeEmHoras)
 
 // 4. Faça um programa que pergunte ao usuário dois números.
-/*let primeriroNumero = Number(prompt("Digite um número: "))
+let primeriroNumero = Number(prompt("Digite um número: "))
 let segundoNumero = Number(prompt("Digite outro número: "))
 //Em seguida, faça as operações e imprima no console as seguintes mensagens seguidas pelo true ou false:
 console.log("O primeiro número é maior que o segundo? ", primeriroNumero > segundoNumero)
@@ -87,8 +87,9 @@ console.log("O segundo numero é divisível pelo primeiro? ", segundoNumero % pr
 // let primeiroNumeroIgual = primeriroNumero === segundoNumero
 // let primeiroDivisiSegundo = primeriroNumero % segundoNumero === 0
 // let segundoDivisiPrimeiro = segundoNumero % primeriroNumero === 0
+
 // console.log("O primeiro número é maior que o segundo? ", primeiroMaior)
 // console.log("O primeiro numero é igual ao segundo? ", primeiroNumeroIgual)
 // console.log("O primeiro numero é divisível pelo segundo? ", primeiroDivisiSegundo)
-// console.log("O segundo numero é divisível pelo primeiro? ", segundoDivisiPrimeiro)*/
+// console.log("O segundo numero é divisível pelo primeiro? ", segundoDivisiPrimeiro)
 

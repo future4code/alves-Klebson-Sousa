@@ -125,28 +125,72 @@ function checaIgualdadeDesconsiderandoCase(string1, string2) {
 function checaRenovacaoRG() {
   // implemente sua lógica aqui
   let anoAtual = +prompt("Qual o ano atual?")
-  const anoNascimento = +prompt("Qaual o seu ano de nascimento?")
-  const anoCartIdentidade = +prompt("Qual o ano foi emitida sua carteira de identidade?")
-  let idade = anoAtual - anoNascimento
-  let tempoCarteira = anoAtual - anoCartIdentidade
-  let renovar = false
-  if (idade <= 20 && tempoCarteira >= 5 || idade > 20 && idade < 50 && tempoCarteira >= 10 || idade > 50 && tempoCarteira >= 15 ) {
-    renovar = true
-  } else {
-    renovar = false
+const anoNascimento = +prompt("Qual o seu ano de nascimento?")
+const anoCartIdentidade = +prompt("Qual o ano foi emitida sua carteira de identidade?")
+let idade = anoAtual - anoNascimento
+let tempoCarteira = anoAtual - anoCartIdentidade
+let renovar = idade <= 20 && tempoCarteira >= 5 || idade > 20 && idade < 50 && tempoCarteira >= 10 || idade > 50 && tempoCarteira >= 15
+console.log(renovar)
+}
+// ou
+// function checaRenovacaoRG() {
+//   // implemente sua lógica aqui
+//   let anoAtual = +prompt("Qual o ano atual?")
+//   const anoNascimento = +prompt("Qaual o seu ano de nascimento?")
+//   const anoCartIdentidade = +prompt("Qual o ano foi emitida sua carteira de identidade?")
+//   let idade = anoAtual - anoNascimento
+//   let tempoCarteira = anoAtual - anoCartIdentidade
+//   let renovar = false
+//   if (idade <= 20 && tempoCarteira >= 5 || idade > 20 && idade < 50 && tempoCarteira >= 10 || idade > 50 && tempoCarteira >= 15 ) {
+//     renovar = true
+//   } else {
+//     renovar = false
            
   
-  }console.log(renovar)
-}
+//   }console.log(renovar)
+// }
 
 // EXERCÍCIO 14
 function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
-
+  const anoBissexto1 = ano % 400 
+  const anoBissexto2 = ano % 4
+  const anoBissexto3 = ano % 100 
+  ano = anoBissexto1 == 0 || anoBissexto2 == 0 && (anoBissexto3 == anoBissexto1)
+  return ano 
 }
+// OU
+// function checaAnoBissexto(ano) {
+//   // implemente sua lógica aqui
+//   const anoBissexto1 = ano % 400 
+//   const anoBissexto2 = ano % 4
+//   const anoBissexto3 = ano % 100
+//   if (anoBissexto1 == 0 || anoBissexto2 == 0 && anoBissexto3 == anoBissexto1) {
+//     return ano = true
+//   } else {
+//     return ano = false
+//   } 
+// }
 
 // EXERCÍCIO 15
 function checaValidadeInscricaoLabenu() {
   // implemente sua lógica aqui
-
+  let temMaisDe18 = prompt("Você tem mais de 18 anos?").trim()
+  let temEnsinoMedio = prompt("você tem ensino médio completo?").trim()
+  let disponibilidade = prompt("Você possui disponibilidade exclusiva durante os horários do curso?").trim()
+  let resposta = true
+  if (temMaisDe18.toLocaleLowerCase() === "sim" && temEnsinoMedio.toLocaleLowerCase() === "sim" && disponibilidade.toLocaleLowerCase() === "sim") {
+    let resposta = true
+  } else {
+    resposta = false
+  }console.log(resposta) 
+}
+// EXERCÍCIO 15
+function checaValidadeInscricaoLabenu() {
+  // implemente sua lógica aqui
+  let temMaisDe18 = prompt("Você tem mais de 18 anos?").trim()
+  let temEnsinoMedio = prompt("você tem ensino médio completo?").trim()
+  let disponibilidade = prompt("Você possui disponibilidade exclusiva durante os horários do curso?").trim()
+  let resposta = (temMaisDe18.toLowerCase() === 'sim' && temEnsinoMedio.toLowerCase() === 'sim' && disponibilidade.toLowerCase() === 'sim')
+  console.log(resposta)
 }

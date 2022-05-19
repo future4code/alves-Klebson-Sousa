@@ -46,7 +46,8 @@ console.log(typeof idade)
 //g
 console.log("Olá,", nome, " você tem ", idade, " anos.")
 
-//2. Escreva um programa que faça 3 perguntas de Sim ou Não, armazenado em uma variável. Por exemplo: "Você está usando uma roupa azul hoje?". Depois, siga os passos:
+//2. Escreva um programa que faça 3 perguntas de Sim ou Não, armazenado em uma variável.
+//Por exemplo: "Você está usando uma roupa azul hoje?". Depois, siga os passos:
 //a)
 const gostarDeFutebol = "você gosta de futebol?"
 const instrutorLabenu = "Você é intrutor Labenu?"

@@ -10,8 +10,6 @@
  * 
  * 
  */
-
-
     const carta1 = comprarCarta(); 
     const carta2 = comprarCarta()
     carta3 = comprarCarta()

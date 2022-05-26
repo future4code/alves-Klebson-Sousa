@@ -44,10 +44,14 @@ div img {
     border-radius: 5px;
     font-size: 20px;
     color: white;
+    display: block;
+    margin-left: 300px;
+    /* margin-block-start: 50%; ele desce  */
 }
 
 .botao-amarelo:hover {
     background-color: #c44f00;
+    text-align: center;
 }
 
 .container {

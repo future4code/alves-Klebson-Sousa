@@ -28,6 +28,9 @@ button:focus {
 img {
     width: 100px;
 }
+table img {
+    width: 50px;
+}
 
 div>p:first-child {
     display: inline;
@@ -106,6 +109,7 @@ table {
     width: 60%;
     text-align: center;
 }
+
 
 td button {
     background-color: #fadf63;

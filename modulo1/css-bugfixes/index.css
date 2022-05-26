@@ -45,8 +45,8 @@ div img {
     font-size: 20px;
     color: white;
     display: block;
-    margin-left: 300px;
-    /* margin-block-start: 50%; ele desce  */
+    margin-left: 250px;
+    
 }
 
 .botao-amarelo:hover {
@@ -104,6 +104,7 @@ div:last-child {
 
 table {
     width: 60%;
+    text-align: center;
 }
 
 td button {
@@ -112,6 +113,7 @@ td button {
     height: 30px;
     border-radius: 5px;
     color: black;
+    text-align: center;
 }
 
 .container-do-search {

@@ -4,49 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./index.css">
     <title>----KBS Pipas----</title>
 </head>
 <body>
     <header>
-        <h1>Bem-vind@ ao <em>KBS Pipas</em>!</h1>
-        <p>Tudo para o seu <strong>RÉEELOOO!!!</strong><img src="./img/pipa logo.jpg" alt="logo"></p>
+        <div class="div1">
+            <h1 class="h1">Bem-vindo ao <em>KBS Pipas</em>!<img src="./img/pipa logo.jpg" alt="logo"></h1>
+            <nav class=" pagina-inicial">
+                <h6>
+                    <a href="index.html"><strong>Página Inicial</strong></a>
+                    <a href="ctrl-estoque.html"><strong>Controle de Estoque</strong></a>
+                    <a href="add-produto.html"><strong>Adicionar Produto</strong></a>
+                    <a href="funcionarios.html"><strong>Funcionários</strong></a>
+                </h6>
+            </nav>
+        </div>
+        <p>Tudo para o seu <strong>RÉEELOOO!!!</strong></p>
     </header>
 
-    <nav>
-        <a href="index.html"><strong>Página Inicial</strong></a>
-        <a href="ctrl-estoque.html"><strong>Controle de Estoque</strong></a>
-        <a href="add-produto.html"><strong>Adicionar Produto</strong></a>
-        <a href="funcionarios.html"><strong>Funcionários</strong></a>
-    </nav>
-
-    <main>
+    <section>
         <!-- ADICIONAR CONTEÚDO PRINCIPAL SOBRE SUA LOJINHA -->
-        <table>        
-              <tr>
-                <th> 
-                   
-                        
-                    <td><ol><li>Pipas de todos os modelos:</li></ol></td>
-                    <td><ol><li>A melhor linha do mercado:</li></ol></td>
-                    <td><ol><li>Carretilhas para <strong>Pipeiro Raiz:</strong></li></ol></td>   
-                        
-                </th>
-            </tr>
-            <tr>
-                <th>  
-                    <td><li><img src="./img/Variadas.jpg" alt="Varios modelos"></li></td>
-                    <td><li><img src="./img/linha 10 corrente.jpg" alt="Linha 10"></li></td>
-                    <td><li><img src="./img/Carretilha de madeira personalizada.jpg" alt="Carretilha de madeira"></li></td>
-                </th>      
-            </tr>   
-        </table>
-    </main>
-    <footer>
+        <main>
+            <table class="nome-produtos">        
+                <tr>
+                    <th><ol>Pipas de todos os modelos:</ol></th>
+                    <th><ol>A melhor linha do mercado:</ol></th>
+                    <th><ol>Carretilhas para <strong>Pipeiro Raiz:</strong></ol></th>                    
+                </tr>
+                <tr class="produtos">
+                    <td><img src="./img/Variadas.jpg" alt="Varios modelos"></td>
+                    <td><img src="./img/linha 10 corrente.jpg" alt="Linha 10"></td>
+                    <td><img src="./img/Carretilha de madeira personalizada.jpg" alt="Carretilha de madeira"></li></td>
+                </tr>   
+            </table>
+        </main>
+    </section>
+
+    <footer class="redes-sociais">
         <p>Siga-nos nas redes sociais!</p>
-        <p><Strong>#@KBSpipas</Strong></p>
-        <img src="https://image.flaticon.com/icons/png/512/25/25305.png"/>
-        <img src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
-        <img src="https://image.flaticon.com/icons/png/512/8/8800.png"/>
+        <img src="./img/istagran.jpg" alt="Instagran">
+        <img src="./img/WatsApp.jpg" alt="WatsApp">
+        <img src="./img/Facebook.png" alt="Facebook">
     </footer>
 </body>
 </html>
+    
+            

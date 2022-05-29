@@ -3,17 +3,29 @@
     padding: 0;
 }
 
-.container {
+.link {
     text-align: end;
-    font-size: xx-small;
+    font-size: x-small;
     background-color: black;
+    padding: 5px;
 }
 
-.container a {
+.link a {
     color: white;
     margin-right: 10px;
+    text-decoration: none;
 }
 h3 {
     text-align: center;
     background-color: rgb(197, 194, 194);
+}
+
+.ol {
+    color: blue;
+    margin: 5px;
+}
+
+.ol li {
+    margin-left: 15px;
+    color: black;
 }

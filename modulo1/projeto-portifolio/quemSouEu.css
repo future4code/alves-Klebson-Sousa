@@ -1,13 +1,16 @@
 * {
     margin: 0;
     padding: 0;
-    
+
 }
+
 .link {
     text-align:end;
     
 }
+
 .link a {
+    text-decoration: none;
     color: black;
     font-size: xx-small;
     margin-top: 0;
@@ -22,8 +25,9 @@ img {
 
 .container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-right: 10px;
+
 }
 
 .rodape-final {

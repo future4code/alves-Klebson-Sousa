@@ -2,29 +2,60 @@
     margin: 0;
     padding: 0;
 }
-img {
-    max-width: 60px;
-    max-width: 60px;
-    width: auto;
-    height: auto;
-    margin-top: 10px;
+
+.link {
+    display: flex;
 }
-header {
+
+.link li {    
+    list-style: none;
+    margin-left: 10px;    
+}
+
+.header1 {
+    background-color: black;
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+}
+
+.link a {
+    color: white;
+    border-radius: 40%;
+    text-decoration: none;
+    font-size: x-small;
+}
+
+.link a:hover {
+    display: inline;
+    background-color: gray;
+    color: black;
+    padding: 5px;
+    
+}
+.header2 {
     border: 2px solid black;       
     background-color: rgb(15, 91, 231);
     height: 20ch;
-    
 }
+
+
+img {
+    max-width: 60px;
+    max-width: 60px;
+    margin-top: 15px;
+    margin-bottom: 10x;
+    border-top-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+}
+
 .div, img, h1, h3 {
     text-align: center;
 
-}
-.button {
-    text-align: end;
-    margin-right: 10px;
 }
 
 .redes-sociais img {
     max-width: 2%;   
     margin-left: 10px;
+    
 }

@@ -49,7 +49,7 @@ if (jogoInDo === "in"){
     let jogo = 'Internacional'
     
     precoTotalIngresso /= 4.10
-    console.log(`---Dados da compra---
+    confirm(`---Dados da compra---
 Nome do cliente: ${nomeCompletoUsuario}
 Tipo do jogo: ${jogo}
 Etapa do jogo: ${nomeEtapaDoJogo}
@@ -60,7 +60,7 @@ Valor do ingresso: U$ ${(precoTotalIngresso / quantidadeIngresso).toLocaleString
 Valor total do ingresso: U$ ${(precoTotalIngresso).toLocaleString('USD')}`)
 } else {
     jogo = 'Nacional'
-    console.log(`---Dados da compra---
+    confirm(`---Dados da compra---
 Nome do cliente: ${nomeCompletoUsuario}
 Tipo do jogo: ${jogo}
 Etapa do jogo: ${nomeEtapaDoJogo}

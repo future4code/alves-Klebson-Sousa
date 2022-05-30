@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+    background-color: rgb(228, 225, 225);
+}
+
 .link {
     background-color: black;
     text-align: end;
@@ -22,3 +26,48 @@
     border-radius: 40%;
 }
 
+#titulo1 {
+    margin: 10px;
+}
+
+#titulo2 {
+   
+}
+
+#titulo3 {
+    margin: 10px;
+}
+
+.div1 {
+    margin: 10px;
+}
+.tecnologia li {
+    margin-left: 20px;
+}
+a {
+    margin: 10px;
+}
+
+.link2 {
+    max-width: 100%;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: rgb(19, 15, 15);
+    color: aliceblue;
+    text-align: center;
+}
+
+#link {
+    display: block;
+    margin: auto; 
+    padding: 5px;
+    text-decoration: none;
+    background-color: rgb(5, 5, 5);
+    text-align: center;
+    color: aliceblue;
+}
+ 
+#link:hover {
+    background-color: blue;
+    color: yellow;
+}

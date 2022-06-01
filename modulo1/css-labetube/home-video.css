@@ -3,7 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-}   
+}
 
 body {
     min-height: 100vh;
@@ -11,17 +11,20 @@ body {
     display: grid;
     grid-template-rows: auto 1fr 50px;
 }
+
 header {
     background-color: orange;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: start;
     padding: 1rem;
 }
-header textarea {    
+
+header input {
     grid-column: 4/5;
-    text-align-last: left;   
+    text-align-last: left;
+    height: 25px;
 }
 
 a {
@@ -34,11 +37,12 @@ section {
     justify-content: center;
     display: flex;
     padding: 10px;
-    background-color: aquamarine;
+    background-color: rgb(178, 224, 209);
 }
 
 .divVideo {
-    width: 80%;   
+    display: grid;
+    width: 80%;
     padding: 1rem;
     justify-items: center;
 }
@@ -52,9 +56,9 @@ a {
 }
 
 footer {
-display: flex;
-background-color: grey;
-align-items: center;
+    display: flex;
+    background-color: grey;
+    align-items: center;
 }
 
 footer h3 {
@@ -62,3 +66,35 @@ footer h3 {
     margin: 10px;
     color: aliceblue;
 }
+
+@media screen and (min-device-width: 320px) and (max-device-width: 488) {
+    body {
+        background-image: url(./nova1.jpg);
+    }
+}
+
+
+
+
+/* @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    body {
+        background-image: url(./nova.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .divVideo h3 {
+        color: rgb(243, 62, 49);
+    }
+
+    section {
+        justify-content: center;
+    }
+
+    footer {
+        background-color: black;
+        height: 80px;
+        align-self: center;
+    }
+} */

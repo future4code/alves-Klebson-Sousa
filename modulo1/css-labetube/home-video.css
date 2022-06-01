@@ -30,6 +30,13 @@ a {
 
 }
 
+section {
+    justify-content: center;
+    display: flex;
+    padding: 10px;
+    background-color: aquamarine;
+}
+
 .divVideo {
     width: 80%;   
     padding: 1rem;
@@ -42,13 +49,6 @@ a {
 
 a {
     margin-left: 10px;
-}
-section {
-    justify-content: center;
-    display: flex;
-    padding: 10px;
-    background-color: aquamarine;
-    
 }
 
 footer {

@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import "./App.css";
-import { createGlobalStyle } from "styled-components";
 import React from "react";
+import Avatar from "./Components/img/avatar.png"
 
 const MainContainer = styled.div`
   display: flex;
@@ -9,34 +8,53 @@ const MainContainer = styled.div`
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
-  background-color: #8c9dae;  
+  background-color: #ffffff;
   margin-top: 0;
 `;
-const Header = styled.header`
-  width: 60%;
-  height: 95vh;
+const Heder = styled.div`
   display: flex;
-  align-items: flex-end;
-  background-color:  #a1aeb0;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  padding: 20px 0;
+  background-color: #f0f2f5;
+`
+const ImgAvatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+`
+const Chat = styled.div`
+  width: 60%;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow-y: hidden;
+  background-color: #eae6df;
 `;
 const Footer = styled.footer`
   display: flex;
   flex-direction: row;
   width: 60%;
-  height: auto;
+  padding: 25px 0;
+  background-color: #f0f2f5;
 `;
 const Input1 = styled.input`
-  width: 30%;
+  width: 25%;
   padding: auto;
-  background-color: #17abd8;
+  background-color: #ffffff;
+  border-radius: 5%;
 `;
 const Input2 = styled.input`
-  width: 55%;
+  width: 60%;
   padding: auto;
-  background-color: #17abd8;
+  background-color: #ffffff;
 `;
 const Botao = styled.button`
-  background-color: #17abd8;
+  background-color: #ffffff;
   width: 15%;
 `;
 class App extends React.Component {
@@ -67,31 +85,39 @@ class App extends React.Component {
 
   render() {
     const listaComponentes = this.state.usuarios.map((usuario) => {
-      return (
-        <p>
-          <strong>{usuario.nome}:</strong> {usuario.mensagem}
-        </p>
-      );
+      const nome = usuario.nome.toLowerCase();
+      if (nome === "eu") {
+        return <p>{usuario.mensagem}</p>;
+      } else {
+        return (
+          <p>
+            <strong>{usuario.nome}:</strong> {usuario.mensagem}
+          </p>
+        );
+      }
     });
 
     return (
       <MainContainer>
-        {/* <div> */}
-          <Header>{listaComponentes}</Header>
-          <Footer>
-            <Input1
-              value={this.state.valorInputNome}
-              onChange={this.onChangeInputUsuario}
-              placeholder={"Nome"}
-            />
-            <Input2
-              value={this.state.valorInputMensagem}
-              onChange={this.onChangeInputMensagem}
-              placeholder={"Mensagem"}
-            />
-            <Botao onClick={this.adicionarUsuario}>Enviar</Botao>
-          </Footer>
-        {/* </div> */}
+        <Heder>
+          <ImgAvatar src={Avatar} alt="Imagem do usuário"/>
+        </Heder>
+        <Chat>
+          {listaComponentes}
+          </Chat>
+        <Footer>
+          <Input1
+            value={this.state.valorInputNome}
+            onChange={this.onChangeInputUsuario}
+            placeholder={"Nome"}
+          />
+          <Input2
+            value={this.state.valorInputMensagem}
+            onChange={this.onChangeInputMensagem}
+            placeholder={"Mensagem"}
+          />
+          <Botao onClick={this.adicionarUsuario}>Enviar</Botao>
+        </Footer>
       </MainContainer>
     );
   }

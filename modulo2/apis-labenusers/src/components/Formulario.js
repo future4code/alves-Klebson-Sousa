@@ -1,38 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
-import styled from "styled-components";
-
-export const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-export const DivButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  button {
-  }
-`;
-
-export const Header = styled.div`
-  display: flex;
-`;
+import {MainForms, DivButton, Header, Button} from "./Styled.js" 
 
 export default class Formulario extends Component {
   render() {
-    // const nomeUsuario = this.props.nomeUsuario.map((usuario) => {
-    //     return <div key={usuario.id}>
-    //         {usuario.name}
-    //     </div>
-    // });
-
     return (
-      <Main>
+      <MainForms>
         <h2>Tela de cadastro de usuário</h2>
         <DivButton>
-          <button onClick={() => this.props.mudaTela("Busca")}>
-            Trocar de tela
-          </button>
+          <Button onClick={() => this.props.mudaTela("Busca")}>
+            Mudar para de lista de usuários
+          </Button>
         </DivButton>
 
         <Header>
@@ -46,11 +24,11 @@ export default class Formulario extends Component {
             onChange={this.props.onChangeEmail}
             placeholder="E-mail"
           />
-          <button onClick={() => this.props.criarNovoUsuario()}>
-            Criar usuário
-          </button>
+          <Button onClick={() => this.props.criarNovoUsuario()}>
+            Cadastrar usuário
+          </Button>
         </Header>
-      </Main>
+      </MainForms>
     );
   }
 }

@@ -2,28 +2,26 @@ import React, { Component } from "react";
 import axios from "axios";
 import CreateList from "./components/createList/CreateList";
 import PlayList from "./components/playList/PlayList";
+import ListMusic from "./components/musicas/ListMusic"
 
 export default class App extends Component {
   state = {
     homeScreen: "Home",
   };
+  mudarTela = (screen) => {
+    this.setState({ homeScreen: screen });
+  };
   choosePage = () => {
     switch (this.state.homeScreen) {
       case "Home":
-        return <CreateList irParaPlayList={this.irParaPlayList} />;
+        return <CreateList mudarTela={this.mudarTela} />;
       case "Detail":
-        return <PlayList irParaHome={this.irParaHome} />;
+        return <PlayList mudarTela={this.mudarTela} />;
       default:
-        return <div>Erro!</div>;
+        return <ListMusic mudarTela={this.mudarTela}/>;
     }
   };
-  irParaHome = () => {
-    this.setState({ homeScreen: "Home" });
-  };
-  irParaPlayList = () => {
-    this.setState({ homeScreen: "Detail" });
-  };
-
+  
   render() {
     return <div>{this.choosePage()}</div>;
   }

@@ -13,10 +13,10 @@ function PokeCard(props) {
 
   // Passo 4c
   useEffect(
-    (prevProps) => {
-      if (pokemon !== props.pokeName) {
+    () => {
+      // if (pokemon !== props.pokeName) {
         pegaPokemon(props.pokeName);
-      }
+      // }
     },
     [props.pokeName]
   );

@@ -5,6 +5,18 @@ import axios from "axios";
 const Section = styled.div`
   display: flex;
   flex-direction: column;
+  div {
+    display: flex;
+    padding: 10px;
+    img {
+      height: 100%;
+      width: 50px;
+      margin-right: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      
+    }
+  }
 `;
 
 const MatchPage = (props) => {
@@ -18,7 +30,6 @@ const MatchPage = (props) => {
 
       .then((response) => {
         setMacheList(response.data.matches);
-        
       })
       .catch((err) => {
         console.log(err);
@@ -26,17 +37,22 @@ const MatchPage = (props) => {
   };
   useEffect(() => {
     getMatches();
-  }, []); 
+  }, []);
   const matchesList = matcheList.map((matche) => {
     return (
       <Section key={matche.id}>
-        <p>{matche.name}</p>
-        <img src={matche.photo} height={240} width={180}/>
+        <div>
+          <img src={matche.photo}/>
+          <p>{matche.name}</p>
+        </div>
       </Section>
     );
   });
-
-  return <div>{matchesList}</div>;
+  
+  return <div>
+    <h2>Matches</h2>
+    {matchesList}
+    </div>;
 };
 
 export default MatchPage;

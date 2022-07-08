@@ -4,11 +4,33 @@ import MatchPage from "./components/MatchPage";
 import Header from "./components/Header";
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
+export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;  
 `;
+export const MainContainer = styled.div`
+  
+    padding: 20px 20px px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    border: solid 1px black;
+    width: 400px;
+    height: 600px;
+    /* position: fixed; */
+     /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* background-color: white;
+    box-shadow: rgb(0 0 0 / 6%) 0px 0px 5px;  */
+
+`
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState("ProfilesPage");
@@ -18,31 +40,23 @@ function App() {
   };
   const viewScreen = () => {
     if (currentScreen === "ProfilesPage") {
-      return <ProfilesPage />;
+      return <ProfilesPage 
+      currentScreen={currentScreen}
+      changeScreen={changeScreen}
+      />;
     } else {
       return <MatchPage />;
     }
   };
-  // const irParaMatchPage = () => {
-  //   setCurrentScreen("MatchPage");
-  // };
-  // const irParaProfilesPage = () => {
-  //   setCurrentScreen("ProfilesPage");
-  // };
-  // const escolherTela = () => {
-  //   if (currentScreen) {
-  //     return <ProfilesPage />;
-  //   } else {
-  //     return <MatchPage />;
-  //   }
-  // };
 
   return (
-    <MainContainer>
-      <Header changeScreen={changeScreen} currentScreen={currentScreen} />
-      <hr/>
+    <Body>
+      <MainContainer>
+        <Header changeScreen={changeScreen} currentScreen={currentScreen} />      
       {viewScreen()}
-    </MainContainer>
+      </MainContainer>
+      
+    </Body>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ProfilesPage from "./components/ProfilesPage";
-import MatchPage from "./components/MatchPage";
-import Header from "./components/Header";
+import ProfilesPage from "./components/profilePage/ProfilesPage";
+import MatchPage from "./components/matchPage/MatchPage";
+import Header from "./components/header/Header";
 import styled from "styled-components";
 
 export const Body = styled.div`

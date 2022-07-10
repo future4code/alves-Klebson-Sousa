@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Section } from "./styled.Match";
+import { Section, H2 } from "./styled.Match";
 
 const MatchPage = (props) => {
   const [matcheList, setMacheList] = useState([]);
@@ -34,7 +34,7 @@ const MatchPage = (props) => {
 
   return (
     <div>
-      <h2>Matches</h2>
+      <H2>Matches</H2>
       {matchesList}
     </div>
   );

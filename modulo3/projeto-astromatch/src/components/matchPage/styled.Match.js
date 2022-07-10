@@ -7,7 +7,7 @@ export const Section = styled.div`
     display: flex;
     padding: 10px;
     img {
-      height: 100%;
+      max-height: 50px;
       width: 50px;
       margin-right: 10px;
       border-radius: 50%;
@@ -16,3 +16,6 @@ export const Section = styled.div`
     }
   }
 `;
+export const H2 = styled.h2`
+  font-family: "Roboto", sans-serif;
+`

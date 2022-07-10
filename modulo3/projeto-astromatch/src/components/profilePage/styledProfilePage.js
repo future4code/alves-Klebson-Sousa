@@ -8,6 +8,9 @@ export const Section = styled.section`
   -webkit-box-pack: end;
   justify-content: flex-end;
   height: 80vh;
+  h3 {
+    font-family: "Roboto", sans-serif;
+  }
 `;
 export const DivMatch = styled.div`
   box-shadow: rgb(117 117 117 / 77%) 0px 2px 10px 0px;
@@ -29,34 +32,49 @@ export const DivMatch = styled.div`
 export const Selectors = styled.div`
   display: flex;
   justify-content: space-evenly;
-  /* -webkit-box-align: center; */
+  -webkit-box-align: center;
   align-items: center;
   padding: 10px 0px;
 `;
-export const BotonLik = styled.button`
-  /* width: 60px;
-  height: 60px;
+export const BotonLike = styled.button`
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
   border: 1px solid green;
-  color: green;
+  transform: scale(0.7);
+  transition: all 0.2s ease 0s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   :hover {
     background-color: green;
-    color: white;
-  } */
-  border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    border: 1px solid green;
+  }
+  svg {
     color: green;
-    font-size: 50px;
-    transform: scale(0.7);
-    transition: all 0.2s ease 0s;
-    position: relative;
-    box-shadow: rgb(205 205 205 / 73%) 0px 0px 15px 0px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: transparent;
+    background: none;
+    font-size: 3em;
+    :hover {
+      color: white;
+    }
+  }
+`;
+export const BotonDislike = styled.button`
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  border: 1px solid red;
+  transform: scale(0.7);
+  transition: all 0.2s ease 0s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 3em;
+  :hover {
+    background-color: red;
+    color: white;
+  }
 `;
 export const Texto = styled.div`
   height: 30%;

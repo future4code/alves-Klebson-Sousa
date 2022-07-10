@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ScreenReset from "../screenReset/ScreenReset";
-import {Section, DivMatch, Selectors, Texto, BotonLik} from "./styledProfilePage"
-import {GrAed} from 'react-icons/gr'
+import {
+  Section,
+  DivMatch,
+  Selectors,
+  Texto,
+  BotonDislike,
+  BotonLike,
+} from "./styledProfilePage";
+import { AiFillHeart} from "react-icons/ai";
 
 const ProfilesPage = (props) => {
   const [profile, setProfile] = useState({});
@@ -17,7 +24,7 @@ const ProfilesPage = (props) => {
         setProfile(response.data.profile);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   };
   useEffect(() => {
@@ -41,7 +48,7 @@ const ProfilesPage = (props) => {
         response.data.isMatch === true && alert("Deu Match!");
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   };
 
@@ -56,7 +63,7 @@ const ProfilesPage = (props) => {
         alert("Perfis resetados com sucesso!");
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   };
 
@@ -77,14 +84,15 @@ const ProfilesPage = (props) => {
             </Texto>
           </DivMatch>
           <Selectors>
-            <button onClick={getProfile}>Dislike</button>
-            <BotonLik onClick={postProfile}><GrAed/></BotonLik>
+            <BotonDislike onClick={getProfile}>X</BotonDislike>
+            <BotonLike onClick={postProfile}>
+              <AiFillHeart />
+            </BotonLike>
           </Selectors>
         </Section>
       ) : (
         <ScreenReset resetProfile={resetProfile} />
       )}
-      {/* <ScreenReset resetProfile={resetProfile} /> */}
     </div>
   );
 };

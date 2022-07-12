@@ -1,28 +1,14 @@
 import "./App.css";
-import AdminHomePage from "./pages/AdminHomePage";
-import ApplicationFormPage from "./pages/ApplicationFormPage";
-import CreateTripPage from "./pages/CreateTripPage";
-import HomePage from "./pages/HomePage";
-import ListTripsPage from "./pages/ListTripsPage";
-import LoginPage from "./pages/LoginPage";
-import TripDetailsPage from "./pages/TripDetailsPage";
+import Header from "./components/Header";
+import { Router } from "./routes/Router";
+
+
 
 function App() {
   return (
     <div>
-      <HomePage />
-      <hr />
-      <ListTripsPage />
-      <hr />
-      <ApplicationFormPage />
-      <hr />
-      <LoginPage />
-      <hr />
-      <AdminHomePage />
-      <hr />
-      <TripDetailsPage />
-      <hr />
-      <CreateTripPage />
+     
+      <Router/> 
     </div>
   );
 }

@@ -1,10 +1,18 @@
-import React from "react";
-
+import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
+import { goToBack, goToAplicationForm } from "../routes/coordinator";
+import { useState, useEffect } from "react";
 const ListTripsPage = () => {
+  const navigate = useNavigate()
+  const [trips, setTrips] = useState()
+
+  
+
   return (
     <div>
       <h1>Lista de Viagens</h1>
-      <button>Inscrever-se</button>
+      <button onClick={() => goToBack(navigate)}>Voltar</button>
+      <button onClick={()=> goToAplicationForm(navigate)}>Inscrever-se</button>
       <p>
         Lorem ipsum placerat habitant dui pulvinar orci fames, pretium cursus
         orci dictum phasellus suscipit, litora aenean porta morbi eleifend

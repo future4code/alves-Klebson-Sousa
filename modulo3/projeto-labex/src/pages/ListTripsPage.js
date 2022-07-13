@@ -1,31 +1,51 @@
-import React, { useState } from "react";
-import {useNavigate} from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { goToBack, goToAplicationForm } from "../routes/coordinator";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { ListContainer, MainContainer } from "../components/styledListTrips";
+
 const ListTripsPage = () => {
-  const navigate = useNavigate()
-  const [trips, setTrips] = useState()
+  const navigate = useNavigate();
+  const [listTrips, setListTrips] = useState([]);
 
-  
+  useEffect(() => {
+    getListTrip();
+  }, []);
 
+  const getListTrip = () => {
+    axios
+      .get(
+        "https://us-central1-labenu-apis.cloudfunctions.net/labeX/:klebson/trips"
+      )
+      .then((response) => {
+        setListTrips(response.data.trips);
+        console.log("Trips", response.data.trips);
+      });
+  };
+
+  const listTrip = listTrips.map((trip) => {
+    return (
+      <ListContainer key={trip.id}>
+        <p>Nome: {trip.name}</p>
+        <p>Descrição: {trip.description}</p>
+        <p>Planeta: {trip.planet}</p>
+        <p>Duração: {trip.durationInDays}</p>
+        <p>Data: {trip.date}</p>
+
+       
+      </ListContainer>
+    );
+  });
   return (
-    <div>
-      <h1>Lista de Viagens</h1>
+    <MainContainer>
       <button onClick={() => goToBack(navigate)}>Voltar</button>
-      <button onClick={()=> goToAplicationForm(navigate)}>Inscrever-se</button>
-      <p>
-        Lorem ipsum placerat habitant dui pulvinar orci fames, pretium cursus
-        orci dictum phasellus suscipit, litora aenean porta morbi eleifend
-        accumsan. rhoncus euismod vitae tincidunt aliquam donec ultricies amet,
-        commodo donec dictumst erat fames vehicula lacus, consequat quam nisl
-        platea imperdiet lorem. eleifend et tincidunt rutrum nisi torquent et
-        semper ac, hac leo blandit sed cubilia quam. ligula dictum rutrum
-        interdum orci laoreet est imperdiet, etiam vitae quisque varius ligula
-        conubia phasellus accumsan, id netus curabitur ac non aenean. himenaeos
-        nec senectus tellus mi vivamus id diam conubia, aliquam consequat
-        torquent morbi ac nibh.
-      </p>
-    </div>
+      <button onClick={() => goToAplicationForm(navigate)}>Inscrever-se</button>
+      <h1>Lista de Viagens</h1>
+      <div>
+        {listTrip}
+      </div>
+      
+    </MainContainer>
   );
 };
 

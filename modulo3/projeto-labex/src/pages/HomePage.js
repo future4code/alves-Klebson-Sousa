@@ -8,8 +8,7 @@ function HomePage() {
   return (
     <div>
       <h1>Labex</h1>
-      <button onClick={() => goToListTrips(navigate)}>Ver Viagens</button>
-      {/* <button onClick={goToAdminHome}>Área de Adimin</button> */}
+      <button onClick={() => goToListTrips(navigate)}>Ver Viagens</button>      
       <button onClick={() => goToLoginPage(navigate)}>Área de Adimin</button>
     </div>
   );

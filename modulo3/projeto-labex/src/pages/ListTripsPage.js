@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { goToBack, goToAplicationForm } from "../routes/coordinator";
 import axios from "axios";
-import { ListContainer, MainContainer } from "../components/styledListTrips";
+import {
+  ListContainer,
+  MainContainer,
+  NavButton,
+} from "../components/styledListTrips";
+import { BASE_URL } from "../constants/Urls";
 
 const ListTripsPage = () => {
   const navigate = useNavigate();
@@ -14,12 +19,13 @@ const ListTripsPage = () => {
 
   const getListTrip = () => {
     axios
-      .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labeX/:klebson/trips"
-      )
+      .get(`${BASE_URL}/trips`)
       .then((response) => {
         setListTrips(response.data.trips);
         console.log("Trips", response.data.trips);
+      })
+      .catch((error) => {
+        console.log("Deu errado", error.response);
       });
   };
 
@@ -31,20 +37,19 @@ const ListTripsPage = () => {
         <p>Planeta: {trip.planet}</p>
         <p>Duração: {trip.durationInDays}</p>
         <p>Data: {trip.date}</p>
-
-       
       </ListContainer>
     );
   });
   return (
     <MainContainer>
-      <button onClick={() => goToBack(navigate)}>Voltar</button>
-      <button onClick={() => goToAplicationForm(navigate)}>Inscrever-se</button>
+      <NavButton>
+        <button onClick={() => goToBack(navigate)}>Voltar</button>
+        <button onClick={() => goToAplicationForm(navigate)}>
+          Inscrever-se
+        </button>
+      </NavButton>
       <h1>Lista de Viagens</h1>
-      <div>
-        {listTrip}
-      </div>
-      
+      <div>{listTrip}</div>
     </MainContainer>
   );
 };

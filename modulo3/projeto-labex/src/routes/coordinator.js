@@ -24,6 +24,6 @@ export const goToAplicationForm = (navigate) => {
   export const goToCreateTrip = (navigate) => {
     navigate("/admin/trips/create");
   };
-  export const goToTripDetails = (navigate) => {
-    navigate("/admin/trips/:id");
+  export const goToTripDetails = (navigate, id) => {
+    navigate(`/admin/trips/${id}`);
   };

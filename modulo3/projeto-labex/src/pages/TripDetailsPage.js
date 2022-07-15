@@ -8,8 +8,8 @@ const TripDetailsPage = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [tripsDetail, setTripsDetail] = useState({});
-  const [candidatos, setCandidatos] = useState([]);
-
+  const [candidates, setCandidates] = useState([]);
+  console.log(params);
   useEffect(() => {
     getTripDetail();
   }, []);
@@ -25,14 +25,19 @@ const TripDetailsPage = () => {
       .then((response) => {
         console.log(response.data.trip);
         setTripsDetail(response.data.trip);
-        setCandidatos(response.data.trip.candidates);
+        setCandidates(response.data.trip.candidates);
       })
       .catch((error) => {
         console.log("Deu erro", error.response);
       });
   };
- 
-  console.log(candidatos);
+
+  const listCandidates =
+    candidates &&
+    candidates.map((candidate) => {
+      return <p key={candidate.id}>Nome: {candidate.name}</p>;
+    });
+
   return (
     <div>
       <button onClick={() => goToBack(navigate)}>Voltar</button>
@@ -44,7 +49,7 @@ const TripDetailsPage = () => {
       <p>{tripsDetail.date}</p>
 
       <h2>Candidatos</h2>
-      <p>{candidatos.name}</p>
+      {listCandidates}
       <button>Aprovar</button>
       <button>Reprovar</button>
     </div>

@@ -1,63 +1,57 @@
 import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { goToBack, goToAdminHome } from "../routes/coordinator";
 import { BASE_URL } from "../constants/Urls";
 import axios from "axios";
+import useForm from "../hooks/useForm";
+
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const { form, onChangeForm, cleanFields } = useForm({email: "", password: ""})
   const navigate = useNavigate();
-  // const history = useHistory()
 
 
-  
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value)
-    
-  }
 
-  const onChangePassword = (event) => {
-    setPassword(event.target.value)
-    
-  }
-
-  const onSubmitLogin = () => {
-    console.log(email, password)
-    const body = {
-      email: email,
-      password: password
-    }
-    axios.post(`${BASE_URL}/login`, body)
-    .then((response) => {
-      console.log("Deu certo",response.data.token)
-      localStorage.setItem("token", response.data.token)
-      goToAdminHome(navigate)
-
-    })
-    .catch((error) => {
-      console.log("Deu errado",error.response)
-    })
-  }
+  const onSubmitLogin = (event) => {
+    event.preventDefault();
+    axios
+      .post(`${BASE_URL}/login`, form)
+      .then((response) => {
+        console.log("Deu certo", response.data.token);
+        localStorage.setItem("token", response.data.token);
+        goToAdminHome(navigate);
+        cleanFields()
+      })
+      .catch((error) => {
+        alert("Senha ou email inválido");
+      });
+  };
 
   return (
     <div>
       <button onClick={() => goToBack(navigate)}>Voltar</button>
       <h1>Login</h1>
-      <input 
-      placeholder="email" 
-      type="email"
-      value={email}
-      onChange={onChangeEmail}
-      />
-      <input 
-      placeholder="password" 
-      type="password"
-      value={password}
-      onChange={onChangePassword}
-      />
-      {/* <button onClick={() => goToAdminHome(navigate)}>x</button> */}
-      <button onClick={onSubmitLogin} >Entrar</button>
+      <form onSubmit={onSubmitLogin}>
+        <input
+          name="email"
+          placeholder="email"
+          type="email"
+          value={form.email}
+          onChange={onChangeForm}
+          required
+        />
+        <input
+          name="password"
+          placeholder="password"
+          type="password"
+          value={form.password}
+          onChange={onChangeForm}
+          required
+          pattern={"^.{5,}"}
+          title={"Senha deve ter no mínimo 5 caracteres"}
+        />
+        <button>Entrar</button>
+      </form>
     </div>
   );
 };

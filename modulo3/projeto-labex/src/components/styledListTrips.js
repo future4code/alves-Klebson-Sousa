@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 export const ListContainer = styled.div`
   display: flex; 
-  justify-content: space-between;
+  justify-content: center; 
   border: solid 1px black;
   margin: 10px;
   flex-direction: column;
-  box-shadow: 6px 6px;
-  max-width: 400px;
+  box-shadow: 6px 6px 6px #969696;
+  max-width: 380px;
   width: 100%;
+  border-radius: 20px;
+  max-height: 330px;
+
   p {
     margin: 10px;
   }
@@ -19,8 +22,8 @@ export const MainContainer = styled.div`
   div {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: space-evenly;     
+    overflow: auto;
   }
 
 `;

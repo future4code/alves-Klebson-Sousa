@@ -18,7 +18,7 @@ export const goToHomePage = (navigate) => {
 };
 
 export const goToAplicationForm = (navigate) => {
-  navigate("/trips/application");
+  navigate(`/trips/application`);
 };
 
   export const goToCreateTrip = (navigate) => {

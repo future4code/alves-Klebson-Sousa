@@ -7,7 +7,7 @@ export const useProtecPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token === null) {
-      console.log("Não está logado!!!");
+      alert("Não está logado!!!");
       goToLoginPage(navigate);
     }
   }, []);

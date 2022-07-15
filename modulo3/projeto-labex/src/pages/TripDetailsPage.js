@@ -9,13 +9,15 @@ const TripDetailsPage = () => {
   const params = useParams();
   const [tripsDetail, setTripsDetail] = useState({});
   const [candidates, setCandidates] = useState([]);
-  console.log(params);
+  const [approve, setApprove] = useState();
+  // console.log(params);
   useEffect(() => {
     getTripDetail();
   }, []);
 
   const getTripDetail = (id) => {
     const token = localStorage.getItem("token");
+    console.log(token)
     axios
       .get(`${BASE_URL}/trip/${params.id}`, {
         headers: {
@@ -23,7 +25,6 @@ const TripDetailsPage = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.trip);
         setTripsDetail(response.data.trip);
         setCandidates(response.data.trip.candidates);
       })
@@ -31,11 +32,55 @@ const TripDetailsPage = () => {
         console.log("Deu erro", error.response);
       });
   };
+  
+  // const candidatesId = candidates.map((candidateId) => {
+  //   return candidateId.id;
+  // });
+  
+
+  const approveCandidates = (id, approve) => {
+    const token = localStorage.getItem("token");
+    const body = {
+      approve: approve,
+    };
+    axios
+      .put(`${BASE_URL}/trips/${params.id}/candidates/${id}/decide`, body, {
+        headers: {
+          auth: token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        console.log(id);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  const aprovar = (id) => {
+    setApprove(true)
+    approveCandidates(id)
+  }
+  const reprovar = (id) => {
+    setApprove(false)
+    approveCandidates(id)
+  }
 
   const listCandidates =
     candidates &&
     candidates.map((candidate) => {
-      return <p key={candidate.id}>Nome: {candidate.name}</p>;
+      return (
+        <div>
+          <p key={candidate.id}>Nome: {candidate.name}</p>;
+          <button onClick={() => approveCandidates(candidate.id, true)}>
+            Aprovar
+          </button>
+          <button onClick={() => approveCandidates(candidate.id, false)}>
+            Reprovar
+          </button>
+        </div>
+      );
     });
 
   return (
@@ -50,8 +95,6 @@ const TripDetailsPage = () => {
 
       <h2>Candidatos</h2>
       {listCandidates}
-      <button>Aprovar</button>
-      <button>Reprovar</button>
     </div>
   );
 };

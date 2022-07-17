@@ -5,22 +5,21 @@ import { BASE_URL } from "../constants/Urls";
 import axios from "axios";
 import useForm from "../hooks/useForm";
 
-
 const LoginPage = () => {
-  const { form, onChangeForm, cleanFields } = useForm({email: "", password: ""})
+  const { form, onChangeForm, cleanFields } = useForm({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
-
-
 
   const onSubmitLogin = (event) => {
     event.preventDefault();
     axios
       .post(`${BASE_URL}/login`, form)
       .then((response) => {
-        console.log("Deu certo", response.data.token);
         localStorage.setItem("token", response.data.token);
         goToAdminHome(navigate);
-        cleanFields()
+        cleanFields();
       })
       .catch((error) => {
         alert("Senha ou email inválido");

@@ -5,32 +5,28 @@ import { BASE_URL } from "../constants/Urls";
 import {
   goToHomePage,
   goToCreateTrip,
-  goToTripDetails,
-  goToLoginPage,
+  goToTripDetails,  
 } from "../routes/coordinator";
 import { MainContainer } from "../components/styledAdminHome";
 import { useProtecPage } from "../constants/functions";
 
 const AdminHomePage = () => {
   useProtecPage();
-
-  // const params = useParams();
+  
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    getTrips();
+        getTrips();
   }, []);
 
   const getTrips = () => {
     axios
       .get(`${BASE_URL}/trips`)
       .then((response) => {
-        setTrips(response.data.trips);
-        console.log("Trips", response.data.trips);
+        setTrips(response.data.trips);        
       })
       .catch((error) => {
-        console.log("Deu errado", error.response);
+        alert("Algo deu errado! Tente novamente")
       });
   };
   const deleteTrip = (trips) => {
@@ -44,6 +40,8 @@ const AdminHomePage = () => {
       .then((response) => {
         alert(`Viagem ${trips.name} deletada com sucesso!`);
         getTrips();
+        document.location.reload(true)
+
       })
       .catch((error) => {
         console.log(error.response);

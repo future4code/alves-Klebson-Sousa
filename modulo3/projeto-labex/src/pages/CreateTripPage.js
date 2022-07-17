@@ -24,12 +24,11 @@ const CreateTripPage = () => {
       }
     })
     .then((response) => {
-      alert("Viagen criada com sucesso")
-      console.log(response.data)
+      alert("Viagen criada com sucesso")     
       cleanFields()
     })
     .catch((error) => {
-      console.log(error.response)
+      alert("Revise os campos de preenchimentos!")
     })
   }
 

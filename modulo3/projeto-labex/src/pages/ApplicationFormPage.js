@@ -9,7 +9,7 @@ const ApplicationFormPage = () => {
   const navigate = useNavigate();
   const { form, onChangeForm, cleanFields } = useForm({
     name: "",
-    age: 0,
+    age: "",
     applicationText: "",
     profession: "",
     country: "",
@@ -29,7 +29,7 @@ const ApplicationFormPage = () => {
         setListTrips(response.data.trips);
       })
       .catch((error) => {
-        console.log("Deu errado", error.response);
+        alert("Deu errado");
       });
   };
 
@@ -42,27 +42,17 @@ const ApplicationFormPage = () => {
         </option>
       );
     });
-  // const tripId = form && listTrips.map((trip) => {
-  //   return trip.id;
-  // });
 
   const onSubmitApplyToTrip = (event) => {
     event.preventDefault();
-    const body = {
-      name: form.name,
-      age: form.age,
-      applicationText: form.applicationText,
-      profession: form.profession,
-      country: form.country,
-    };
-    console.log(body);
+
     axios
-      // .post(`${BASE_URL}/trips/${form.id}/apply`, form)
-      .post(`${BASE_URL}/trips/${form.id}/apply`, body)
+      .post(`${BASE_URL}/trips/${form.id}/apply`, form)
+
       .then((response) => {
-        console.log(response.data);
         alert("Aplicação enviada com sucesso!");
         cleanFields();
+        document.location.reload(true);
       })
       .catch((error) => {
         alert("Algo deu errado tente novamente");
@@ -74,20 +64,11 @@ const ApplicationFormPage = () => {
     <div>
       <h1>Inscreva-se para uma viagem</h1>
       <form onSubmit={onSubmitApplyToTrip}>
-        {/* <select onChange={onChangeForm} value={form.id}> */}
         <select name={"id"} onChange={onChangeForm} defaultValue={form.id}>
-          <option value disabled>
+          <option value="" disabled selected>
             Escolha uma Viagem
           </option>
-          {/* {chooseTrip} */}
-          {listTrips &&
-            listTrips.map((trip) => {
-              return (
-                <option key={trip.id} value={trip.id}>
-                  {trip.name}
-                </option>
-              );
-            })}
+          {chooseTrip}
         </select>
         <input
           placeholder="Nome"
@@ -112,7 +93,7 @@ const ApplicationFormPage = () => {
           placeholder="Texto de Candidatura"
           name="applicationText"
           required
-          pattern={"^.{30,}"}
+          pattern={"^.{20,}"}
           title={"O nome deve ter no mínimo 30 caracteres"}
           value={form.applicationText}
           onChange={onChangeForm}
@@ -133,7 +114,7 @@ const ApplicationFormPage = () => {
           required
           value={form.country}
         >
-          <option value disabled selected>
+          <option value="" disabled selected>
             Escolha um País
           </option>
           <option value="Afghanistan">Afghanistan</option>

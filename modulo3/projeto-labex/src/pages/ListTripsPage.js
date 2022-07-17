@@ -21,11 +21,10 @@ const ListTripsPage = () => {
     axios
       .get(`${BASE_URL}/trips`)
       .then((response) => {
-        setListTrips(response.data.trips);
-        console.log("Trips", response.data.trips);
+        setListTrips(response.data.trips);        
       })
       .catch((error) => {
-        console.log("Deu errado", error.response);
+        alert("Deu errado");
       });
   };
 

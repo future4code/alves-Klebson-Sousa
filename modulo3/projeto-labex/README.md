@@ -1,70 +1,21 @@
-# Getting Started with Create React App
+Projeto Labex
+Este desenvolvido para um programa de viagens espaciais onde o usuário pode se inscrever para uma viagem e aguardar aprovação do administrador.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O que funciona?
+No diretório do projeto, você pode visualizar viagens existentes e executar inscrições para uma determinada viagem de sua escolha, botões de navegação, voltar para home, formulário de inscrição, área de admin pode ser acessada através de login onde é preciso inserir um e-mail e senha de usuário, só administradores devidamente cadastrados e autorizados podem acessar a página de admin, acessando a página de admin o mesmo tem acesso a lista de viagens e detalhes de cada viagem onde pode ser visualizado o detalhe da viagem e os candidatos pendentes, também candidatos aprovados para viagem, na área de candidatos pendentes há botões onde pode-se escolher entre aprovar e reprovar candidatos, os mesmos após serem clicados ambos retornam um alerta de sucesso seja de aprovado ou reprovado. Se aprovado o candidato some da lista de pendentes e aparece na lista de Candidatos aprovados. Ainda na página de admin é possível que o administrador possa deletar qualquer uma viagem a sua escolha como também é possível acessar uma página de formulário onde pode-se criar novas viagens.
 
-## Available Scripts
+Link do surge onde pode ser visualizado:
+https://ludicrous-crate.surge.sh/admin/trips/create
 
-In the project directory, you can run:
+O que não funciona? 
+Botão de Logout, estilização devido a perda de tempo em determinadas partes do código.
+
+No diretório do projeto, você pode executar:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Tecnologia usada:
+Front-end: React JS, Axios, Styled-components, Hooks, navegação com React Router, Autenticação em aplicações react.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dificuldades:
+Até sexta na parte da manhã, estava tudo tranquilo, mas me deparei com um erro no código na parte de inscrição que perdi o dia inteiro tentando debugar e, no sábado tambéna finalização das funções de mostrar candidatos aprovados, perdi o sábado também, isso me estressou muito, no domingo um colega me orientou e consegui finalizar a lógica, por causa desses acontecimentos, não pude fazer a estilização como eu queria, nem deixar como o Wireframe.

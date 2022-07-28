@@ -4,13 +4,13 @@ import vector1 from "../../assets/vector1.png";
 import vector2 from "../../assets/vector2.png";
 import vector3 from "../../assets/vector3.png";
 import vector4 from "../../assets/vector4.png";
-import { gotoLoginPage, goToPostPage } from "../../routes/cordinator";
+import { goToLoginPage, goToPostPage } from "../../routes/cordinator";
 
 const Header = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token")
-    gotoLoginPage(navigate)
+    goToLoginPage(navigate)
   }
   useEffect(() => {
     showButton()
@@ -35,7 +35,7 @@ const Header = () => {
           <img src={vector2} />
           <img src={vector3} />
           <img src={vector4} />
-          <button onClick={() => goToPostPage(navigate)}>Entrar</button>
+          <button onClick={() => goToLoginPage(navigate)}>Login</button>
         </div>
       );
     } else if (window.location.pathname === "/adicionar-comentario/:id") {
@@ -46,7 +46,7 @@ const Header = () => {
           <img src={vector2} />
           <img src={vector3} />
           <img src={vector4} />
-          <button onClick={() => gotoLoginPage(navigate)}>Logout</button>
+          <button onClick={() => goToLoginPage(navigate)}>Logout</button>
         </div>
       );
     }

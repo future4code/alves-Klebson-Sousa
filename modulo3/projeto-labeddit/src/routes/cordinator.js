@@ -1,4 +1,4 @@
-export const gotoLoginPage = (navigate) => {
+export const goToLoginPage = (navigate) => {
     navigate("/")
 }
 export const goToSignUpPage = (navigate) => {

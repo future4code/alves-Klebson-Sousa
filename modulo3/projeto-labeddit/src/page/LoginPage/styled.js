@@ -92,6 +92,7 @@ export const Form = styled.form`
     background: #ffffff;
     border: 1px solid #d5d8de;
     border-radius: 4px;
+    cursor: pointer;
   }
 `;
 export const ButtonContinue = styled.button`

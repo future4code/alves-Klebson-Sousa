@@ -1,35 +1,17 @@
 import React from "react";
-import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../constants/urls";
-import { ButtonContinue, ButtonCreate, ContainerLogo, Form, MainLogin, Vetor5, Vetor6, Vetor7, Vetor8 } from "./styled";
-import axios from "axios";
-import { goToPostPage, goToSignUpPage } from "../../routes/cordinator";
+import { ButtonCreate, ContainerLogo, MainLogin, Vetor5, Vetor6, Vetor7, Vetor8 } from "./styled";
+import { goToSignUpPage } from "../../routes/cordinator";
 import Vector5 from "../../assets/Vector5.png";
 import Vector6 from "../../assets/Vector6.png";
 import Vector7 from "../../assets/Vector7.png";
 import Vector8 from "../../assets/Vector8.png";
+import LoginForm from "./LoginForm";
+import useUntectedPage from "../../hooks/useUnprotectedPage";
 
 const LoginPage = () => {
-  const { form, onChangeForm, cleanFields } = useForm({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-
-  const onSubmitLogin = (event) => {
-    event.preventDefault();
-    axios
-      .post(`${BASE_URL}/users/login`, form)
-      .then((response) => {
-        localStorage.setItem("token", response.data.token);
-        goToPostPage(navigate);
-        cleanFields();
-      })
-      .catch((error) => {
-        alert("Senha ou email inválido");
-      });
-  };
+  useUntectedPage()
+  const navigate = useNavigate()
   return (
     <MainLogin>
       <ContainerLogo>
@@ -39,29 +21,8 @@ const LoginPage = () => {
         <Vetor8 src={Vector8} />
         <h1>LabEddit</h1>
       </ContainerLogo>
-      <p>Projeto de rede social da Labenu</p>
-
-      <Form onSubmit={onSubmitLogin}>
-        <input
-          name="email"
-          placeholder="email"
-          type="email"
-          value={form.email}
-          onChange={onChangeForm}
-          required
-        />
-        <input
-          name="password"
-          placeholder="password"
-          type="password"
-          value={form.password}
-          onChange={onChangeForm}
-          required
-          pattern={"^.{8,}"}
-          title={"Senha deve ter no mínimo 8 caracteres"}
-        />
-        <ButtonContinue>Continuar</ButtonContinue>
-      </Form>      
+      <p>Projeto de rede social da Labenu</p>  
+      <LoginForm/>   
       <ButtonCreate onClick={() => goToSignUpPage(navigate)}>
         Crie uma conta!
       </ButtonCreate>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../../global/GlobalContext";
+import GlobalStateContext from "../../global/GlobalStateContext";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import useForm from "../../hooks/useForm";
@@ -13,41 +13,43 @@ import {
   ContainerCard,
 } from "./styled";
 import { goToAddComment } from "../../routes/cordinator";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import useRequestData from "../../hooks/useRequestData";
 
 const PostPage = () => {
   useProtectedPage();
-  const navigate = useNavigate()
-  const [listPosts, setListPosts] = useState([]);
+  const navigate = useNavigate();
+  // const [listPosts, setListPosts] = useState([]);
+  const { listPosts, getPosts } = useContext(GlobalStateContext);
   const { form, onChangeForm, cleanFields } = useForm({
     title: "",
     body: "",
   });
+
   // const listPosts = useRequestData([], `${BASE_URL}/posts`)
-  console.log(listPosts)
-  useEffect(() => {
-    getPosts();
-  }, []);
-  const getPosts = () => {
-    const token = localStorage.getItem("token");
-    axios
-      .get(`${BASE_URL}/posts`, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setListPosts(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-  const onClickCard = (id) => {
-    goToAddComment(navigate, id)
-  }
+  // console.log(listPosts)
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
+  // const getPosts = () => {
+  //   const token = localStorage.getItem("token");
+  //   axios
+  //     .get(`${BASE_URL}/posts`, {
+  //       headers: {
+  //         Authorization: token,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setListPosts(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
+  // };
+  // const onClickCard = (id) => {
+  //   goToAddComment(navigate, id)
+  // }
   const creatPost = (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -61,6 +63,7 @@ const PostPage = () => {
         alert("Post criado com sucesso");
         cleanFields();
         getPosts();
+       
         console.log(response);
       })
       .catch((error) => {
@@ -70,9 +73,11 @@ const PostPage = () => {
   const posts =
     listPosts &&
     listPosts.map((post) => {
-      console.log(post);
       return (
-        <CardPost key={post.id} onClick={() => onClickCard(post.id)}>
+        <CardPost
+          key={post.id}
+          onClick={() => goToAddComment(navigate, post.id)}
+        >
           <p>Enviado por: {post.username}</p>
           <h6>{post.title}</h6>
           <h6>{post.body}</h6>

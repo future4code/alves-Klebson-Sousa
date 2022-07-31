@@ -11,42 +11,27 @@ import {
   InputPost,
   ButtonPost,
   ContainerCard,
+  CardButton,
 } from "./styled";
 import { goToAddComment } from "../../routes/cordinator";
 import { useNavigate, useParams } from "react-router-dom";
+import Comment from "../../assets/Comment.svg";
+import Like from "../../assets/Like.svg";
+import Dislike from "../../assets/Dislike.svg";
 // import useRequestData from "../../hooks/useRequestData";
+import * as P from "./styled"
 
 const PostPage = () => {
   useProtectedPage();
   const navigate = useNavigate();
   // const [listPosts, setListPosts] = useState([]);
-  const { listPosts, getPosts } = useContext(GlobalStateContext);
+  const { listPosts, getPosts, like, disLike } = useContext(GlobalStateContext);
   const { form, onChangeForm, cleanFields } = useForm({
     title: "",
     body: "",
   });
 
   // const listPosts = useRequestData([], `${BASE_URL}/posts`)
-  // console.log(listPosts)
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
-  // const getPosts = () => {
-  //   const token = localStorage.getItem("token");
-  //   axios
-  //     .get(`${BASE_URL}/posts`, {
-  //       headers: {
-  //         Authorization: token,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setListPosts(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //     });
-  // };
   // const onClickCard = (id) => {
   //   goToAddComment(navigate, id)
   // }
@@ -63,7 +48,7 @@ const PostPage = () => {
         alert("Post criado com sucesso");
         cleanFields();
         getPosts();
-       
+
         console.log(response);
       })
       .catch((error) => {
@@ -72,22 +57,35 @@ const PostPage = () => {
   };
   const posts =
     listPosts &&
-    listPosts.map((post) => {
+    listPosts.map((post) => {      
       return (
-        <CardPost
-          key={post.id}
-          onClick={() => goToAddComment(navigate, post.id)}
+        <P.CardPost
+          key={post.id}          
         >
-          <p>Enviado por: {post.username}</p>
-          <h6>{post.title}</h6>
-          <h6>{post.body}</h6>
-        </CardPost>
+          <div onClick={() => goToAddComment(navigate, post.id)}>
+            <p>Enviado por: {post.username}</p>
+            <h6>{post.title}</h6>
+            <h6>{post.body}</h6>
+          </div>
+          <P.CardButton>
+            <button onClick={() => like("posts",post.id)}>
+              <img src={Like} /> {post.voteSum}
+            </button>
+            
+            <button onClick={() => disLike("posts",post.id)}>
+              <img src={Dislike} /> {post.voteSum}
+            </button>
+            <button>
+              <img src={Comment} /> {post.commentCount}
+            </button>
+          </P.CardButton>
+        </P.CardPost>
       );
     });
   return (
-    <MainContainer>
+    <P.MainContainer>
       <form onSubmit={creatPost}>
-        <Title
+        <P.Title
           name="title"
           placeholder="Título do Post"
           type="text"
@@ -95,7 +93,7 @@ const PostPage = () => {
           onChange={onChangeForm}
           required
         />
-        <InputPost
+        <P.InputPost
           name="body"
           placeholder="Post"
           type="text"
@@ -103,10 +101,10 @@ const PostPage = () => {
           onChange={onChangeForm}
           required
         />
-        <ButtonPost>Postar</ButtonPost>
+        <P.ButtonPost>Postar</P.ButtonPost>
       </form>
-      <ContainerCard>{posts}</ContainerCard>
-    </MainContainer>
+      <P.ContainerCard>{posts}</P.ContainerCard>
+    </P.MainContainer>
   );
 };
 export default PostPage;

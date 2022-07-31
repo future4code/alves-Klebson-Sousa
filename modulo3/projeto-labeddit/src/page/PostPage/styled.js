@@ -36,9 +36,18 @@ export const CardPost = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
-  cursor: pointer;
+
+  position: relative;
+  div {
+    cursor: pointer;
+  }
 `;
 
+export const ContainerVotes = styled.div`
+  position: absolute;
+  bottom: 10%;
+  /* margin-right: 10px; */
+`;
 export const Title = styled.input`
   position: absolute;
   width: 364px;
@@ -71,4 +80,16 @@ export const ButtonPost = styled.button`
   top: 330px;
   background: linear-gradient(90deg, #ff6489 0%, #f9b24e 100%), #4088cb;
   border-radius: 12px;
+`;
+export const CardButton = styled.div`
+  width: 174.33px;
+  height: 28px;
+  position: absolute;
+  bottom: 8%;
+  button {
+    margin-right: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;    
+  }
 `;

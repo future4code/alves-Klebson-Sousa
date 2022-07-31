@@ -56,7 +56,35 @@ export const CardBody = styled.div`
 export const CardButton = styled.div`
   width: 174.33px;
   height: 28px;
-  img {
+  button {
     margin-right: 10px;
+    border: none;
+    background-color: transparent;
+  }
+`;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px 20px;
+  border-bottom: solid 1px  #f9b24e ;
+  input {
+    width: 364px;
+    height: 131px;
+    background: #ededed;
+    border-radius: 12px;
+    border: none;
+  }
+  button {
+    margin: 10px 0px 10px;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 145px;
+    width: 364px;
+    height: 47px;
+    background: linear-gradient(90deg, #ff6489 0%, #f9b24e 100%), #4088cb;
+    border-radius: 12px;
   }
 `;

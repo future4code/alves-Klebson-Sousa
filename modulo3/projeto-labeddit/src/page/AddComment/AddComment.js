@@ -1,76 +1,107 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "../../constants/urls";
+import { BASE_URL, HEADER } from "../../constants/urls";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import useRequestData from "../../hooks/useRequestData";
-import { CardBody, CardButton, CardName, CardPost, MainContainer } from "./styled";
+import {
+  CardBody,
+  CardButton,
+  CardName,
+  CardPost,
+  MainContainer,
+} from "./styled";
 import Comment from "../../assets/Comment.svg";
 import Like from "../../assets/Like.svg";
 import Dislike from "../../assets/Dislike.svg";
+import axios from "axios";
+import CommentForm from "./CommentForm";
 
 const AddComment = () => {
   useProtectedPage();
   const [selectedPost, setSelectedPost] = useState({});
-  const { listPosts } = useContext(GlobalStateContext);
-  // const params = useParams()
-  // console.log("Aqui está params", params.id)
+  const { listPosts, like, dislike } = useContext(GlobalStateContext);
+  const [listComments, setListComments] = useState([]);
+
   const idPost = useParams();
-  // console.log(selectedPost )
-  // console.log(idPost)
-  console.log(listPosts);
+  console.log(selectedPost);
   useEffect(() => {
-    // const currentPost = listPosts && listPosts.map((item) => {
-    //   console.log(item)
-    //   if (item.id === idPost)
-    //    return item
-    // })
     const currentPost =
       listPosts &&
       listPosts.find((item) => {
-        console.log(item);
         return item.id === idPost.id;
       });
-    // console.log(currentPost)
     setSelectedPost(currentPost);
   }, []);
-  // const post = useRequestData([], `${BASE_URL}/posts/${params.id}`);
 
-  // const teste = listPosts && listPosts.map((post) => {
-  //   if (post.id === params.id){
-  //     return (<div key={post.id}>
-  //       <p>{post.username}</p>
-  //       <p>{post.body}</p>
-  //       </div>)
-  //   } else {
-  //     return <div></div>
-  //   }
-  // })
+  useEffect(() => {
+    getComments();
+  }, []);
+
+ const getComments = () => {
+    console.log("Entrou aqui");
+    axios
+      .get(`${BASE_URL}/posts/${idPost.id}/comments`, HEADER)
+      .then((response) => {
+        setListComments(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+  console.log(listComments);
+  const comments =
+    listComments &&
+    listComments.map((comment) => {
+      return (
+        <CardPost key={comment.id}>
+          <CardName>
+            <p>Enviado por: {comment.username}</p>
+          </CardName>
+          <CardBody>
+            <h6>{comment.body}</h6>
+          </CardBody>
+          <CardButton>
+            <button onClick={() => like("comments", comment.id)}>
+              <img src={Like} />
+            </button>
+            <button onClick={() => dislike("comments", comment.id)}>
+              <img src={Dislike} />
+            </button>
+          </CardButton>
+        </CardPost>
+      );
+    });
 
   return (
     <MainContainer>
       <h1>AddComment</h1>
 
-      {selectedPost ? (
+      {selectedPost && (
         <CardPost key={selectedPost.id}>
           <CardName>
             <p>Enviado por: {selectedPost.username}</p>
-            </CardName>
+          </CardName>
           <CardBody>
             <h6>{selectedPost.title}</h6>
             <h6>{selectedPost.body}</h6>
           </CardBody>
-          <CardButton>            
-            <img src={Like}/>
-            <img src={Dislike}/>
-            <img src={Comment}/>
+          <CardButton>
+            <button onClick={() => like("posts", selectedPost.id)}>
+              <img src={Like} /> {selectedPost.voteSum}
+            </button>
+            <button onClick={() => dislike("posts", selectedPost.id)}>
+              <img src={Dislike} /> {selectedPost.voteSum}
+            </button>
+            <button>
+              <img src={Comment} /> {selectedPost.commentCount}
+            </button>
           </CardButton>
         </CardPost>
-      ) : (
-        <div>
-          <h4>Carregando...</h4>
-        </div>
       )}
+      <CommentForm getComments={getComments}/>
+      {comments}
     </MainContainer>
   );
 };

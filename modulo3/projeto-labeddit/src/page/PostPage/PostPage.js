@@ -4,15 +4,6 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import useForm from "../../hooks/useForm";
 import useProtectedPage from "../../hooks/useProtectedPage";
-import {
-  MainContainer,
-  CardPost,
-  Title,
-  InputPost,
-  ButtonPost,
-  ContainerCard,
-  CardButton,
-} from "./styled";
 import { goToAddComment } from "../../routes/cordinator";
 import { useNavigate, useParams } from "react-router-dom";
 import Comment from "../../assets/Comment.svg";
@@ -52,7 +43,7 @@ const PostPage = () => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response);
       });
   };
   const posts =

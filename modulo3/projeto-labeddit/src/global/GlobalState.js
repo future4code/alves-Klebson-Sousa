@@ -11,7 +11,7 @@ const GlobalState = (props) => {
 
   useEffect(() => {
     getPosts();
-  }, []); 
+  }, []);
 
   const getPosts = () => {
     const token = localStorage.getItem("token");
@@ -25,7 +25,7 @@ const GlobalState = (props) => {
         setListPosts(response.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response);
       });
   };
 
@@ -41,14 +41,13 @@ const GlobalState = (props) => {
         .post(`${BASE_URL}/${postComment}/${id}/votes`, body, HEADER)
         .then((response) => {
           setLikePost(!likePost);
-          console.log("like")
         })
         .catch((error) => {
-          console.log(error.response);
+          alert(error.response);
         });
     }
   };
-  const disLike = (postComment,id ) => {
+  const disLike = (postComment, id) => {
     if (disLikePost === true) {
       removeLike(setDisLikePost, disLikePost, id);
       setDisLikePost(!disLikePost);
@@ -59,11 +58,10 @@ const GlobalState = (props) => {
       axios
         .put(`${BASE_URL}/${postComment}/${id}/votes`, body, HEADER)
         .then((response) => {
-          console.log("disLike")
           setDisLikePost(!disLikePost);
         })
         .catch((error) => {
-          console.log(error.response);
+          alert(error.response);
         });
     }
   };
@@ -71,8 +69,7 @@ const GlobalState = (props) => {
     axios
       .delete(`${BASE_URL}/posts/${id}/votes`, HEADER)
       .then((response) => {
-        setLike(!like);
-        console.log("Removeu")
+        setLike(!like);        
       })
       .catch((error) => {
         alert(error.response);

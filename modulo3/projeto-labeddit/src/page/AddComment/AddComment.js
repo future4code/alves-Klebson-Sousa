@@ -4,18 +4,12 @@ import { BASE_URL, HEADER } from "../../constants/urls";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import useRequestData from "../../hooks/useRequestData";
-import {
-  CardBody,
-  CardButton,
-  CardName,
-  CardPost,
-  MainContainer,
-} from "./styled";
 import Comment from "../../assets/Comment.svg";
 import Like from "../../assets/Like.svg";
 import Dislike from "../../assets/Dislike.svg";
 import axios from "axios";
 import CommentForm from "./CommentForm";
+import * as AA from "./styled";
 
 const AddComment = () => {
   useProtectedPage();
@@ -24,7 +18,7 @@ const AddComment = () => {
   const [listComments, setListComments] = useState([]);
 
   const idPost = useParams();
-  console.log(selectedPost);
+  
   useEffect(() => {
     const currentPost =
       listPosts &&
@@ -38,56 +32,54 @@ const AddComment = () => {
     getComments();
   }, []);
 
- const getComments = () => {
-    console.log("Entrou aqui");
+  const getComments = () => {
     axios
       .get(`${BASE_URL}/posts/${idPost.id}/comments`, HEADER)
       .then((response) => {
         setListComments(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response);
       });
   };
-  console.log(listComments);
+
   const comments =
     listComments &&
     listComments.map((comment) => {
       return (
-        <CardPost key={comment.id}>
-          <CardName>
+        <AA.CardPost key={comment.id}>
+          <AA.CardName>
             <p>Enviado por: {comment.username}</p>
-          </CardName>
-          <CardBody>
+          </AA.CardName>
+          <AA.CardBody>
             <h6>{comment.body}</h6>
-          </CardBody>
-          <CardButton>
+          </AA.CardBody>
+          <AA.CardButton>
             <button onClick={() => like("comments", comment.id)}>
-              <img src={Like} />
+              <img src={Like} /> {comment.voteSum}
             </button>
             <button onClick={() => dislike("comments", comment.id)}>
-              <img src={Dislike} />
+              <img src={Dislike} /> {comment.voteSum}
             </button>
-          </CardButton>
-        </CardPost>
+          </AA.CardButton>
+        </AA.CardPost>
       );
     });
 
   return (
-    <MainContainer>
+    <AA.MainContainer>
       <h1>AddComment</h1>
 
       {selectedPost && (
-        <CardPost key={selectedPost.id}>
-          <CardName>
+        <AA.CardPost key={selectedPost.id}>
+          <AA.CardName>
             <p>Enviado por: {selectedPost.username}</p>
-          </CardName>
-          <CardBody>
+          </AA.CardName>
+          <AA.CardBody>
             <h6>{selectedPost.title}</h6>
             <h6>{selectedPost.body}</h6>
-          </CardBody>
-          <CardButton>
+          </AA.CardBody>
+          <AA.CardButton>
             <button onClick={() => like("posts", selectedPost.id)}>
               <img src={Like} /> {selectedPost.voteSum}
             </button>
@@ -97,12 +89,12 @@ const AddComment = () => {
             <button>
               <img src={Comment} /> {selectedPost.commentCount}
             </button>
-          </CardButton>
-        </CardPost>
+          </AA.CardButton>
+        </AA.CardPost>
       )}
-      <CommentForm getComments={getComments}/>
+      <CommentForm getComments={getComments} />
       {comments}
-    </MainContainer>
+    </AA.MainContainer>
   );
 };
 export default AddComment;

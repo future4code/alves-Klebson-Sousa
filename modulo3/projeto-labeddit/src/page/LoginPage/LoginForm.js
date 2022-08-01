@@ -1,6 +1,6 @@
 import React from "react";
 import useForm from "../../hooks/useForm";
-import { ButtonContinue, Form } from "./styled";
+import * as LF from "./styled"
 import { login } from "../../services/users";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Form onSubmit={onSubmitLogin}>
+    <LF.Form onSubmit={onSubmitLogin}>
       <input
         name="email"
         placeholder="email"
@@ -36,8 +36,8 @@ const LoginForm = () => {
         pattern={"^.{8,}"}
         title={"Senha deve ter no mínimo 8 caracteres"}
       />
-      <ButtonContinue>Continuar</ButtonContinue>
-    </Form>
+      <LF.ButtonContinue>Continuar</LF.ButtonContinue>
+    </LF.Form>
   );
 };
 export default LoginForm;

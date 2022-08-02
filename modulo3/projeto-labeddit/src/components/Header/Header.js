@@ -38,7 +38,8 @@ const Header = () => {
           <button onClick={() => goToLoginPage(navigate)}>Login</button>
         </div>
       );
-    } else if (window.location.pathname === "/adicionar-comentario/:id") {
+    } else if (window.location.pathname.includes("/adicionar-comentario/")
+    ) {
       return (
         <div>
           <button onClick={() => goToPostPage(navigate)}>X</button>

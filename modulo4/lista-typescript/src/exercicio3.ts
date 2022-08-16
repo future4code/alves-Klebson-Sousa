@@ -17,16 +17,23 @@ enum GENERO {
 // como parâmetros( 3 essenciais + 1 opcional) e retorne todas informações organizadas em 
 // um `type`
 
-const catalogoDeFilmes = ((nome: string, ano: number, genero: string, pontuacao?:number) => {
+type Filme = {
+    nome: string,
+    ano: number,
+    genero: GENERO,
+    pontuacao?: number
+}
 
-    let filme = {}
+const catalogoDeFilmes = ((nome: string, ano: number, genero: GENERO, pontuacao?:number): Filme => {
+
     if (pontuacao){
-        filme = {nome: nome, anoDeLamento: ano, genero: genero, pontuação: pontuacao}
+        return {nome, ano, genero, pontuacao}
     } else {
-        filme = {nome: nome, anoDeLamento: ano, genero: genero}
+       return {nome, ano, genero}
 
     }
-    return filme
+    
 })
 
 console.log(catalogoDeFilmes("Poeira em auto Mar", 2000, GENERO.COMEDIA))
+console.log(catalogoDeFilmes("Poeira em auto Mar", 2000, GENERO.COMEDIA, 10))

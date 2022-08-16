@@ -21,8 +21,8 @@ const pessoas: Users[] = [
 	{name: "Carina", email: "carina@email.com", role: ROLE.ADMIN}      
 ]
 
-const listaEmails = ((array: Users[]) => {
-	const emailAdmin = array.filter((pessoa: Users) => {
+const listaEmails = ((array: Users[]): string[] => {
+	const emailAdmin: string[] = array.filter((pessoa) => {
 		return pessoa.role === "admin"
 	}).map((pessoa:Users) => {
 		return pessoa.email

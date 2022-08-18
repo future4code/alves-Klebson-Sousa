@@ -17,18 +17,18 @@ app.post("/produtos/criar", (req: Request, res: Response) => {
     const { name, price } = req.body;
 
     if (!name || !price) {
-        res.statusCode = 404;
-        throw new Error("Informe um produto");
-      } if (name !== String) {
-        res.statusCode = 500;
-        throw new Error("O nome do produto é do tipo string");
-      } if (price !== Number) {
-        res.statusCode = 500;
-        throw new Error("O preço deve ser do tipo number");
-      } if (price <= 0) {
-        res.statusCode = 404;
-        throw new Error("Informe um preço válido");
-      }
+      res.statusCode = 404;
+      throw new Error("Informe um produto e preço");
+    }
+    if (typeof name !== "string") {
+      throw new Error("O nome do produto é do tipo string");
+    }
+    if (price !== Number) {
+      throw new Error("O preço deve ser do tipo number");
+    }
+    if (price <= 0) {
+      throw new Error("Informe um preço válido");
+    }
 
     const novosProdutos: Produtos = {
       id: Date.now().toString(),
@@ -36,7 +36,7 @@ app.post("/produtos/criar", (req: Request, res: Response) => {
       price: price,
     };
     produtos.push(novosProdutos);
-    res.send(produtos);
+    res.status(201).send(produtos);
   } catch (error: any) {
     res.status(res.statusCode || 500).send({ message: error.message });
   }
@@ -46,7 +46,16 @@ app.post("/produtos/criar", (req: Request, res: Response) => {
 
 app.get("/produtos", (req: Request, res: Response) => {
   try {
-    res.send(produtos);
+    const search: string = req.query.search as string;
+
+    if (search) {
+      const filtrarProdutos = produtos.filter((product) =>
+        product.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+      res.status(200).send(filtrarProdutos);
+    } else {
+      res.send(produtos);
+    }
   } catch (error: any) {
     res.status(res.statusCode || 500).send({ message: error.message });
   }
@@ -58,25 +67,22 @@ app.get("/produtos", (req: Request, res: Response) => {
 app.put("/editarPreco/:id", (req: Request, res: Response) => {
   try {
     const produtoId = req.params.id;
-    const { price } = req.body;
+    const { price, name } = req.body;
 
-    if (!produtoId) {
+    if (!price && !name) {
+      res.statusCode = 422;
+      throw new Error("Informe um produto e preço");
+    }
+    if (typeof price !== "number" || typeof name !== "string") {
+      res.statusCode = 422;
+      throw new Error("O preço deve ser do tipo number e nome string");
+    }
+    if (price <= 0) {
       res.statusCode = 404;
-      throw new Error("Informe um produto");
-    } if (!price) {
-        res.statusCode = 404;
-        throw new Error("Informe um valor válido");
-      } if (price !== Number) {
-        res.statusCode = 500;
-        throw new Error("O preço deve ser do tipo number");
-      } if (price <= 0) {
-        res.statusCode = 404;
-        throw new Error("Informe um preço válido");
-      }
+      throw new Error("Informe um preço maior que zero");
+    }
 
-    const produto = produtos.find((prod) => {
-      return prod.id === produtoId;
-    });
+    const produto = produtos.find((prod) => prod.id === produtoId);
     if (produto === undefined) {
       res.statusCode = 404;
       throw new Error("Produto não encontrado");
@@ -90,9 +96,17 @@ app.put("/editarPreco/:id", (req: Request, res: Response) => {
     //     res.statusCode = 404;
     //     throw new Error("Informe um produto");
     //   }
-
-    produto.price = price;
-    res.status(200).send(produtos);
+    if (!name) {
+      produto.price = price;
+      res.status(200).send(produtos);
+    } else if (!price) {
+      produto.name = name;
+      res.status(200).send(produtos);
+    } else {
+      produto.price = price;
+      produto.name = name;
+      res.status(200).send(produtos);
+    }
   } catch (error: any) {
     res.status(res.statusCode || 500).send({ message: error.message });
   }
@@ -106,18 +120,16 @@ app.delete("/deletarProduto/:name", (req: Request, res: Response) => {
     const name = req.params.name.toLocaleLowerCase();
 
     if (!name) {
-        res.statusCode = 404;
-        throw new Error("Informe um produto");
-      }
+      res.statusCode = 404;
+      throw new Error("Informe um produto");
+    }
 
     const deleteProduto: Produtos[] = produtos.filter((produto) => {
       return produto.name !== name;
     });
     res.send(deleteProduto);
   } catch (error: any) {
-    res
-      .status(res.statusCode || 500)
-      .send({ message: error.message });
+    res.status(res.statusCode || 500).send({ message: error.message });
   }
 });
 

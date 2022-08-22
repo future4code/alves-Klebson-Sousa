@@ -3,7 +3,7 @@
 
 export type TRANSACTION = {
     value: number,
-    data: string,
+    date: Date,
     description: string
 }
 
@@ -12,7 +12,7 @@ export type TRANSACTION = {
 export type Account = {
     name: string,
     cpf: string,
-    birthDate: string,
+    birthDate: Date,
     balance: number,
     statement: TRANSACTION[]
 }

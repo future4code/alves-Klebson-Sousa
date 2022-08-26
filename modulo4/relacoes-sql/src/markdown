@@ -1,0 +1,94 @@
+### Exercício 1
+a) É uma chave usada para referênciar informações de tabelas entre si através de suas chaves primárias não permitindo inserir valores inesistentes referentes as chaves.
+
+b) 
+CREATE TABLE Evaluation(
+	id VARCHAR(255) PRIMARY KEY,
+    comment TEXT NOT NULL,
+	evaluation FLOAT NOT NULL,
+    film_id int,
+    FOREIGN KEY (film_id) REFERENCES Films(id)
+);
+
+INSERT INTO Evaluation
+VALUES("001","Gostei",8,1);
+
+INSERT INTO Evaluation
+VALUES("002","Adorei a cabeleira",10,3);
+
+INSERT INTO Evaluation
+VALUES("003","Coitado, como gritou!",7,4);
+
+INSERT INTO Evaluation
+VALUES("004","Mais ou menos!",6,5);
+
+INSERT INTO Evaluation
+VALUES("005","Que doideira!",5,6);
+
+INSERT INTO Evaluation
+VALUES("006","Muito emocionente",10,7);
+
+c) INSERT INTO Evaluation
+VALUES("007","Té parece",10,20);
+Não foi possível criar uma avaliação pois há uma restrição foreign key, que não permite inserir informações à uma chave inexistente.
+
+d) ALTER TABLE Films
+ DROP COLUMN evaluation;
+
+e) Erro 1451, diz que não é possível deletar ou atualizaruma raiz pois há uma restrição de chave estrangeira.
+
+
+### Exercício 2
+a) Essa tabela vai fazer referência aos filmes e atores onde os elementos de uma tabela, nesse caso os atores se relacionam com vários filmes da tabela films
+
+b) INSERT INTO FilmCast VALUES
+(1, "001"), (3, "001"), (4, "002"),
+(5, "003"), (6, "004"), (7, "007");
+
+c) INSERT INTO FilmCast VALUES
+(2, "001");
+Não é possível adicionar ou atualizar linha, restrição de chave estrangeira
+
+d) DELETE FROM Actor
+ WHERE id = 7;
+Não é possível deletarr ou atualizar linha, restrição de chave estrangeira
+
+### Exercício 3
+SELECT * FROM Films 
+INNER JOIN Evaluation 
+ON Films.id = Evaluation.film_id;
+a) Vai mostrar todas informações dos filmes em que o id do filme for referente ao id que já foi avaliado. o ON é a condição em que vai retornar filmes avaliados
+
+b) SELECT name, Films.id, Evaluation.evaluation 
+FROM Films 
+INNER JOIN Evaluation 
+ON Films.id = Evaluation.film_id;
+
+### Exercício 4
+a) SELECT Films.id, name, comment, Evaluation.evaluation FROM Films
+LEFT JOIN Evaluation
+ON Films.id = Evaluation.film_id;
+
+b) SELECT Films.id, name, FilmCast.actor_id FROM Films
+RIGHT JOIN FilmCast
+ON Films.id = FilmCast.film_id;
+
+c)SELECT AVG(Evaluation.evaluation) as "Média de avaliações", 
+name as "Nome do filme", Films.id FROM Films
+lEFT JOIN Evaluation
+ON Films.id = Evaluation.film_id
+GROUP BY Films.id;
+
+### Exercício 5
+a) O primeiro JOIN vai unir a tabela de filmes com a tabela de comentários, e o segundo JOIN vai juntar as junções anteriores filmes e comentários com a tabela de atores.
+
+b) SELECT Films.id as "Id do filme", 
+Films.name as "Nome do filme", 
+Actor.id as "Id do ator", 
+Actor.name as "Nome do ator"
+FROM Films
+LEFT JOIN FilmCast ON Films.id = FilmCast.film_id
+JOIN Actor ON Actor.id = FilmCast.actor_id;
+
+c) 
+

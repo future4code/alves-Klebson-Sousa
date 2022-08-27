@@ -1,0 +1,18 @@
+POST http://localhost:3003/user/create
+Content-Type: application/json
+
+{
+    "name": "Marcos",
+    "nickname": "Marc",
+    "email": "maorcos@gmail.com"    
+}
+### 
+Get http://localhost:3003/user/16615448304690.5717099302805171
+
+###
+Put http://localhost:3003/user/edit/16615448304690.5717099302805171
+
+{
+    "name": "Farinha",
+    "nickname": "Farofa"    
+}

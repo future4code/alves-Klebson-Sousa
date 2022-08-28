@@ -10,9 +10,21 @@ Content-Type: application/json
 Get http://localhost:3003/user/16615448304690.5717099302805171
 
 ###
-Put http://localhost:3003/user/edit/16615448304690.5717099302805171
+Put http://localhost:3003/user/edit/16615461378650.2469729533180116
+Content-Type: application/json
 
 {
-    "name": "Farinha",
-    "nickname": "Farofa"    
+    "name": "Teste3",
+    "nickname": "Test"    
+}
+
+###
+POST http://localhost:3003/task/create
+Content-Type: application/json
+
+{
+    "title": "Mais uma",
+    "description": "Estou chegando lá",
+    "deadline": "30/10/2022",
+    "authorTaskId": "16615468754140.3234802972722546"
 }

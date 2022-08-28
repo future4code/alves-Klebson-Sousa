@@ -1,4 +1,5 @@
 import connection from "../connection";
+import { ids } from "../data/ids";
 
 const createUsers = async (  
   name: string,
@@ -7,7 +8,7 @@ const createUsers = async (
 ): Promise<any> => {
     const result = await connection("to_do_list_users")
     .insert({
-        id: Date.now() + Math.random().toString(), 
+        ids,
         name,
         nickname,
         email

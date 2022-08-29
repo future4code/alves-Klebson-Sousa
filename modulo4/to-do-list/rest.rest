@@ -6,6 +6,10 @@ Content-Type: application/json
     "nickname": "Marc",
     "email": "maorcos@gmail.com"    
 }
+
+###
+Get http://localhost:3003/users/all
+
 ### 
 Get http://localhost:3003/user/16615448304690.5717099302805171
 

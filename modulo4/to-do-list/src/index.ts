@@ -9,6 +9,9 @@ import moment from "moment";
 import { ids } from "./data/ids";
 import createTask from "./endpoints/createTask";
 import getTaskById from "./endpoints/getTaskById";
+import getUsers from "./endpoints/getUsers";
+import { Console } from "console";
+import getTaskCreateUser from "./endpoints/getTasksCreateUser";
 
 app.get("/test", (req: Request, res: Response) => {
   res.send("Hello!");
@@ -137,8 +140,70 @@ app.get("/task/:id", async (req: Request, res: Response) => {
       deadline: moment(result.deadline, "YYYY-MM-DD").format("DD/MM/YYYY"),
       status: result.status,
       authorTaskId: result.author_task_id,
-      nickname: result.nickname
+      nickname: result.nickname,
     });
+  } catch (error: any) {
+    if (res.statusCode == 200) {
+      res.status(500).send(error.sqlMessage || error.message);
+    } else {
+      res.status(res.statusCode).send(error.message);
+    }
+  }
+});
+
+app.get("/users/all", async (req: Request, res: Response) => {
+  try {
+    const result = await getUsers();
+    if (!result.length) {
+      res.status(404);
+      throw new Error("Lista de suários não encontrado");
+    }
+    console.log(result);
+    res.status(200).send({ users: result });
+  } catch (error: any) {
+    if (res.statusCode == 200) {
+      res.status(500).send(error.sqlMessage || error.message);
+    } else {
+      res.status(res.statusCode).send(error.message);
+    }
+  }
+});
+
+// app.get("/task?creatorUserId", async (req: Request, res: Response) => {
+//   try {
+//     const authorTaskId: string = req.query.author_task_id as string
+
+//     if (!authorTaskId) {
+//       res.status(404);
+//       throw new Error("Insira um id válido");
+//     }
+
+//     const result = await getTaskCreateUser(authorTaskId)
+//     console.log(result)
+
+//     res.status(200).send(result);
+//   } catch (error: any) {
+//     if (res.statusCode == 200) {
+//       res.status(500).send(error.sqlMessage || error.message);
+//     } else {
+//       res.status(res.statusCode).send(error.message);
+//     }
+//   }
+// });
+
+app.get("/task?creatorUserId", async (req: Request, res: Response) => {
+  try {
+    const authorTaskId: string = req.query.author_task_id as string
+
+    if (!authorTaskId) {
+      res.status(404)
+      throw new Error("Insira um id válido")
+    }
+
+    const result = await getTaskCreateUser(authorTaskId)
+
+    res.status(200).send(result)
+
   } catch (error: any) {
     if (res.statusCode == 200) {
       res.status(500).send(error.sqlMessage || error.message);

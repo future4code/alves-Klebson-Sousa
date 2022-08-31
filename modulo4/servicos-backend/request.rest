@@ -1,0 +1,10 @@
+GET http://localhost:3003/address/05424150
+
+###
+
+POST http://localhost:3003/address/insert/05424150
+Content-Type: application/json
+
+{
+    "bairro": ""
+}

@@ -1,0 +1,21 @@
+Get http://localhost:3003/users
+
+###
+
+Get http://localhost:3003/users/search?name=Soter
+
+###
+
+Get http://localhost:3003/users/Teacher
+
+###
+
+Get http://localhost:3003/users/order?sort=type&order=asc
+
+###
+
+Get http://localhost:3003/users/page/select?page=2
+
+###
+
+Get http://localhost:3003/users/full/search?type=Teacher&sort=name&order=asc&page=1

@@ -1,8 +1,7 @@
 import { connection } from "./connection";
 
 export default async function selecFilterOrderPages(
-  name: string,
-  type: string,
+  filter: string, 
   sort: any,
   order: any,
   size: number,
@@ -10,7 +9,7 @@ export default async function selecFilterOrderPages(
 ): Promise<any> {
   const result = await connection.raw(`
        SELECT * FROM aula49_exercicio
-       WHERE name LIKE '%${name}%' AND type LIKE '%${type}%'
+       WHERE name LIKE '%${filter}%' OR type LIKE '%${filter}%'
        ORDER BY ${sort} ${order}
        LIMIT ${size}
        OFFSET ${offset}

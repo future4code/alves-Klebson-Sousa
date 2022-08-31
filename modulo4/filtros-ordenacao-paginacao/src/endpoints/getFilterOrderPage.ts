@@ -6,8 +6,7 @@ export const getFilterOrderPage = async (
   res: Response
 ): Promise<void> => {
   try {
-    let name = req.query.name || ""
-    let type = req.params.type || ""
+    let filter = req.query.filter || ""    
     let sort = req.query.sort as string;
     let order = req.query.order as string;
     let page = Number(req.query.page);
@@ -26,8 +25,7 @@ export const getFilterOrderPage = async (
       order = "DESC";
     }
     const result = await selecFilterOrderPages(
-      name as string,
-      type,
+      filter as string,      
       sort,
       order,
       size,
@@ -42,9 +40,7 @@ export const getFilterOrderPage = async (
         res.statusCode = 404;
         throw new Error("No users found");
     }
-    res.status(200).send(users)
-
-    res.status(200).send(users);
+    res.status(200).send(users)    
   } catch (error: any) {
     console.log(error);
     res.send(error.message || error.sqlMessage);

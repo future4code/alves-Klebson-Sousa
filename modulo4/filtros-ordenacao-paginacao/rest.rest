@@ -18,4 +18,4 @@ Get http://localhost:3003/users/page/select?page=2
 
 ###
 
-Get http://localhost:3003/users/full/search?type=Teacher&sort=name&order=asc&page=1
+Get http://localhost:3003/users/full/search?filter=cx&sort=name&order=asc&page=1

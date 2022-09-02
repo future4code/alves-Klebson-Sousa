@@ -1,0 +1,38 @@
+POST http://localhost:3003/user
+Content-Type: application/json
+
+{
+    "name": "Mais Um Nome",
+    "email": "mais.um@gmail.com",
+    "password": "1234"
+}
+
+###
+
+GET http://localhost:3003/users
+
+###
+
+POST http://localhost:3003/products/create
+Content-Type: application/json
+
+{
+    "name": "Hd Pentiun",
+    "price": 580.90,
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiF054F6lCiYOK8FaFHp1OUOUngXH72i6lgg&usqp=CAU"
+}
+
+###
+
+GET http://localhost:3003/products
+
+###
+
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+    "user_id": "",
+    "product_id": "",
+    "total_price": ""
+}

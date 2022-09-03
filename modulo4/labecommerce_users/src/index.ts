@@ -7,6 +7,7 @@ import getAllUsers from "./endpoints/getAllUsers"
 import getProductsByOrder from "./endpoints/getProductsByOrder"
 import getProductsBySearch from "./endpoints/getProductsBySearch"
 import getPurchasesByUserId from "./endpoints/getPurchasesByUserId"
+import getUserPurchases from "./endpoints/getUserPurchases"
 
 
 app.post("/user", createUser)
@@ -24,3 +25,5 @@ app.get("/users/:userId/purchases", getPurchasesByUserId)
 app.get("/products/order",getProductsByOrder)
 
 app.get("/products/search",getProductsBySearch)
+
+app.get("/users/purchases",getUserPurchases)

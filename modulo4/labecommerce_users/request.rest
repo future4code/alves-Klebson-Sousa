@@ -49,3 +49,7 @@ GET http://localhost:3003/products/order?order=desc
 ###
 
 GET http://localhost:3003/products/search?search=hd
+
+###
+
+GET http://localhost:3003/users/purchases

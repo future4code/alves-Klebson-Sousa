@@ -2,8 +2,8 @@ POST http://localhost:3003/user
 Content-Type: application/json
 
 {
-    "name": "Mais Um Nome",
-    "email": "mais.um@gmail.com",
+    "name": "Tutu",
+    "email": "tutu@gmail.com",
     "password": "1234"
 }
 
@@ -32,7 +32,20 @@ POST http://localhost:3003/purchases
 Content-Type: application/json
 
 {
-    "user_id": "",
-    "product_id": "",
-    "total_price": ""
+    "user_id": "1662051934657",
+    "product_id": "1662072924569",
+    "quantity": 3
 }
+
+###
+
+Get http://localhost:3003/users/1662152980632/purchases
+
+
+###
+
+GET http://localhost:3003/products/order?order=desc
+
+###
+
+GET http://localhost:3003/products/search?search=hd

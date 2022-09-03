@@ -5,3 +5,16 @@ export type Purchase = {
   quantity: number;
   totalPrice: number;
 };
+
+export type AllPurchases = {
+  idCompras: string;
+  nomeProduto: string;
+  quantidade: number;
+  precoTotal: number;
+};
+
+export type PurchasesUser = {
+  idUsuario: string;
+  nomeUsuario: string;
+  compras: AllPurchases[];
+}

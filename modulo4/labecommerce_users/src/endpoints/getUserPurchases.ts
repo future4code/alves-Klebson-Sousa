@@ -8,9 +8,14 @@ const getUserPurchases =async (req: Request, res:Response): Promise<void> => {
         const result = await selectAllUsers()
 
         for(const user of result) {
-            console.log(user)
-        }
-            const purchases = await selectUserPurchases()   
+            
+            const purchases = await selectUserPurchases(user.id) 
+            user.purchases = purchases  
+            if(purchases.lengh === 0) {
+                user.purchases = []
+            }            
+        }        
+        res.send(result)
     } catch (error: any) {
         res.status(500).send({message: error.message})
     }

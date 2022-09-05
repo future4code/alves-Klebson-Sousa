@@ -1,4 +1,4 @@
-import { connection } from "../data/connection";
+import { connection } from "./connection";
 import { PurchasesUser } from "../types/typesPurchase";
 
 const selectUserPurchases = async (userId: string): Promise<any> => {

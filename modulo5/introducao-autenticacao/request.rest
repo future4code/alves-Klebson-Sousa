@@ -1,0 +1,23 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+	"email": "timao@labenu.com.br",
+	"password": "123456789"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+	"email": "murilo@labenu.com.br",
+	"password": "123456789"
+}
+
+###
+
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMxZjU3Mzg3LTQwYjUtNGU0OC1hMzJiLTE2YmYzNTNiY2M0MSIsImlhdCI6MTY2MzAyNDYyNiwiZXhwIjoxNjYzMDI4MjI2fQ.9s00FExh613eT20cqVGaucIhR0IL_QzxDPr_iq9F8QQ

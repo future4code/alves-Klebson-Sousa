@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import UserData from "../data/UserData";
 import Authenticator from "../services/Authenticator";
 import { GenerateId } from "../services/GenerateId";
+import { HashManager } from "../services/HashManager";
 import { AuthenticationData } from "../services/types";
 
 class UserController {
@@ -31,8 +32,14 @@ class UserController {
       }
 
       const id = new GenerateId().generateId();
+      //---------------------------------------------------
+      // await userData.insertUser(id, email, password);
+      const hashManager = new HashManager()
 
-      await userData.insertUser(id, email, password);
+      const hash = await hashManager.hash(password)
+
+      await userData.insertUser(id, email, hash);
+      //-----------------------------------------------------
 
       const payload: AuthenticationData = { id };
 

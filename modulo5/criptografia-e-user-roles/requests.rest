@@ -1,0 +1,38 @@
+# @name signup
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   "email": "bob3@gmail.com",
+   "password": "bobOBravo2",
+   "role": "NORMAL"
+}
+
+###
+
+
+### Login
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email": "bob2@gmail.com",
+   "password": "bobOBravo"
+}
+
+### Get Users
+GET http://localhost:3003/user/profile
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzMTgxNDcwLTU3MDktNDM2Yi1iMWRkLWM3YjUwZWJjN2E2YyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MzEwNzI2NiwiZXhwIjoxNjYzMTEwODY2fQ.xqt7WB5WV5b1UK8LETCskD5Vyjam1tpkWNP00Lly_ss
+
+###
+
+DELETE http://localhost:3003/user/023bf68f-5fb1-410b-8a61-f2cd106ab771
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzMTgxNDcwLTU3MDktNDM2Yi1iMWRkLWM3YjUwZWJjN2E2YyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MzEwNzI2NiwiZXhwIjoxNjYzMTEwODY2fQ.xqt7WB5WV5b1UK8LETCskD5Vyjam1tpkWNP00Lly_ss
+
+###
+
+GET http://localhost:3003/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzMTgxNDcwLTU3MDktNDM2Yi1iMWRkLWM3YjUwZWJjN2E2YyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MzExMTI2NSwiZXhwIjoxNjYzMTE0ODY1fQ.oPanv9QTHlIFnwTQKCGVndK0SHySEhSJYIErlORnMoo

@@ -1,39 +1,28 @@
-import { USER_ROLES } from "../services/types"
+import { USER_ROLES } from "../services/types";
 
-class User{
-    
-    constructor(
-        private id:string,
-        // private name:string,
-        // private nickname:string, 
-        private email:string,
-        private password:string,
-        private role: USER_ROLES = USER_ROLES.NORMAL
-    ){}
-    
-    public getId(){
-        return this.id
-    }
+class User {
+  constructor(
+    private id: string,
+    private email: string,
+    private password: string,
+    private role: USER_ROLES = USER_ROLES.NORMAL
+  ) {}
 
-    // public getName(){
-    //     return this.name
-    // }
+  public getId() {
+    return this.id;
+  }
 
-    // public getNickName(){
-    //     return this.nickname
-    // }
+  public getEmail() {
+    return this.email;
+  }
 
-    public getEmail(){
-        return this.email
-    }
+  public getPassword() {
+    return this.password;
+  }
 
-    public getPassword(){
-        return this.password
-    }
-
-    public getRole = () => {
-        return this.role
-    }
+  public getRole = () => {
+    return this.role;
+  };
 }
 
-export default User
+export default User;

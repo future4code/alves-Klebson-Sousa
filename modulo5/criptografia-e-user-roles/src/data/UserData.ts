@@ -29,8 +29,13 @@ class UserData extends BaseDataBase {
     const result = await this.getConnection()
       .select("*")
       .from("User")
-      .where({ id });       
-    return result[0];
+      .where({ id });        
+
+      if(!result.length){
+          return undefined
+      }      
+      return result[0] ? new User(result[0].id, result[0].email, result[0].password, result[0].role) : undefined
+
   }
 
   deleteUser = async (id: string): Promise<void> => {

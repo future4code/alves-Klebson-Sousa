@@ -246,8 +246,8 @@ class UserController {
 
     if (!user) {
       res.statusCode = 404
-      throw new Error("Usário inexistente!")
-    }
+      throw new Error("Usário inexistente!")    }
+   
 
     res.status(200).send({
       id: user.getId(),

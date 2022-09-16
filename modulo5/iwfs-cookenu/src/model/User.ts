@@ -21,6 +21,11 @@ class User {
   public getPassword() {
     return this.password;
   }
+
+  static toUserModel(data: any): User | undefined {
+    if(!data) return undefined
+    return new User(data.id, data.name, data.email, data.password)
+  }
 }
 
 export default User;

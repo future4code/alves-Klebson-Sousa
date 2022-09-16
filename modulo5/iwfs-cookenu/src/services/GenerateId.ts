@@ -2,7 +2,8 @@ import {v4} from "uuid"
 
 
 export class GenerateId {
-    generateId = (): string => {
+    generateIds = (): string => {
+        console.log("generate")
         return v4()
     }
 }

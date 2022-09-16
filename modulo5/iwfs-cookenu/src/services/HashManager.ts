@@ -5,7 +5,7 @@ dotenv.config()
 
 export class HashManager {
 
-    createHash = (plainText: string): string => {
+    createHash = async(plainText: string): Promise<string> => {
         const cost: number = Number(process.env.BCRYPT_COST)
         const salt: string = genSaltSync(cost)
         const cypherText: string = hashSync(plainText, salt)
@@ -13,7 +13,7 @@ export class HashManager {
         return cypherText
     }
 
-    compareHash = (plainText: string, cypherText: string): boolean => {
+    compareHash = async(plainText: string, cypherText: string): Promise<boolean> => {
         return compareSync(plainText, cypherText)
     } 
 }

@@ -3,7 +3,7 @@ class Recipes {
     private id: string,
     private title: string,
     private description: string,
-    private creationDate: string,
+    // private creationDate: Date,
     private userId: string
   ) {}
 
@@ -14,16 +14,16 @@ class Recipes {
     return this.id;
   }
 
-  public getEmail() {
+  public getTitle() {
     return this.title;
   }
 
-  public getPassword() {
+  public getDescription() {
     return this.description;
   }
-  public getCreationDate() {
-    return this.creationDate;
-  }
+  // public getCreationDate() {
+  //   return this.creationDate;
+  // }
 }
 
 export default Recipes;

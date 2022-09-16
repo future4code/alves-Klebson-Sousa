@@ -1,8 +1,11 @@
 import { sign, verify } from "jsonwebtoken";
 import dotenv from "dotenv";
-import { authenticationData } from "../model/types";
 
 dotenv.config()
+
+export interface authenticationData {
+    id: string
+ }
 
 export class Authenticator {
 

@@ -1,4 +1,6 @@
-
-export interface authenticationData {
-   id: string
+export interface UserDB {
+  id: string
+  name: string
+  email: string
+  password: string
 }

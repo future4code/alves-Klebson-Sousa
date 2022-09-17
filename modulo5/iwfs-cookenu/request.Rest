@@ -13,7 +13,7 @@ POST http://localhost:3003/login
 Content-Type: application/json
 
 {
-    "email": "dumbledore@gmail.com",
+    "email": "granger@gmail.com",
 	"password": "123456789"	
 }
 
@@ -35,6 +35,44 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "Espetinho de carne moida",
-    "description": "Carne moída no espeto, recheado com bacon e mussartela"
+    "title": "Café cremoso2",
+    "description": "Café torrado e passado na hora com chantylly"
 }
+
+###
+
+GET http://localhost:3003/recipe/8bb6dc5a-b407-4887-bfb9-54800aea5078
+Authorization: {{token}}
+
+###
+
+GET http://localhost:3003/recipes/all
+
+
+###
+POST http://localhost:3003/user/follow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "idSeguindo": "88d3a25a-9cf7-435b-9158-24520a8647b5"
+}
+
+###
+
+POST http://localhost:3003/user/unfollow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "userToUnfollowId": "88d3a25a-9cf7-435b-9158-24520a8647b5"
+}
+
+###
+
+GET http://localhost:3003/user/feed
+Content-Type: application/json
+Authorization: {{token}}
+
+
+###

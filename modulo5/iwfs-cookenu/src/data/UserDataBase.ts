@@ -1,6 +1,8 @@
+import moment from "moment";
 import Feed from "../model/Feed";
-import { UserDB } from "../model/types";
+import { feedDB, UserDB } from "../model/types";
 import User from "../model/User";
+import { authenticationData } from "../services/Authenticator";
 import { BaseDataBase } from "./BaseDataBase";
 
 class UserDataBase extends BaseDataBase {
@@ -25,6 +27,7 @@ class UserDataBase extends BaseDataBase {
           name: user.getName(),
           email: user.getEmail(),
           password: user.getPassword(),
+          role: user.getRole()
         })
         .into(UserDataBase.userTableName);
     } catch (error: any) {
@@ -43,7 +46,8 @@ class UserDataBase extends BaseDataBase {
             result[0].id,
             result[0].name,
             result[0].email,
-            result[0].password
+            result[0].password,
+            result[0].role
           )
         : undefined;
     } catch (error: any) {
@@ -73,34 +77,54 @@ class UserDataBase extends BaseDataBase {
       .delete();
   };
 
-  selectRecipesUserFeed = async (userId: string): Promise<any> => {
+  selectRecipesUserFeed = async (id:string): Promise<feedDB[]> => {
+
+    // select Recipes_Cookenu.*, User_Cookenu.name from User_Cookenu_follow 
+    // inner join User_Cookenu 
+    // on 
+    // User_Cookenu_follow.id_seguindo = User_Cookenu.id
+    // inner join Recipes_Cookenu
+    // on
+    // User_Cookenu_follow.id_seguindo = Recipes_Cookenu.user_id
+    // where User_Cookenu_follow.id_seguir = "ea5d65fb-d156-4a76-b636-0662876c4813";
+
     
       const result = await BaseDataBase.connection()
         .select(
-          "Recipes_Cookenu.id as recipe_id",
-          "Recipes_Cookenu.title",
-          "Recipes_Cookenu.description",
-          "Recipes_Cookenu.creation_Date",
-          "User_Cookenu.id as user_id",
-          "User_Cookenu.name"
+          "Recipes_Cookenu.*",
+          "User_Cookenu.name",          
         )
         .from("User_Cookenu_follow")
         .innerJoin(
           "User_Cookenu",
-          "User_Cookenu.id",
-          "User_Cookenu_follow.id_seguindo"
+          "User_Cookenu_follow.id_seguindo",
+          "User_Cookenu.id"
         )
         .innerJoin(
           "Recipes_Cookenu",
-          "Recipes_Cookenu.user_id",
-          "User_Cookenu_follow.id_seguindo"
+          "User_Cookenu_follow.id_seguindo",
+          "Recipes_Cookenu.user_id"
         )
-        .where({ id_seguir: userId });
-        console.log(result)
+        .where({ "User_Cookenu_follow.id_seguir": `${id}` });
+       
+        const typeFeed = result.map((feed) => {
+          console.log("feed", feed)
+          const type : feedDB = {
+            id:feed.id,
+            title: feed.title,
+            description:feed.description,
+            creation_Date:moment(feed.creation_Date, "YYYY-MM-DD").format("DD/MM/YYY"),
+            userId: feed.user_id,
+            userName: feed.name
+          }
+          return type
+        })
 
-      return result;
+      return typeFeed;
    
-  };
+  }
+
+ 
 }
 
 export default UserDataBase;

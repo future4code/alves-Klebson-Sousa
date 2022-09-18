@@ -16,9 +16,6 @@ app.get("/user/feed", userController.getRecipesFeed)
 
 app.post("/recipe/create", recipeController.createRecipe)
 app.get("/recipe/:id", recipeController.getRecipeById)
-
-
-
-
-
+app.put("/edit/recipe/:id",recipeController.editRecipe)
+app.delete("/delete/recipe/:id",recipeController.deleteRecipe)
 

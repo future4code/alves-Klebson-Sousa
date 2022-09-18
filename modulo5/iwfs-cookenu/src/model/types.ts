@@ -12,3 +12,12 @@ export interface RecipeDB {
   creation_Date: Date;
   userId: string;
 }
+
+export interface feedDB {
+  id:string,
+  title: string,
+  description:string,
+  creation_Date:string,
+  userId: string,
+  userName: string
+}

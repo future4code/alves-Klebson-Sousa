@@ -1,10 +1,12 @@
 import { sign, verify } from "jsonwebtoken";
 import dotenv from "dotenv";
+import { USER_ROLES } from "../model/User";
 
 dotenv.config()
 
 export interface authenticationData {
     id: string
+    role: USER_ROLES
  }
 
 export class Authenticator {
@@ -19,13 +21,13 @@ export class Authenticator {
         return token
     }
 
-    getTokenData = (token: string): authenticationData | null => {
+    getTokenData = (token: string): authenticationData => {
         try {
-            const {id}= verify(token,process.env.JWT_KEY!) as authenticationData
+            const payload = verify(token,process.env.JWT_KEY!) as authenticationData
 
-        return {id}  
-        } catch (error) {
-            return null
+        return payload
+        } catch (error: any) {
+            return error
         }
         
     }

@@ -13,7 +13,7 @@ POST http://localhost:3003/login
 Content-Type: application/json
 
 {
-    "email": "granger@gmail.com",
+    "email": "dumbledore@gmail.com",
 	"password": "123456789"	
 }
 
@@ -35,8 +35,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "Café cremoso2",
-    "description": "Café torrado e passado na hora com chantylly"
+    "title": "Café cremoso3",
+    "description": "Bom demais"
 }
 
 ###
@@ -71,8 +71,22 @@ Authorization: {{token}}
 ###
 
 GET http://localhost:3003/user/feed
-Content-Type: application/json
 Authorization: {{token}}
 
 
 ###
+
+Put http://localhost:3003/edit/recipe/702f9b99-0157-42aa-87a3-e33765047e37
+Content-Type: application/json
+Authorization: {{token}}
+
+{    
+    "title": "Café preto",
+    "description": "Café torrado e passado na hora com chantylly"
+}
+
+###
+
+DELETE http://localhost:3003/delete/recipe/845dfdf9-6a18-439d-aea2-75b4e3e8a289
+Content-Type: application/json
+Authorization: {{token}}

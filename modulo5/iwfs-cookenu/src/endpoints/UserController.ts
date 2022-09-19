@@ -78,8 +78,7 @@ class UserController {
 
       const user = await userDB.selectUserByEmail(email);
 
-      if (!user) {
-        // foi usado anteriormente só user
+      if (!user) {        
         res.statusCode = 400;
         throw new Error("Usuário não cadastrado");
       }

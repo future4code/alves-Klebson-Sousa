@@ -18,6 +18,7 @@ class UserDataBase extends BaseDataBase {
 
     return User.toUserModel(result[0]);
   };
+  
   insertUser = async (user: User): Promise<void> => {
     try {
       await BaseDataBase.connection()

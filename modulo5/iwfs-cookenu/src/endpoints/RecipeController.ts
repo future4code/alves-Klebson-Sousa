@@ -140,20 +140,19 @@ class RecipeController {
         );
       }
 
-      const idPerson = new Authenticator().getTokenData(token); // id está chegando nulo
-
+      const idPerson = new Authenticator().getTokenData(token); 
       const recipeDataBase = new RecipeDataBase();
 
-      const recipeById = await recipeDataBase.selectRecipeById(idRecipe);
-      console.log(idPerson);
+      const recipeById = await recipeDataBase.selectRecipeById(idRecipe); // id está chegando undefined
+
+      console.log(idPerson.id, "=", recipeById && recipeById.getIdUser());
 
       if (!recipeById) {
         throw new Error("Receita não encontrada");
       }
 
       if (
-        idPerson.role === USER_ROLES.NORMAL &&
-        recipeById.getIdUser() !== idPerson.id
+        idPerson.role === USER_ROLES.NORMAL && recipeById.getIdUser() !== idPerson.id
       ) {
         throw new Error(
           "Somente administradores podem editar receitas de outros usuarios"
@@ -200,7 +199,7 @@ class RecipeController {
         recipeById.getIdUser() !== idPerson.id
       ) {
         throw new Error(
-          "Somente administradores podem editar receitas de outros usuarios"
+          "Somente administradores podem deletar receitas de outros usuarios"
         );
       }
 

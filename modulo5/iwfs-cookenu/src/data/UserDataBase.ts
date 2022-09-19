@@ -2,7 +2,6 @@ import moment from "moment";
 import Feed from "../model/Feed";
 import { feedDB, UserDB } from "../model/types";
 import User from "../model/User";
-import { authenticationData } from "../services/Authenticator";
 import { BaseDataBase } from "./BaseDataBase";
 
 class UserDataBase extends BaseDataBase {
@@ -124,6 +123,27 @@ class UserDataBase extends BaseDataBase {
    
   }
 
+  async deleteFollowSeguir(idSeguir: string) {
+
+    await BaseDataBase.connection()
+        .delete()
+        .from(UserDataBase.userTableFollow)
+        .where({ id_seguir: idSeguir })
+}
+
+async deleteFollowSeguido(idSeguindo: string) {
+    await BaseDataBase.connection()
+        .delete()
+        .from(UserDataBase.userTableFollow)
+        .where({ id_seguindo: idSeguindo })
+}
+
+async deleteUser(id: string) {
+    await BaseDataBase.connection()
+        .delete()
+        .from(UserDataBase.userTableName)
+        .where({ id })
+}
  
 }
 

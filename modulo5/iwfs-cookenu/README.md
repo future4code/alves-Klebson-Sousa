@@ -26,3 +26,6 @@
     6. **Feed**
         
         Um usuário deve poder visualizar as receitas criadas pelos usuários que ele segue. As receitas devem estar ordenadas pela data de criação.
+
+        link do deploy:
+        https://cookenubicalho.herokuapp.com

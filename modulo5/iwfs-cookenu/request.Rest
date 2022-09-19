@@ -1,13 +1,16 @@
+# Criar usuário
 POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-    "name": "Albus Dumbledore",
-	"email": "dumbledore@gmail.com",
-	"password": "123456789"	
+    "name": "Harry Potter",
+	"email": "potter@gmail.com",
+	"password": "123456789",
+    "role": "admin"	
 }
 
 ### 
+# Fazer login
 # @name login
 POST http://localhost:3003/login
 Content-Type: application/json
@@ -19,74 +22,84 @@ Content-Type: application/json
 
 ### 
 @token = {{login.response.body.token}}
-
+# Pegar o própio perfil
 GET http://localhost:3003/user/profile
 Authorization: {{token}}
 
 ###
 
-GET http://localhost:3003/user/88d3a25a-9cf7-435b-9158-24520a8647b5
+# Pegar o perfil de outro usuário pelo id
+GET http://localhost:3003/user-by-id/ea5d65fb-d156-4a76-b636-0662876c4813
 Authorization: {{token}}
 
 ###
 
+# Criar recita
 POST http://localhost:3003/recipe/create
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "Café cremoso3",
-    "description": "Bom demais"
+    "title": "Bolo de banana",
+    "description": "Muito gostoso"
 }
 
 ###
 
-GET http://localhost:3003/recipe/8bb6dc5a-b407-4887-bfb9-54800aea5078
+# Pegar receita
+GET http://localhost:3003/recipe-by-id/9cd4645b-1a1c-4f77-994f-266e1de9e1a5
 Authorization: {{token}}
 
 ###
 
-GET http://localhost:3003/recipes/all
-
-
-###
+# Seguir usuário
 POST http://localhost:3003/user/follow
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "idSeguindo": "88d3a25a-9cf7-435b-9158-24520a8647b5"
+    "idSeguindo": "ffb639bb-eb7d-460f-9aaf-ed9ba2f8dfae"
 }
 
 ###
 
+# Deixar de seguir usuário
 POST http://localhost:3003/user/unfollow
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "userToUnfollowId": "88d3a25a-9cf7-435b-9158-24520a8647b5"
+    "userToUnfollowId": "e4b69625-b729-4fb9-b024-8bc7002986a2"
 }
 
 ###
-
+# Pegar feed de receitas das pessoas seguidas pelo id logado
 GET http://localhost:3003/user/feed
 Authorization: {{token}}
 
 
 ###
 
-Put http://localhost:3003/edit/recipe/702f9b99-0157-42aa-87a3-e33765047e37
+# Editar receita
+Put http://localhost:3003/edit/recipe/9cd4645b-1a1c-4f77-994f-266e1de9e1a5
 Content-Type: application/json
 Authorization: {{token}}
 
 {    
-    "title": "Café preto",
-    "description": "Café torrado e passado na hora com chantylly"
+    "title": "Cupcake flutuante2",
+    "description": "Wingardium Leviosa"
 }
 
 ###
 
-DELETE http://localhost:3003/delete/recipe/845dfdf9-6a18-439d-aea2-75b4e3e8a289
+# Deletar receita
+DELETE http://localhost:3003/delete/recipe/152cda4c-d704-4073-ba5f-7d41ee31f0f4
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+
+# Deletar a conta do usuário
+DELETE http://localhost:3003/delete/account/845dfdf9-6a18-439d-aea2-75b4e3e8a289
 Content-Type: application/json
 Authorization: {{token}}

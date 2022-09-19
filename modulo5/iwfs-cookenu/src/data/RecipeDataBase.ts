@@ -34,6 +34,29 @@ class RecipeDataBase extends BaseDataBase {
     }
   }
 
+  async selectRecipeByUserId(id: string): Promise<Recipes[] | undefined> {
+
+    const result = await BaseDataBase.connection()
+        .select("*")
+        .from(RecipeDataBase.recipeTableName)
+        .where({ user_id:id })
+    
+    if (!result.length) {
+        return undefined
+    }
+
+    const typeRecipe = result.map((recipe:any)=>{
+        return new Recipes(
+            recipe.id,
+            recipe.title,
+            recipe.description,
+            recipe.creation_Date,
+            recipe.user_id
+        )
+    })
+    return typeRecipe
+    }
+
   selectRecipe = async () => {
     const result = await BaseDataBase.connection(
       RecipeDataBase.recipeTableName

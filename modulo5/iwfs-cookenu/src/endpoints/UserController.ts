@@ -4,6 +4,7 @@ import User, { USER_ROLES } from "../model/User";
 import { GenerateId } from "../services/GenerateId";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
+import RecipeDataBase from "../data/RecipeDataBase";
 
 class UserController {
   signupUser = async (req: Request, res: Response) => {
@@ -211,14 +212,19 @@ class UserController {
         throw new Error(`Usuário com id ${idSeguindo} não existe`);
       }
 
-      await userDB.followPerson(tokenData.id, idSeguindo);
-
+      
       const user = await userDB.selectUserById(tokenData.id);
-
+      
       if (!user) {
         res.statusCode = 404;
         throw new Error("Usuário não existe");
       }
+      if (tokenData.id === idSeguindo) {
+        res.statusCode = 404;
+        throw new Error("Usuário não pode seguir a si mesmo!");
+      }
+      
+      await userDB.followPerson(tokenData.id, idSeguindo);
 
       res
         .status(200)
@@ -285,8 +291,8 @@ class UserController {
       const token = req.headers.authorization
 
       if (!token) {
-        res.statusCode = 422;
-        throw new Error("Please provid a token");
+        res.statusCode = 401;
+        throw new Error("Insira um token");
       }
 
       const authenticator = new Authenticator();
@@ -313,7 +319,65 @@ class UserController {
     }
   }
 
+  deleteAccount = async (req: Request, res: Response) => {
+    try {
+      const token = req.headers.authorization // pessoa admin
+      const id = req.params.id // id da pessoa a ser deletada
+
+      if (!token) {
+        res.statusCode = 401;
+        throw new Error("Insira um token");
+      }
+
+      // verificar se o token é valido
+      const idPerson = new Authenticator().getTokenData(token)
+
+      const userData = new UserDataBase()
+
+      const userId = await userData.selectUserById(id)
+
+      if (!userId) {
+          throw new Error("Pessoa nao Encontrada")
+      }
+
+      // somente pessoas do tipo normal podem editar a propria receita
+      if (idPerson.role === USER_ROLES.NORMAL && userId.getId() !== idPerson.id) {
+          throw new Error("Somente administradores podem deletar usuarios")
+      }
+
+      const recipeData = new RecipeDataBase()
+
+      const recipes = await recipeData.selectRecipeByUserId(userId.getId())
+
+      // verifica se a pessoa ja nao tem nenhuma receita
+      // if (!recipes) {
+      //     throw new Error("Pessoa não tem nenhuma receita")
+      // }
+
+      // deletar todas as receitas , percorrendo o array de receitas e deletando uma a uma
+      if (recipes && recipes.length > 0) {
+          for (const recipe of recipes) {
+              await recipeData.deleteRecipe(recipe.getId())
+          }
+      }
+
+      // deletar todos os seguidores e pessoas que seguem o id em questão
+      await userData.deleteFollowSeguir(userId.getId())
+      await userData.deleteFollowSeguido(userId.getId())
+
+
+      // deletar usuario
+      await userData.deleteUser(userId.getId())
+
+
+      res.status(200).send({ message: "Usuario deletado com sucesso!" })
+  } catch (error: any) {
+      res.status(error.statusCode || 500).send({ message: error.message })
+  }
+}
+
   
+    
 }
 
 export default UserController;

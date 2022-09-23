@@ -1,0 +1,47 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### 1) Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Patric Estrela",
+    "email": "estrela@gmail.com",
+    "password": "123456789"    
+}
+
+### 2) Login
+
+# @name login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "astrodev@gmail.com",
+    "password": "bananinha"
+}
+
+###
+
+# Criar post
+@token = {{login.response.body.token}}
+POST http://localhost:3003/posts/create
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "content": "Só um teste",
+    "userId": "bb574a78-ae4a-455c-be1b-4ce050849806"   
+}
+
+
+### Get posts
+GET http://localhost:3003/posts
+Authorization: {{token}}
+
+### Delete post
+DELETE http://localhost:3003/posts/delete/c8a0afa2-c319-44d0-b84d-d8feeb094aa8
+Content-Type: application/json
+Authorization: {{token}}
+

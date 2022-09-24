@@ -3,6 +3,7 @@ import {
   createPostInputDTO,
   IDeletePostInputDTO,
   ILikeDataInputDTO,
+  ILikeDB,
   messageOutputDTO,
   Post,
 } from "../models/Post";
@@ -58,7 +59,15 @@ export class PostBusiness {
 
     const postData = await this.postDatabase.selectPosts();
 
-    return postData;
+    const posts = postData.map((post) => {
+      return new Post(post.id, post.content, post.user_id);
+    });
+    for (let post of posts) {
+      const idPost = post.getId();
+      const likes = await this.postDatabase.selectLikes(idPost);
+      post.setLikes(likes);
+    }
+    return posts;
   };
 
   deletePost = async (input: IDeletePostInputDTO) => {
@@ -120,8 +129,67 @@ export class PostBusiness {
       throw new Error("Post not found");
     }
 
-    const idLike = this.idGenerator.generate()
+    const idLike = this.idGenerator.generate();
 
-    const like = await this.postDatabase.selectLike(tokenData.id, idPost)
+    const likeDB = await this.postDatabase.findLike(idPost, tokenData.id);
+
+    if (likeDB) {
+      throw new Error("You already liked");
+    }
+
+    const newLike: ILikeDB = {
+      id: idLike,
+      post_id: idPost,
+      user_id: tokenData.id
+    }
+    
+      await this.postDatabase.insertLike(newLike);
+    
+
+    const response: messageOutputDTO = {
+      message: "Like ok",
+    };
+    return response;
+  };
+
+  dislikePost = async (input: ILikeDataInputDTO) => {
+    const token = input.token;
+    const idPost = input.idPost;
+
+    if (!token) {
+      throw new Error("Provide a token through login");
+    }
+
+    if (!idPost) {
+      throw new Error("Enter the desired post ID in the parameter");
+    }
+
+    const tokenData = this.authenticator.getTokenPayload(token);
+
+    if (!tokenData) {
+      throw new Error("Invalid token");
+    }
+    const post = await this.postDatabase.selecttPostById(idPost);
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    const idLike = this.idGenerator.generate();
+
+    const likeDB = await this.postDatabase.findLike(idPost, tokenData.id);
+    
+    if (!likeDB) {
+      throw new Error(
+        "You can only dislike a post that you have previously liked"
+      );
+    }
+    
+      await this.postDatabase.removeLike(idPost, tokenData.id);
+  
+
+    const response: messageOutputDTO = {
+      message: "Dislike ok",
+    };
+    return response;
   };
 }

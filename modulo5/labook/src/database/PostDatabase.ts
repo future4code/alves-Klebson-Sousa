@@ -1,4 +1,4 @@
-import { IPostDB, Post } from "../models/Post";
+import { ILikeDB, IPostDB, Post } from "../models/Post";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class PostDatabase extends BaseDatabase {
@@ -20,27 +20,13 @@ export class PostDatabase extends BaseDatabase {
       PostDatabase.TABLE_POSTS
     ).select("*");
 
-    return postsData.map((post: any) => {
-      const postData = new Post(
-        post.id,
-        post.content,
-        post.user_id,
-        post.likes
-      );
-      const postResponse = {
-        id: postData.getId(),
-        content: postData.getContent(),
-        userId: postData.getUserId(),
-        likes: postData.getLikes(),
-      };
-      return postResponse;
-    });
+    return postsData;
   };
 
   removePost = async (idToDelete: string): Promise<void> => {
     await BaseDatabase.connection(PostDatabase.TABLE_POSTS)
-    .delete()
-    .where({id: idToDelete})
+      .delete()
+      .where({ id: idToDelete });
   };
 
   selecttPostById = async (idToDelete: string) => {
@@ -48,15 +34,39 @@ export class PostDatabase extends BaseDatabase {
       PostDatabase.TABLE_POSTS
     )
       .select("*")
-      .where({ id: idToDelete })
-       
-    return result[0];
-  }
+      .where({ id: idToDelete });
 
-  selectLike = async (idUser: string, idPost: string) => {
+    return result[0];
+  };
+
+  selectLikes = async (idPost: string) => {
     const result = await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
-    .select("*")
-    .where({user_id: idUser})
-    .andWhere({post_id: idPost})
-  }
+      .select()
+      .count()
+      .where({ post_id: idPost });
+
+    return result[0]["count(*)"] as number;
+  };
+
+  insertLike = async (likeDB: ILikeDB) => {
+    await BaseDatabase.connection(PostDatabase.TABLE_LIKES).insert(likeDB);
+  };
+
+  findLike = async (idPost: string, idUser: string) => {
+    const result: ILikeDB[] = await BaseDatabase.connection(
+      PostDatabase.TABLE_LIKES
+    )
+      .select()
+      .where({ post_id: idPost })
+      .andWhere({ user_id: idUser });
+
+    return result[0];
+  };
+
+  removeLike = async (idPost: string, idUser: string) => {
+    await BaseDatabase.connection(PostDatabase.TABLE_LIKES)
+      .delete()
+      .where({post_id: idPost})
+      .andWhere({ user_id: idUser });
+  };
 }

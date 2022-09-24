@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { IDeleteUserInputDTO, IEditUserInputDTO, IGetUsersInputDTO, IGetUsersOutputDTO, ILoginInputDTO, ISignupInputDTO } from "../models/User";
+import { ILoginInputDTO, ISignupInputDTO } from "../models/User";
 
 export class UserController {
     constructor(
@@ -38,5 +38,4 @@ export class UserController {
         }
     }
 
-    
 }

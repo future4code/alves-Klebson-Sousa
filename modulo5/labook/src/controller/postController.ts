@@ -54,10 +54,25 @@ export class PostController {
         try{
             const input: ILikeDataInputDTO = {
                 token: req.headers.authorization,
-                idPost: req.params.idPost
+                idPost: req.params.id
             }
 
             const response = await this.postBusiness.likePost(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            res.status(400).send({ message: error.message })
+        }
+    }
+
+    dislikePost = async (req: Request, res: Response) => {
+        try{
+            const input: ILikeDataInputDTO = {
+                token: req.headers.authorization,
+                idPost: req.params.id
+            }
+
+            const response = await this.postBusiness.dislikePost(input)
 
             res.status(200).send(response)
         } catch (error) {

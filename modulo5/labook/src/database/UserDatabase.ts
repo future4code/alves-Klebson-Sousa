@@ -27,5 +27,4 @@ export class UserDatabase extends BaseDatabase {
             .insert(userDB)
     }
 
-    
 }

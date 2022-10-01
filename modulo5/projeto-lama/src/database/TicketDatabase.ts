@@ -4,7 +4,7 @@ import { BaseDatabase } from "./BaseDatabase";
 export class TicketDatabase extends BaseDatabase {
   public static TABLE_Tickets = "Lama_Tickets";
 
-  public selectTickets = async (showId: string) => {
+  public selectTickets = async (showId: string): Promise<number | undefined> => {
     const result: any = await BaseDatabase.connection(
       TicketDatabase.TABLE_Tickets
     )
@@ -15,7 +15,7 @@ export class TicketDatabase extends BaseDatabase {
     return result[0].tickets as number;
   };
 
-  public findTicket = async (showId: string, userId: string) => {
+  public findTicket = async (showId: string, userId: string): Promise<ITicketDB | undefined> => {
     const ticketsDB: ITicketDB[] = await BaseDatabase.connection(
       TicketDatabase.TABLE_Tickets)
       .select()

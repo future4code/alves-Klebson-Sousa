@@ -4,14 +4,14 @@ import { AuthenticatorMock } from "./mocks/AuthenticatorMock"
 import { IdGeneratorMock } from "./mocks/IdGeneratorMock"
 import { ShowDatabaseMock} from "./mocks/ShowDatabaseMock"
 import { ICreateShowInputDTO, Show } from "../src/models/Show"
-import { TicketDatabase } from "../src/database/TicketDatabase"
+
 
 describe("Testando a ShowBusiness", () => {
     const showBusiness = new ShowBusiness(
         new ShowDatabaseMock(),
         new IdGeneratorMock(),
         new AuthenticatorMock(),
-        new TicketDatabase()
+        new TicketDatabaseMock()
     )
 
     test("Deve retornar uma lista de shows", async () => {

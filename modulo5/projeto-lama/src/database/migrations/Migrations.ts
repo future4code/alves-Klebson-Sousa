@@ -1,7 +1,7 @@
-import { BaseDatabase } from "../database/BaseDatabase"
-import { UserDatabase } from "../database/UserDatabase"
-import { TicketDatabase } from "../database/TicketDatabase"
-import { ShowDatabase } from "../database/ShowDatabase"
+import { BaseDatabase } from "../BaseDatabase"
+import { UserDatabase } from "../UserDatabase"
+import { TicketDatabase } from "../TicketDatabase"
+import { ShowDatabase } from "../ShowDatabase"
 import { users, shows, tickets } from "./data"
 
 class Migrations extends BaseDatabase {

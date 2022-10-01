@@ -4,8 +4,9 @@ import { AuthorizationError } from "../errors/AuthorizationError";
 import { ConflictError } from "../errors/ConflictError";
 import { ParamsError } from "../errors/ParamsError";
 import {
+  ICreateMessageOutputDTO,
   ICreateShowInputDTO,
-  ICreateShowpOutputDTO,
+  IGetShowsOutputDTO,
   Show,
 } from "../models/Show";
 import { USER_ROLES } from "../models/User";
@@ -13,18 +14,19 @@ import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import moment from "moment"
+import { TicketDatabase } from "../database/TicketDatabase";
 
 export class ShowBusiness {
   constructor(
     private showDatabase: ShowDatabase,
-    private idGenerator: IdGenerator,
-    private hashManager: HashManager,
-    private authenticator: Authenticator
+    private idGenerator: IdGenerator,    
+    private authenticator: Authenticator,
+    private ticketDatabase: TicketDatabase
   ) {}
 
   public createShow = async (
     input: ICreateShowInputDTO
-  ): Promise<ICreateShowpOutputDTO> => {
+  ): Promise<ICreateMessageOutputDTO> => {
     const { token, band, startsAt } = input;
 
     const payload = this.authenticator.getTokenPayload(token);
@@ -38,19 +40,18 @@ export class ShowBusiness {
     }
 
     const showDate = "05/12/2022"
-    // const date1 = Number(showDate.date)
-    const date2: number = moment(showDate, 'DD/MM/YYYY').unix() - moment(startsAt, 'YYYY-MM-DD').unix()
 
-    const isShowAlreadyExists = await this.showDatabase.findByStartsAt(
+    const previousDate: number = moment(showDate, 'DD/MM/YYYY').unix() - moment(startsAt, 'YYYY-MM-DD').unix()
+
+    const isShowAlreadyExists = await this.showDatabase.findShowByStartsAt(
       startsAt
     );
-
-    console.log("isShow", date2)    
+   
 
     if (isShowAlreadyExists) {
       throw new ConflictError("Já existe Show previsto para esta data");
     }
-    if (date2 > 0) {
+    if (previousDate > 0) {
       throw new ConflictError("Não é possível criar show antes da data prevista");
     }
 
@@ -64,10 +65,35 @@ export class ShowBusiness {
 
     await this.showDatabase.insertShow(show);
 
-    const response: ICreateShowpOutputDTO = {
+    const response: ICreateMessageOutputDTO = {
       message: "Show criado com sucesso",
     };
 
     return response;
   };
+
+  public getShow = async (): Promise<IGetShowsOutputDTO> => {
+    
+    const showsDB = await this.showDatabase.selectShows()
+
+    const shows = showsDB.map(showDB => {
+        return new Show(
+          showDB.id,
+          showDB.band,
+          showDB.starts_at
+        )
+    })
+
+    for (let show of shows) {
+        const showtId = show.getId()
+        const tickets = await this.ticketDatabase.selectTickets(showtId)
+        show.setTickets(show.getTickets() - tickets)
+    }
+
+    const response: IGetShowsOutputDTO = {
+      shows
+    }
+
+    return response
+  }
 }

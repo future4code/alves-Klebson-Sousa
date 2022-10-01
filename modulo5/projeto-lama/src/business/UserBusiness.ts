@@ -46,7 +46,7 @@ export class UserBusiness {
         const isEmailAlreadyExists = await this.userDatabase.findByEmail(email)
         
         if (isEmailAlreadyExists) {
-            throw new ConflictError("Email já cadastrado")
+            throw new ConflictError("Já existe um cadastro com esse email")
         }
 
         const id = this.idGenerator.generate()

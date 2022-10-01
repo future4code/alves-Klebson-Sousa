@@ -6,8 +6,8 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "alice",
-    "email": "alice@gmail.com",
+    "name": "alice2",
+    "email": "alice2@gmail.com",
     "password": "alice99"
 }
 
@@ -29,6 +29,24 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "band": "Eletr",
-    "starts_at": "2022-12-13"
+    "band": "Imagine Dragons",
+    "starts_at": "2022-12-05"
 }
+###
+# Pegar shows
+GET http://localhost:3003/shows
+
+###
+# Reservar Ticket
+POST http://localhost:3003/tickets/reservation
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "showId": "06421cae-3386-405c-925b-52460b9da0c7"
+       
+}
+
+### Delete reserva
+DELETE http://localhost:3003/tickets/delete/7bce83d2-6b03-4e4d-a712-9a1bbca1a9d3
+Authorization: {{token}}

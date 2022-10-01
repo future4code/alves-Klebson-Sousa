@@ -18,12 +18,23 @@ export class ShowController {
 
             const response = await this.showBusiness.createShow(input)
             res.status(201).send(response)
-        } catch (error) {
-            console.log(error)
+        } catch (error) {            
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
             }
             res.status(500).send({ message: "Erro inesperado ao criar Show" })
+        }
+    }
+
+    public getShow = async (req: Request, res: Response) => {
+        try {            
+            const response = await this.showBusiness.getShow()
+            res.status(200).send(response)
+        } catch (error) {
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao buscar Shows" })
         }
     }
 

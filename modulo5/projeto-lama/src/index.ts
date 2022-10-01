@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 import { pingRouter } from './router/pingRouter'
 import { userRouter } from './router/userRouter'
 import { showRouter } from './router/showRouter'
+import { ticketRouter } from './router/thicketRouter'
 
 dotenv.config()
 
@@ -19,3 +20,4 @@ app.listen(process.env.PORT || 3003, () => {
 app.use("/ping", pingRouter)
 app.use("/users", userRouter)
 app.use("/shows", showRouter)
+app.use("/tickets", ticketRouter)

@@ -4,8 +4,7 @@ import { BaseDatabase } from "./BaseDatabase"
 export class ShowDatabase extends BaseDatabase {
     public static TABLE_Shows = "Lama_Shows"
     
-    public toShowDBModel = (show: Show): IShowDB => {
-        console.log("aqui")
+    public toShowDBModel = (show: Show): IShowDB => {      
         const showDB: IShowDB = {
             id: show.getId(),
             band: show.getBand(),

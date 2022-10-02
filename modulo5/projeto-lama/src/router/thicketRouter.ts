@@ -20,4 +20,4 @@ const ticketController = new TicketController(
 )
 
 ticketRouter.post("/reservation", ticketController.reservationTicket)
-ticketRouter.delete("/delete/:id", ticketController.DeleteReservation)
+ticketRouter.delete("/delete/:id", ticketController.deleteReservation)

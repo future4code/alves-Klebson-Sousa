@@ -26,7 +26,7 @@ export class TicketBusiness {
     const payload = this.authenticator.getTokenPayload(token);
 
     if (!showId) {
-        throw new ParamsError("Parâmetro showId  devm ser passads")
+        throw new ParamsError("Parâmetro showId  deve ser passado")
     }
 
     if (!payload) {
@@ -64,13 +64,13 @@ export class TicketBusiness {
 
   };
 
-  public DeleteReservation = async (input:IDeleteTicketInputDTO) => {
+  public deleteReservation = async (input:IDeleteTicketInputDTO) => {
     const { token, showId} = input
 
     const payload = this.authenticator.getTokenPayload(token)
 
     if (!payload) {
-        throw new Error("Não autenticado")
+        throw new AuthenticationError("Insira um token válido")
     }
 
     const isShowAlreadyExists = await this.showDatabase.findShowById(showId)

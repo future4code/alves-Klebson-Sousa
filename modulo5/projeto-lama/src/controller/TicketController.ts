@@ -25,14 +25,14 @@ export class TicketController {
     }
   };
 
-  public DeleteReservation = async (req: Request, res: Response) => {
+  public deleteReservation = async (req: Request, res: Response) => {
     try {
       const input: IDeleteTicketInputDTO = {
         token: req.headers.authorization as string,       
         showId: req.params.id      
       };
 
-      const response = await this.ticketBusiness.DeleteReservation(input);
+      const response = await this.ticketBusiness.deleteReservation(input);
       res.status(201).send(response);
 
     } catch (error) {

@@ -6,8 +6,8 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "alice2",
-    "email": "alice2@gmail.com",
+    "name": "alice3",
+    "email": "alice3@gmail.com",
     "password": "alice99"
 }
 
@@ -29,8 +29,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "band": "Imagine Dragons",
-    "starts_at": "2022-12-05"
+    "band": "Imagine Dragon5",
+    "starts_at": "2022-12-04"
 }
 ###
 # Pegar shows

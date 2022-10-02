@@ -11,6 +11,8 @@ export class TicketDatabaseMock extends BaseDatabase {
     switch (showId) {
       case "201":
         return 1;
+      case "202":
+        return 1;
       default:
         return undefined;
     }
@@ -21,12 +23,18 @@ export class TicketDatabaseMock extends BaseDatabase {
     userId: string
   ): Promise<ITicketDB | undefined> => {
     
-    switch (showId && userId) {
-      case "201" && "101":
+    switch (showId) {
+      case "201" :
         return {
           id: "301",
           show_id: "201",
-          user_id: "101",
+          user_id: "id-mock-admin",
+        }
+      case "201" && "id-mock-normal":
+        return {
+          id: "301",
+          show_id: "201",
+          user_id: "id-mock-normal",
         };
 
       default:

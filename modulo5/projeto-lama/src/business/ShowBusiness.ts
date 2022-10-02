@@ -32,7 +32,7 @@ export class ShowBusiness {
     const payload = this.authenticator.getTokenPayload(token);
 
     if (!payload) {
-      throw new AuthenticationError("Não autenticado");
+      throw new AuthenticationError("Insira um token válido");
     }
 
     if (typeof band !== "string") {
@@ -42,7 +42,7 @@ export class ShowBusiness {
     const showDate = "05/12/2022"
 
     const previousDate: number = moment(showDate, 'DD/MM/YYYY').unix() - moment(startsAt, 'YYYY-MM-DD').unix()
-
+    
     const isShowAlreadyExists = await this.showDatabase.findShowByStartsAt(
       startsAt
     );
@@ -56,7 +56,7 @@ export class ShowBusiness {
     }
 
     if (payload.role === USER_ROLES.NORMAL) {
-      throw new AuthorizationError("Somente admin pde criar shows");
+      throw new AuthorizationError("Somente admin pode criar shows");
     }
 
     const id = this.idGenerator.generate();
@@ -87,7 +87,7 @@ export class ShowBusiness {
     for (let show of shows) {
         const showtId = show.getId()
         const tickets = await this.ticketDatabase.selectTickets(showtId)
-        show.setTickets(show.getTickets() - tickets)
+        show.setTickets(show.getTickets() - tickets!)
     }
 
     const response: IGetShowsOutputDTO = {

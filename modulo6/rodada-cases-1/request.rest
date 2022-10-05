@@ -1,0 +1,15 @@
+### Ping
+GET http://localhost:3003/ping
+
+### Pegar pessoas
+GET http://localhost:3003/person
+
+### Inserir dados da pessoa
+POST http://localhost:3003/person/insert
+Content-Type: application/json
+
+{
+    "firstName": "Marta",
+    "lastName": "Penha",
+    "participation": 40
+}

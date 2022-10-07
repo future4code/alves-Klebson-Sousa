@@ -1,5 +1,6 @@
+import { IListPurchaseDB } from "../../model/ListPurchase";
 import { IProductsDB } from "../../model/Products";
-import { IListPurchaseDB, IUserDB, User } from "../../model/User";
+import { IStock_PurchasesDB } from "../../model/StockPurchase";
 
 export const products: IProductsDB[] = [
     {
@@ -353,27 +354,20 @@ export const products: IProductsDB[] = [
     }
 ]
 
-export const users: IUserDB[] = [
-    {
-        name: "Marta",
-        delivery_date: new Date("2022-12-24")
-    },
-
-    {
-        name: "Mauro",
-        delivery_date: new Date("2022-12-25")
-    },
-    {
-        name: "Pedro",
-        delivery_date: new Date("2022-12-26")
-    }
-]
-
 export const listPurchases: IListPurchaseDB[] = [
     {
         id: "98",
-        name_product: "DESODORANTE AEROSOL REXONA ANTIBACTERIANO + INVISIBLE PROTECTION FEMININO 150ML",
+        client_name: "Marta",
+        delivery_date: new Date("2022-12-24"),
+        product_name: "DESODORANTE AEROSOL REXONA ANTIBACTERIANO + INVISIBLE PROTECTION FEMININO 150ML",
         quantity: 5,
-        name_client: "Marta"
     }
+]
+
+
+export const stock_Purchases: IStock_PurchasesDB[] = [
+    {
+        purchase_id: "98",
+        product_id: 98
+    }    
 ]

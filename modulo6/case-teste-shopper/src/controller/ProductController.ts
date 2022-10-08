@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ProductBusiness } from "../business/ProductBusiness";
-import { IListPurchaseDTO } from "../model/ListPurchase";
+import { IListPurchaseDTO } from "../model/Order";
 
 export class ProductController {
     constructor(

@@ -1,4 +1,4 @@
-import { IListPurchaseDB, IListPurchaseDTO, ListPurchase } from "../model/ListPurchase";
+import { IListPurchaseDTO, ListPurchase } from "../model/Order";
 import { IProductsDB } from "../model/Products";
 import { BaseDatabase } from "./BaseDatabase";
 
@@ -16,24 +16,23 @@ export class ProductDatabase extends BaseDatabase {
     //     return result[0]
     // }
 
-    public toListPurchaseDBModel = (listPurchase: ListPurchase): IListPurchaseDB => {      
-        const ListDB: IListPurchaseDB = {
-            id: listPurchase.getId(),
-            client_name: listPurchase.getClientName(),
-            delivery_date: listPurchase.getDeliveryDate(),
-            product_name: listPurchase.getProductName(),
-            quantity: listPurchase.setQuantity()
-        }
+    // public toListPurchaseDBModel = (listPurchase: ListPurchase): IListPurchaseDB => {      
+    //     const ListDB: IListPurchaseDB = {
+    //         id: listPurchase.getId(),
+    //         client_name: listPurchase.getClientName(),
+    //         delivery_date: listPurchase.getDeliveryDate(),
+    //         product_name: listPurchase.getProductName(),
+    //         quantity: listPurchase.setQuantity()
+    //     }
 
-        return ListDB
-    }
+    //     return ListDB
+    // }
 
     public findByProductName = async (productName: string) => {
         const result = await BaseDatabase
             .connection(ProductDatabase.TABLE_PRODUCT)
             .select()
-            .where({ name:productName })
-            console.log(result)
+            .where({ name:productName })           
 
         return result[0]
     }

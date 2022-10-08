@@ -1,6 +1,6 @@
 import { BaseDatabase } from "../BaseDatabase"
 // import { UserDatabase } from "../UserDatabase"
-import { listPurchases, products, stock_Purchases } from "./data"
+import { productsStock, Client, order } from "./data"
 
 class Migrations extends BaseDatabase {
     execute = async () => {
@@ -28,47 +28,48 @@ class Migrations extends BaseDatabase {
 
     createTables = async () => {
         await BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS Stock_Purchases;
-        DROP TABLE IF EXISTS List_Purchases;
+        DROP TABLE IF EXISTS Order_Products;
+        DROP TABLE IF EXISTS Stock_Purchases_Clients;
+        DROP TABLE IF EXISTS Purchases_Clients;
         DROP TABLE IF EXISTS Products_Stock;
         
         CREATE TABLE IF NOT EXISTS Products_Stock (
-            id INT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
+            id INT NOT NULL,
+            name VARCHAR(255) PRIMARY KEY,
             price decimal(4,2) NOT NULL,
             qty_stock INT NOT NULL           
           );
 
-          CREATE TABLE IF NOT EXISTS List_Purchases (	
-            id VARCHAR(255) PRIMARY KEY,
-            client_name VARCHAR(255) NOT NULL,
-            delivery_date DATE NOT NULL,
-            product_name VARCHAR(255) NOT NULL,    
-            quantity TINYINT      
-        );
+          CREATE TABLE IF NOT EXISTS Purchases_Clients (
+            id VARCHAR(255) PRIMARY KEY,	
+            name VARCHAR(255) NOT NULL,
+            delivery_date DATE NOT NULL 
+          );          
 
-        CREATE TABLE IF NOT EXISTS Stock_Purchases (
-            purchase_id VARCHAR(255) NOT NULL,
-            product_id INT NOT NULL,
-            FOREIGN KEY (purchase_id) REFERENCES List_Purchases (id),
-            FOREIGN KEY (product_id) REFERENCES Products_Stock (id)
-          );
+          CREATE TABLE IF NOT EXISTS Order_Products (	
+            id VARCHAR(255) PRIMARY KEY,	
+            product_name VARCHAR(255) NOT NULL,    
+            quantity INT,
+            client_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (product_name) REFERENCES Products_Stock (name),
+            FOREIGN KEY (client_id) REFERENCES Purchases_Clients (id)
+            
+        );
         `)
     }
 
     insertData = async () => {
         await BaseDatabase
             .connection("Products_Stock")
-            .insert(products)
+            .insert(productsStock)
         
         await BaseDatabase
-            .connection("List_Purchases")
-            .insert(listPurchases)
-        
+            .connection("Purchases_Clients")
+            .insert(Client)        
+       
         await BaseDatabase
-            .connection("Stock_Purchases")
-            .insert(stock_Purchases)
-
+            .connection("Order_Products")
+            .insert(order)
     }
 }
 

@@ -1,8 +1,8 @@
-import { IListPurchaseDB } from "../../model/ListPurchase";
+import { IOrderDB } from "../../model/Order";
 import { IProductsDB } from "../../model/Products";
-import { IStock_PurchasesDB } from "../../model/StockPurchase";
+import { IClientDB } from "../../model/Client";
 
-export const products: IProductsDB[] = [
+export const productsStock: IProductsDB[] = [
     {
         "id":16,
         "name": "AZEITE PORTUGUÊS EXTRA VIRGEM GALLO 500ML",
@@ -110,7 +110,7 @@ export const products: IProductsDB[] = [
 
     {
         "id": 36,
-        "name": "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN,",
+        "name": "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
         "price": 11.29,
         "qty_stock": 162
     },
@@ -354,20 +354,48 @@ export const products: IProductsDB[] = [
     }
 ]
 
-export const listPurchases: IListPurchaseDB[] = [
+export const Client: IClientDB[] = [
     {
-        id: "98",
-        client_name: "Marta",
-        delivery_date: new Date("2022-12-24"),
-        product_name: "DESODORANTE AEROSOL REXONA ANTIBACTERIANO + INVISIBLE PROTECTION FEMININO 150ML",
+        id: "001",
+        name: "Vander",
+        delivery_date: new Date("2022-12-10")
+    },
+
+    {
+        id: "002",
+        name: "Fulano",
+        delivery_date: new Date("2022-11-30")
+    }    
+]
+
+export const order: IOrderDB[] = [
+    {
+        id: "order1",
+        product_name: "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
         quantity: 5,
+        client_id: "002"
+    },
+
+    {
+        id: "order2",
+        product_name: "DESODORANTE AEROSOL REXONA ANTIBACTERIANO + INVISIBLE PROTECTION FEMININO 150ML",
+        quantity: 10,
+        client_id: "002"
+    },
+
+    {
+        id: "order3",
+        product_name: "REFRIGERANTE ANTARCTICA GUARANÁ 2L",
+        quantity: 15,
+        client_id: "001"
+    },
+
+    {
+        id: "order4",
+        product_name: "CREME DE TRATAMENTO ELSEVE OLÉO EXTRAORDINÁRIO 300G",
+        quantity: 10,
+        client_id: "001"
     }
 ]
 
 
-export const stock_Purchases: IStock_PurchasesDB[] = [
-    {
-        purchase_id: "98",
-        product_id: 98
-    }    
-]

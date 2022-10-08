@@ -1,0 +1,14 @@
+### Test
+GET http://localhost:3003/products
+
+### Lista de compras
+POST http://localhost:3003/product/purchase-list
+Content-Type: application/json
+
+{
+    "clientName": "Marta",
+    "deliveryDate": "2022/12/30",
+    "productName": "AZEITE PORTUGUÊS EXTRA VIRGEM GALLO 500ML",
+    "quantity": 10
+}
+

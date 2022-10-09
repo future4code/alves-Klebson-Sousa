@@ -2,7 +2,7 @@ import { BaseError } from "./BaseError";
 
 export class MissingFields extends BaseError {
     constructor(
-        message: string = "Some parameter missing" 
+        message: string = "Todos os parâmetros devem ser preenchidos" 
         ) {
         super(422, message)
     }

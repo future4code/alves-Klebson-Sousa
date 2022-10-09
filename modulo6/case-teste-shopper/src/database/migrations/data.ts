@@ -358,13 +358,13 @@ export const Client: IClientDB[] = [
     {
         id: "001",
         name: "Vander",
-        delivery_date: new Date("2022-12-10")
+        delivery_date: new Date("2022/12/10")
     },
 
     {
         id: "002",
         name: "Fulano",
-        delivery_date: new Date("2022-11-30")
+        delivery_date: new Date("2022/11/30")
     }    
 ]
 

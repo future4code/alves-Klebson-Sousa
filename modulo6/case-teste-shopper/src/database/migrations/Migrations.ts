@@ -1,5 +1,5 @@
 import { BaseDatabase } from "../BaseDatabase"
-// import { UserDatabase } from "../UserDatabase"
+import { ClientDatabase } from "../ClientDatabase"
 import { productsStock, Client, order } from "./data"
 
 class Migrations extends BaseDatabase {
@@ -30,7 +30,7 @@ class Migrations extends BaseDatabase {
         await BaseDatabase.connection.raw(`
         DROP TABLE IF EXISTS Order_Products;
         DROP TABLE IF EXISTS Stock_Purchases_Clients;
-        DROP TABLE IF EXISTS Purchases_Clients;
+        DROP TABLE IF EXISTS ${ClientDatabase.TABLE_CLIENTS};
         DROP TABLE IF EXISTS Products_Stock;
         
         CREATE TABLE IF NOT EXISTS Products_Stock (
@@ -40,7 +40,7 @@ class Migrations extends BaseDatabase {
             qty_stock INT NOT NULL           
           );
 
-          CREATE TABLE IF NOT EXISTS Purchases_Clients (
+          CREATE TABLE IF NOT EXISTS ${ClientDatabase.TABLE_CLIENTS} (
             id VARCHAR(255) PRIMARY KEY,	
             name VARCHAR(255) NOT NULL,
             delivery_date DATE NOT NULL 
@@ -52,7 +52,7 @@ class Migrations extends BaseDatabase {
             quantity INT,
             client_id VARCHAR(255) NOT NULL,
             FOREIGN KEY (product_name) REFERENCES Products_Stock (name),
-            FOREIGN KEY (client_id) REFERENCES Purchases_Clients (id)
+            FOREIGN KEY (client_id) REFERENCES ${ClientDatabase.TABLE_CLIENTS} (id)
             
         );
         `)
@@ -64,7 +64,7 @@ class Migrations extends BaseDatabase {
             .insert(productsStock)
         
         await BaseDatabase
-            .connection("Purchases_Clients")
+            .connection(ClientDatabase.TABLE_CLIENTS)
             .insert(Client)        
        
         await BaseDatabase

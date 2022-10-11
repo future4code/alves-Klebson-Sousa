@@ -1,8 +1,9 @@
 import { ProductDatabase } from "../database/ProductDatabase";
-import { MissingFields } from "../errors/MissingFields";
-import { NotFoundError } from "../errors/NotFoundError";
-import { ParamsError } from "../errors/ParamsError";
-import { IListPurchaseDTO, ListPurchase } from "../model/Order";
+// import { MissingFields } from "../errors/MissingFields";
+// import { NotFoundError } from "../errors/NotFoundError";
+// import { ParamsError } from "../errors/ParamsError";
+// import { IGetPurchasesListOutputDTO, IOrderInputDTO, Order } from "../model/Order";
+import { IGetProductsOutputDTO, Product } from "../model/Products";
 import { IdGenerator } from "../services/IdGenerator";
 
 export class ProductBusiness {
@@ -10,41 +11,40 @@ export class ProductBusiness {
         private productDataBase: ProductDatabase,
         private idGenerator: IdGenerator
     ) {}
-    public purchaseList = async (input: IListPurchaseDTO) => {
-        const { clientName,deliveryDate,productName,quantity } = input
 
-        if (!clientName || !deliveryDate || !productName || !quantity) {
-            throw new MissingFields()
-        }
+    public getProducts = async ():Promise<IGetProductsOutputDTO> => {
         
-        if (typeof clientName !== "string") {
-            throw new ParamsError("Invalid 'clientName' parameter: must be a string")
-        }        
+        const productDb = await this.productDataBase.selectProducts()
 
-        if (typeof productName !== "string") {
-            throw new ParamsError("Invalid 'productName' parameter: must be a string")
-        }
+        const products =productDb.map((product) => {
+                return new Product (
+                    product.id,
+                    product.name,
+                    product.price,
+                    product.qty_stock
+                )
+            }) 
+            
+        const response: IGetProductsOutputDTO = {
+        message: "Sucesso",
+        products: products
+        }       
 
-        if (typeof quantity !== 'number') {
-            throw new ParamsError("Parâmetro 'quantity' inválido: deve ser um número")
-        }
+        return response
 
-        // const isProductAlreadyExists = await this.productDataBase.findByProductName(productName)
-
-        // if (!isProductAlreadyExists) {
-        //     throw new NotFoundError("Produto esgotado ou não existe no estoque");
-        //   }
-
-        // const id = this.idGenerator.generate()
-
-        // const listProduct = new ListPurchase(
-        //     id,
-        //     clientName,
-        //     deliveryDate,
-        //     productName,
-        //     quantity
-        // )
-        // console.log (listProduct)
-        
     }
+
+    // public getListPurchases = async ():Promise<IGetPurchasesListOutputDTO> => {
+        
+    //     const purchasesDB = await this.productDataBase.selectPurchasesList()
+
+    //     const clientDB = await
+
+    //     purchasesDB = product
+
+
+
+    //     return response
+
+    // }
 }

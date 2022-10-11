@@ -1,6 +1,7 @@
 import { BaseDatabase } from "../BaseDatabase"
 import { ClientDatabase } from "../ClientDatabase"
-import { productsStock, Client, order } from "./data"
+import { ProductDatabase } from "../ProductDatabase"
+import { productsStock, client, order } from "./data"
 
 class Migrations extends BaseDatabase {
     execute = async () => {
@@ -28,12 +29,11 @@ class Migrations extends BaseDatabase {
 
     createTables = async () => {
         await BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS Order_Products;
-        DROP TABLE IF EXISTS Stock_Purchases_Clients;
+        DROP TABLE IF EXISTS ${ProductDatabase.TABLE_ORDER_PRODUCT};        
         DROP TABLE IF EXISTS ${ClientDatabase.TABLE_CLIENTS};
-        DROP TABLE IF EXISTS Products_Stock;
+        DROP TABLE IF EXISTS ${ProductDatabase.TABLE_PRODUCT};
         
-        CREATE TABLE IF NOT EXISTS Products_Stock (
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase.TABLE_PRODUCT} (
             id INT NOT NULL,
             name VARCHAR(255) PRIMARY KEY,
             price decimal(4,2) NOT NULL,
@@ -41,17 +41,17 @@ class Migrations extends BaseDatabase {
           );
 
           CREATE TABLE IF NOT EXISTS ${ClientDatabase.TABLE_CLIENTS} (
-            id VARCHAR(255) PRIMARY KEY,	
+            id VARCHAR(255) PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             delivery_date DATE NOT NULL 
           );          
 
-          CREATE TABLE IF NOT EXISTS Order_Products (	
-            id VARCHAR(255) PRIMARY KEY,	
+          CREATE TABLE IF NOT EXISTS ${ProductDatabase.TABLE_ORDER_PRODUCT} (	
+            id VARCHAR(255) NOT NULL,	
             product_name VARCHAR(255) NOT NULL,    
             quantity INT,
             client_id VARCHAR(255) NOT NULL,
-            FOREIGN KEY (product_name) REFERENCES Products_Stock (name),
+            FOREIGN KEY (product_name) REFERENCES ${ProductDatabase.TABLE_PRODUCT} (name),
             FOREIGN KEY (client_id) REFERENCES ${ClientDatabase.TABLE_CLIENTS} (id)
             
         );
@@ -60,15 +60,15 @@ class Migrations extends BaseDatabase {
 
     insertData = async () => {
         await BaseDatabase
-            .connection("Products_Stock")
+            .connection(ProductDatabase.TABLE_PRODUCT)
             .insert(productsStock)
         
         await BaseDatabase
             .connection(ClientDatabase.TABLE_CLIENTS)
-            .insert(Client)        
+            .insert(client)        
        
         await BaseDatabase
-            .connection("Order_Products")
+            .connection(ProductDatabase.TABLE_ORDER_PRODUCT)
             .insert(order)
     }
 }

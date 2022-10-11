@@ -5,7 +5,7 @@ import { productRouter } from "./router/productRouter";
 
 
 app.use("/client", clientRouter)
-app.use("/product", productRouter)
+app.use("/products", productRouter)
 
 
 // app.get("/products", async (req, res) => {

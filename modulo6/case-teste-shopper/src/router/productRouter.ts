@@ -14,5 +14,5 @@ const productController = new ProductController(
     
 )
 
-productRouter.get("/")
-productRouter.post("/purchase-list", productController.purchaseList)
+productRouter.get("/", productController.getProducts)
+// productRouter.post("/order-purchase", productController.createListPurchases)

@@ -1,34 +1,33 @@
-import { IListPurchaseDTO, ListPurchase } from "../model/Order";
-import { IProductsDB } from "../model/Products";
+import { IOrderDB, IOrderInputDTO, Order } from "../model/Order";
+import { IProductDB, Product } from "../model/Products";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class ProductDatabase extends BaseDatabase {
-
-    public static TABLE_PURCHASE = "List_Purchases"
+    
     public static TABLE_PRODUCT = "Products_Stock"
+    public static TABLE_ORDER_PRODUCT = "Order_Products"
 
-    // public findByProductName = async (productName: string): Promise<IListPurchaseDTO | undefined> => {
-    //     const result = await BaseDatabase
-    //     .connection(ProductDatabase.TABLE_PRODUCT)
-    //     .select()
-    //     .where({name: productName})
-    //     console.log(result[0])
-    //     return result[0]
-    // }
 
-    // public toListPurchaseDBModel = (listPurchase: ListPurchase): IListPurchaseDB => {      
-    //     const ListDB: IListPurchaseDB = {
-    //         id: listPurchase.getId(),
-    //         client_name: listPurchase.getClientName(),
-    //         delivery_date: listPurchase.getDeliveryDate(),
-    //         product_name: listPurchase.getProductName(),
-    //         quantity: listPurchase.setQuantity()
-    //     }
+    public toProductDBModel = (product: Product): IProductDB => {      
+        const productDB: IProductDB = {
+            id: product.getId(),
+            name: product.getName(),
+            price: product.getPrice(),
+            qty_stock: product.getQtyStock()
+        }
 
-    //     return ListDB
-    // }
+        return productDB
+    } 
 
-    public findByProductName = async (productName: string) => {
+    public selectProducts = async (): Promise<IProductDB[]> => {
+        const result: IProductDB[] = await BaseDatabase
+        .connection(ProductDatabase.TABLE_PRODUCT)
+        .select()  
+
+        return result
+    }
+
+    public findByProductName = async (productName: string): Promise<Product | undefined> => {
         const result = await BaseDatabase
             .connection(ProductDatabase.TABLE_PRODUCT)
             .select()
@@ -36,4 +35,14 @@ export class ProductDatabase extends BaseDatabase {
 
         return result[0]
     }
+
+    public selectPurchasesList = async (): Promise<IOrderDB[]> => {
+        const result: IOrderDB[] = await BaseDatabase
+            .connection(ProductDatabase.TABLE_ORDER_PRODUCT)
+            .select()                      
+
+        return result
+    }
+
+
 }

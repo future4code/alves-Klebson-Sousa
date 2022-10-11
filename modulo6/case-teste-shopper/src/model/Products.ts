@@ -1,4 +1,4 @@
-export interface IProductsDB {
+export interface IProductDB {
     id: number,   
     name: string,
     price: number,
@@ -33,16 +33,17 @@ export class Product {
     }     
 }
 
-// export interface ISignupInputDTO {
+// export interface IProductsInputDTO {
+//     id: number,   
 //     name: string,
-//     email: string,
-//     password: string
+//     price: number,
+//     qty_stock: number
 // }
 
-// export interface ISignupOutputDTO {
-//     message: string,
-//     token: string
-// }
+export interface IGetProductsOutputDTO {
+    message: string,
+    products: Product[]
+}
 
 // export interface ILoginInputDTO {
 //     email: string,

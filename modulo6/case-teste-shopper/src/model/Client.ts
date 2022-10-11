@@ -1,5 +1,5 @@
 export interface IClientDB {
-    id: string   
+    id: string,  
     name: string,
     delivery_date: Date
 }
@@ -9,8 +9,8 @@ export class Client {
         private id: string,
         private name: string,
         private deliveryDate: Date
-        ) {}
-   
+        ) {}   
+
     public getId = () => {
         return this.id
     }

@@ -1,0 +1,52 @@
+### Ping
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "alice3",
+    "email": "alice3@gmail.com",
+    "password": "alice99"
+}
+
+### Login
+# @name login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "astrodev@gmail.com",
+    "password": "bananinha"
+}
+
+### 
+@token = {{login.response.body.token}}
+# Criar show
+POST http://localhost:3003/shows/create
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "band": "Imagine Dragon5",
+    "starts_at": "2022-12-04"
+}
+###
+# Pegar shows
+GET http://localhost:3003/shows
+
+###
+# Reservar Ticket
+POST http://localhost:3003/tickets/reservation
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "showId": "06421cae-3386-405c-925b-52460b9da0c7"
+       
+}
+
+### Delete reserva
+DELETE http://localhost:3003/tickets/delete/7bce83d2-6b03-4e4d-a712-9a1bbca1a9d3
+Authorization: {{token}}

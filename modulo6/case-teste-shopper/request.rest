@@ -11,15 +11,20 @@ Content-Type: application/json
 }
 
 ### Pegar Lista de compras
-get http://localhost:3003/client/order-purchase/001
+get http://localhost:3003/client/show-order/001
 Content-Type: application/json
 
-### Lista de compras
+### Criar Lista de compras
 POST http://localhost:3003/client/order-purchase/001
 Content-Type: application/json
 
-{
-    "clientName": "Vander"
+{    
+    "listPurchase": [
+        {
+            "productName": "AZEITE PORTUGUÊS EXTRA VIRGEM GALLO 500ML",
+            "quantity": 10
+        }
+    ]
 }
 
 

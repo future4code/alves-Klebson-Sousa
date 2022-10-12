@@ -4,6 +4,6 @@ export const compareDates = (initialDate: Date) => {
     const factoringDate = formatDate.split("/")
     const refactoringDate = []
     refactoringDate.push(factoringDate[2],factoringDate[1], factoringDate[0])
-    const addingDate = refactoringDate.join("/")
+    const addingDate = refactoringDate.join("/")    
     return addingDate
   }

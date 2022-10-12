@@ -1,4 +1,4 @@
-import { IOrderDB } from "../../model/Order";
+import { IProductsClientDB } from "../../model/Order";
 import { IProductDB } from "../../model/Products";
 import { IClientDB } from "../../model/Client";
 
@@ -367,33 +367,33 @@ export const client: IClientDB[] = [
     }    
 ]
 
-export const order: IOrderDB[] = [
+export const order: IProductsClientDB[] = [
     {
         id: "order1",
         product_name: "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
         quantity: 5,
-        client_id: "001"
+        order_id: "001"
     },
 
     {
         id: "order2",
         product_name: "DESODORANTE AEROSOL REXONA ANTIBACTERIANO + INVISIBLE PROTECTION FEMININO 150ML",
         quantity: 10,
-        client_id: "001"
+        order_id: "001"
     },
 
     {
         id: "order3",
         product_name: "REFRIGERANTE ANTARCTICA GUARANÁ 2L",
         quantity: 15,
-        client_id: "002"
+        order_id: "002"
     },
 
     {
         id: "order4",
         product_name: "CREME DE TRATAMENTO ELSEVE OLÉO EXTRAORDINÁRIO 300G",
         quantity: 10,
-        client_id: "002"
+        order_id: "002"
     }
 ]
 

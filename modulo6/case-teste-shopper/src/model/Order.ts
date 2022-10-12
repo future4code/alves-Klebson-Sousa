@@ -1,8 +1,8 @@
-export interface IOrderDB {   
+export interface IProductsClientDB {   
     id: string,
     product_name: string,
     quantity: number,
-    client_id: string,
+    order_id: string,
 }
 export interface IPurchaseDTO {    
     productName: string,    
@@ -10,7 +10,7 @@ export interface IPurchaseDTO {
     quantity: number
 }
 
-export class Order {
+export class ProductsClient {
     constructor(
         private id: string,
         private clientName: string,             
@@ -51,19 +51,36 @@ export class Order {
     
 }
 
-export interface IOrderInputDTO {
-    products: {
+// export interface IOrderInputDTO { 
+//     idOrder: string,
+//     productName: string,    
+//     quantity: number     
+// }
+export interface IOrderInputDTO {     
+    listPurchase: {
         productName: string,    
-        quantity: number        
+        quantity: number
     }[]
 }
+
+export interface IlistPurchaseDTO {
+    idProduct: string,
+    productName: string,
+    price: number,
+    quantity: number,
+    subTotal: number
+}
+
+ 
 
 export interface IPurchasesByUserDTO { 
     orderId: string,
     clientName: string,
     deliveryDate: Date,
-    listPurchase: []    
+    listPurchase: IlistPurchaseDTO[],
+    total: number    
 }
+
 
 export interface IGetPurchasesByUserDTO { 
     orderId: string,
@@ -72,4 +89,17 @@ export interface IGetPurchasesByUserDTO {
     productName: string,
     price: number,
     quantity: number  
+}
+
+export interface ICreateOrderOutputDTO {
+    message: "Lista criada com sucesso",
+    order: {
+        id: string,
+        products: {
+            productName: string,    
+            quantity: number 
+            price:number           
+        }[],
+        total: number
+    }
 }

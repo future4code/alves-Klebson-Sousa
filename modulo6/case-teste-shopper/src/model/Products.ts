@@ -28,8 +28,8 @@ export class Product {
     public getQtyStock = () => {
         return this.qtyStock
     }    
-    public setQtyStock = () => {
-        return this.qtyStock
+    public setQtyStock = (newQtyStock: number) => {
+        return this.qtyStock = newQtyStock
     }     
 }
 

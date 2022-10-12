@@ -30,12 +30,13 @@ export class ClientController {
     public createListPurchases = async (req: Request, res: Response) => {
         try {
             const input: IOrderInputDTO = {
-                products: req.body.products                
+                listPurchase: req.body.listPurchase
             }
-            const idOrder =  req.params.id
+
+            const idClient: string = req.params.id 
            
 
-            const response = await this.clientBusiness.createListPurchases(input, idOrder )
+            const response = await this.clientBusiness.createListPurchases(input, idClient)
             
             res.status(200).send(response)
             

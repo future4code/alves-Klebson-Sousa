@@ -1,10 +1,12 @@
 import { Client, IClientDB } from "../model/Client";
-import { IGetPurchasesByUserDTO } from "../model/Order";
+import { IGetPurchasesByUserDTO, IProductsClientDB } from "../model/Order";
+import { IProductDB } from "../model/Products";
 import { BaseDatabase } from "./BaseDatabase";
+import { ProductDatabase } from "./ProductDatabase";
 
 export class ClientDatabase extends BaseDatabase {
-    public static TABLE_CLIENTS = "Purchases_Clients" 
-    public static TABLE_ORDER_PRODUCT = "Order_Products"   
+    public static TABLE_CLIENTS = "Order_Clients" 
+    public static TABLE_ORDER_PRODUCT = "Products_Clients"   
 
     public toClientDBModel  = (client:Client): IClientDB => {
         const clientDB: IClientDB = { 
@@ -33,6 +35,16 @@ export class ClientDatabase extends BaseDatabase {
 
         return result[0]
     }
+
+    public getPriceQuantity = async (name: string): Promise<{price: number, qty_stock: number} | undefined> => {
+        const result: any[] = await BaseDatabase
+        .connection(ProductDatabase.TABLE_PRODUCT)
+        .select("price", "qty_stock")
+        .where({ name })                   
+
+        return result[0] 
+    }
+
     public findClientById = async (id: string): Promise<IClientDB | undefined> => {
         const result: IClientDB[] = await BaseDatabase
         .connection(ClientDatabase.TABLE_CLIENTS)
@@ -45,12 +57,12 @@ export class ClientDatabase extends BaseDatabase {
     public getListPurchases = async (id: string): Promise<any> => {
         const result = await BaseDatabase
         .connection.raw(`
-        SELECT Purchases_Clients.id as idClient, Purchases_Clients.name as clientName, Purchases_Clients.delivery_date, 
-        Products_Stock.name as productName, Products_Stock.price, Order_Products.quantity
-        FROM Purchases_Clients
-        JOIN Order_Products ON Order_Products.client_id = Purchases_Clients.id
-        JOIN Products_Stock ON Order_Products.product_name = Products_Stock.name
-        WHERE Purchases_Clients.id= "${id}" `)
+        SELECT Order_Clients.id as idClient, Order_Clients.name as clientName, Order_Clients.delivery_date, 
+        Products_Clients.id as idProduct, Products_Clients.product_name as productName, Products_Stock.price, Products_Clients.quantity
+        FROM Order_Clients
+        JOIN Products_Clients ON Products_Clients.order_id = Order_Clients.id
+        JOIN Products_Stock ON Products_Clients.product_name = Products_Stock.name
+        WHERE Order_Clients.id= "${id}" `)
      
         return result[0]
     }
@@ -61,5 +73,11 @@ export class ClientDatabase extends BaseDatabase {
         await BaseDatabase
             .connection(ClientDatabase.TABLE_CLIENTS)
             .insert(clientDB)
+    }
+
+    public insertProductOnOrder = async (orderProduct: IProductsClientDB): Promise<void> => {
+        const productDb = await BaseDatabase
+            .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+            .insert(orderProduct)
     }
 }

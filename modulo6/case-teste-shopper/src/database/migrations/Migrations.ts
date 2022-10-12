@@ -29,7 +29,7 @@ class Migrations extends BaseDatabase {
 
     createTables = async () => {
         await BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS ${ProductDatabase.TABLE_ORDER_PRODUCT};        
+        DROP TABLE IF EXISTS ${ClientDatabase.TABLE_ORDER_PRODUCT};        
         DROP TABLE IF EXISTS ${ClientDatabase.TABLE_CLIENTS};
         DROP TABLE IF EXISTS ${ProductDatabase.TABLE_PRODUCT};
         
@@ -46,13 +46,13 @@ class Migrations extends BaseDatabase {
             delivery_date DATE NOT NULL 
           );          
 
-          CREATE TABLE IF NOT EXISTS ${ProductDatabase.TABLE_ORDER_PRODUCT} (	
+          CREATE TABLE IF NOT EXISTS ${ClientDatabase.TABLE_ORDER_PRODUCT} (	
             id VARCHAR(255) NOT NULL,	
             product_name VARCHAR(255) NOT NULL,    
             quantity INT,
-            client_id VARCHAR(255) NOT NULL,
+            order_id VARCHAR(255) NOT NULL,
             FOREIGN KEY (product_name) REFERENCES ${ProductDatabase.TABLE_PRODUCT} (name),
-            FOREIGN KEY (client_id) REFERENCES ${ClientDatabase.TABLE_CLIENTS} (id)
+            FOREIGN KEY (order_id) REFERENCES ${ClientDatabase.TABLE_CLIENTS} (id)
             
         );
         `)

@@ -11,10 +11,11 @@ export const clientRouter = Router()
 const clientController = new ClientController(
     new ClientBusiness(
         new ClientDatabase(),
+        new ProductDatabase(),
         new IdGenerator()
     )    
 )
 
-clientRouter.get("/")
 clientRouter.post("/signup", clientController.signup)
-clientRouter.get("/order-purchase/:id", clientController.getListPurchases)
+clientRouter.get("/show-order/:id", clientController.getListPurchases)
+clientRouter.post("/order-purchase/:id", clientController.createListPurchases)

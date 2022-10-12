@@ -1,17 +1,19 @@
 import { ClientDatabase } from "../database/ClientDatabase";
+import { ProductDatabase } from "../database/ProductDatabase";
 import { ConflictError } from "../errors/ConflictError";
 import { MissingFields } from "../errors/MissingFields";
 import { NotFoundError } from "../errors/NotFoundError";
 import { ParamsError } from "../errors/ParamsError";
 import { RequestError } from "../errors/RequestError";
 import { Client, IMessageOutputDTO, ISignupInputDTO } from "../model/Client";
-import { IOrderInputDTO, IPurchaseDTO, IPurchasesByUserDTO, Order } from "../model/Order";
+import { ICreateOrderOutputDTO, IOrderInputDTO, IProductsClientDB, IPurchasesByUserDTO } from "../model/Order";
 import { compareDates } from "../services/formatDate";
 import { IdGenerator } from "../services/IdGenerator";
 
 export class ClientBusiness {
   constructor(
     private clientDatabase: ClientDatabase,
+    private productDatabase: ProductDatabase,
     private idGenerator: IdGenerator
   ) {}
 
@@ -57,21 +59,81 @@ export class ClientBusiness {
     return response;
   };
 
-  public createListPurchases = (input: IOrderInputDTO, idOrder: string) => {
-    const orderInput = input.products
-    if (orderInput.length === 0) {
-      throw new ParamsError("Pedido vazio! Informe nome e quantidade desejada.")
-  }
+  public createListPurchases = async (input: IOrderInputDTO, idClient: string) => {
+    const listPurchase = input.listPurchase
+
+    const idOrder = await this.clientDatabase.findClientById(idClient)
+
     if (!idOrder) {
-      throw new ParamsError("Id do pedido deve ser passado")
-  }
+      throw new NotFoundError("Pedido inexistente")
+    }
+    
 
-  
+    if (listPurchase.length === 0) {
+      throw new ParamsError(
+        "Pedido vazio! Informe nome e quantidade desejada."
+      );
+    }
 
-  
-  }
+    const products = listPurchase.map((product) => {
+      if (product.quantity <= 0) {
+        throw new ParamsError("Quantidade de product inválida! A quantidade mínima é 1")
+    }
+      return {
+        ...product,
+        price: 0,
+        subTotal: 0
+      }
+    })
 
-  public getListPurchases = async (clientId: string): Promise<IPurchasesByUserDTO | undefined> => {
+    for (let product of products) {
+      const values = await this.clientDatabase.getPriceQuantity(product.productName)
+      
+      if (values?.qty_stock === 0) {
+        throw new NotFoundError("Produto esgotado ou não existe")
+      }
+      const price = values?.price as number      
+    
+      product.price = price 
+      product.subTotal = product.quantity * price
+    }
+    
+    for (let product of products) {
+      const orderProduct: IProductsClientDB = {
+        id:this.idGenerator.generate(),
+        product_name: product.productName,
+        quantity: product.quantity,
+        order_id: idClient
+      }
+      await this.clientDatabase.insertProductOnOrder(orderProduct)
+      const QuantityProductStock = await this.productDatabase.findQuantityProductByName(product.productName)
+      
+      if (QuantityProductStock) {
+        const qtyStock = QuantityProductStock - product.quantity
+        console.log("qtyStock", qtyStock, "stock", QuantityProductStock)
+        await this.productDatabase.updateProductStock(qtyStock, product.productName)
+      }
+    }
+
+    // const quantidade = stock.map((quant) => quant.qty_stock)
+    // console.log("stock", quantidade)
+
+
+    const response: ICreateOrderOutputDTO = {
+      message: "Lista criada com sucesso",
+      order: {
+        id:idClient,
+        products,
+        total: products.reduce((acc, product) => (acc + product.subTotal), 0)
+      }
+    }    
+
+    return response
+  };
+
+  public getListPurchases = async (
+    clientId: string
+  ): Promise<IPurchasesByUserDTO | undefined> => {
     const registeredPurchases = await this.clientDatabase.getListPurchases(
       clientId
     );
@@ -82,26 +144,30 @@ export class ClientBusiness {
 
     let purchase: any = {};
     const listPurchases = registeredPurchases.map((item: any) => {
+      const subTotal = item.price * item.quantity
+      
       purchase = {
+        idProduct: item.idProduct,
         productName: item.productName,
         price: item.price,
         quantity: item.quantity,
+        subTotal: +subTotal.toFixed(2)
       };
       return purchase;
     });
 
-    const order = registeredPurchases.find((item: any) => {
-      return {
-        orderId: item.idClient
-      };
-    });
+    const order = registeredPurchases.find((item: any) => item.idClient);
+    const total = listPurchases.reduce(
+      (acc: number, product:typeof listPurchases) => (acc + product.subTotal), 0)
+
     const OrderClient: IPurchasesByUserDTO = {
       orderId: order.idClient,
       clientName: order.clientName,
       deliveryDate: order.delivery_date,
       listPurchase: listPurchases,
-    };
+      total: total.toFixed(2)
+    }
 
-    return OrderClient
+    return OrderClient;
   };
 }

@@ -16,7 +16,7 @@ export class ProductBusiness {
         
         const productDb = await this.productDataBase.selectProducts()
 
-        const products =productDb.map((product) => {
+        const products = productDb.map((product) => {
                 return new Product (
                     product.id,
                     product.name,

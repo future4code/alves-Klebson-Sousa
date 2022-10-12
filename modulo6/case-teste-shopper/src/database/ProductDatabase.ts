@@ -27,14 +27,14 @@ export class ProductDatabase extends BaseDatabase {
         return result
     }
 
-    public updateProductStock = async (qtyStock: number, name: string): Promise<void> => {
+    public updateProductStock = async (qtyStock: number, id: number): Promise<void> => {
         await BaseDatabase
         .connection.raw(`UPDATE Products_Stock
         SET qty_stock = ${qtyStock}
-        WHERE "${name}";`)       
+        WHERE id = ${ id };`)       
     }
 
-    public findByProductName = async (productName: string): Promise<Product | undefined> => {
+    public findByProductName = async (productName: string): Promise<IProductDB | undefined> => {
         const result = await BaseDatabase
             .connection(ProductDatabase.TABLE_PRODUCT)
             .select()

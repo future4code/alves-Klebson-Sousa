@@ -23,6 +23,10 @@ Content-Type: application/json
         {
             "productName": "AZEITE PORTUGUÊS EXTRA VIRGEM GALLO 500ML",
             "quantity": 10
+        },
+        {
+            "productName": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L",
+            "quantity": 5
         }
     ]
 }

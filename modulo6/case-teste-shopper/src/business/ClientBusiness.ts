@@ -7,6 +7,7 @@ import { ParamsError } from "../errors/ParamsError";
 import { RequestError } from "../errors/RequestError";
 import { Client, IMessageOutputDTO, ISignupInputDTO } from "../model/Client";
 import { ICreateOrderOutputDTO, IOrderInputDTO, IProductsClientDB, IPurchasesByUserDTO } from "../model/Order";
+import { Product } from "../model/Products";
 import { compareDates } from "../services/formatDate";
 import { IdGenerator } from "../services/IdGenerator";
 
@@ -89,13 +90,14 @@ export class ClientBusiness {
     for (let product of products) {
       const values = await this.clientDatabase.getPriceQuantity(product.productName)
       
-      if (values?.qty_stock === 0) {
-        throw new NotFoundError("Produto esgotado ou não existe")
+      if (values && values.qty_stock === 0) {
+        throw new NotFoundError("Produto esgotado")
       }
-      const price = values?.price as number      
+      const price = values?.price as number
+      const sub = product.quantity * price
     
       product.price = price 
-      product.subTotal = product.quantity * price
+      product.subTotal = +sub.toFixed(2)
     }
     
     for (let product of products) {
@@ -105,26 +107,31 @@ export class ClientBusiness {
         quantity: product.quantity,
         order_id: idClient
       }
-      await this.clientDatabase.insertProductOnOrder(orderProduct)
-      const QuantityProductStock = await this.productDatabase.findQuantityProductByName(product.productName)
+      const stock = await this.productDatabase.findByProductName(product.productName)
       
-      if (QuantityProductStock) {
-        const qtyStock = QuantityProductStock - product.quantity
-        console.log("qtyStock", qtyStock, "stock", QuantityProductStock)
-        await this.productDatabase.updateProductStock(qtyStock, product.productName)
+      const qtyStock = stock?.qty_stock
+      
+      if (qtyStock && qtyStock < product.quantity) {
+        throw new ConflictError("Quantidade do pedido acima da quantidade em estoque")
+      }
+
+      await this.clientDatabase.insertProductOnOrder(orderProduct)
+      
+      if (stock) {
+        const newqtyStock = stock.qty_stock - product.quantity
+        
+        await this.productDatabase.updateProductStock(newqtyStock, stock.id)
       }
     }
 
-    // const quantidade = stock.map((quant) => quant.qty_stock)
-    // console.log("stock", quantidade)
-
+    const total = products.reduce((acc, product) => (acc + product.subTotal), 0)
 
     const response: ICreateOrderOutputDTO = {
       message: "Lista criada com sucesso",
       order: {
         id:idClient,
         products,
-        total: products.reduce((acc, product) => (acc + product.subTotal), 0)
+        total: +total.toFixed(2)
       }
     }    
 

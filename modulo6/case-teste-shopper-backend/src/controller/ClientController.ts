@@ -9,14 +9,14 @@ export class ClientController {
         private clientBusiness: ClientBusiness
     ) {}
 
-    public signup = async (req: Request, res: Response) => {
+    public registerOrder = async (req: Request, res: Response) => {
         try {
             const input: ISignupInputDTO = {
                 name: req.body.name,
                 deliveryDate: req.body.deliveryDate
             }
 
-            const response = await this.clientBusiness.signup(input)
+            const response = await this.clientBusiness.registerOrder(input)
             res.status(201).send(response)
         } catch (error) {
             console.log(error)

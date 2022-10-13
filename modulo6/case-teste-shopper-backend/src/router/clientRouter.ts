@@ -16,6 +16,6 @@ const clientController = new ClientController(
     )    
 )
 
-clientRouter.post("/signup", clientController.signup)
+clientRouter.post("/register", clientController.registerOrder)
 clientRouter.get("/show-order/:id", clientController.getListPurchases)
 clientRouter.post("/order-purchase/:id", clientController.createListPurchases)

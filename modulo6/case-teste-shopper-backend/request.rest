@@ -2,7 +2,7 @@
 GET http://localhost:3003/products
 
 ### Inserir dados do client
-POST http://localhost:3003/client/signup
+POST http://localhost:3003/client/register
 Content-Type: application/json
 
 {

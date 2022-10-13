@@ -18,7 +18,7 @@ export class ClientBusiness {
     private idGenerator: IdGenerator
   ) {}
 
-  public signup = async (input: ISignupInputDTO) => {
+  public registerOrder = async (input: ISignupInputDTO) => {
     const { name, deliveryDate } = input;
 
     if (!name || !deliveryDate) {

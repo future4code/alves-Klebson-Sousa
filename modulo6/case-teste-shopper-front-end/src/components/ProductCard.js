@@ -1,8 +1,9 @@
 import React from "react";
-import { Container, ButtonADD, Price, Quantity, Title} from "./productCard.styled"
+import { Container, ButtonADD, Price, Quantity, Title, DivButton} from "./productCartStyle"
 
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, aaddToCart }) => {
+
   return (
     <Container>
       <Title>{product.name}</Title>
@@ -13,7 +14,10 @@ const ProductCard = ({ product }) => {
         })}
       </Price>
       <Quantity>Quantidade em estoque - {product.qtyStock}</Quantity>
-      <ButtonADD>+ adicionar</ButtonADD>
+      <DivButton>
+        <ButtonADD onClick={() => aaddToCart(product)}>+ Adicionar</ButtonADD>
+      </DivButton>
+      
     </Container>
   );
 };

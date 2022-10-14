@@ -1,14 +1,13 @@
 import React from "react";
-import ProductsPage from "./pages/productsPage/ProductsPages";
+import GlobalState from "./global/GlobalState";
 import Router from "./routes/Router";
 
 function App() {
 
   return (
-    <div>
-      {/* <ProductsPage/> */}
+    <GlobalState>      
       <Router/>
-    </div>
+    </GlobalState>
     
   );
 }

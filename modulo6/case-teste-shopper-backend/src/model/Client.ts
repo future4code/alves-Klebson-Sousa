@@ -43,5 +43,7 @@ export interface ISignupInputDTO {
 // }
 
 export interface IMessageOutputDTO {
-    message: string,   
+    message: string,
+    id: string,
+    name: string 
 }

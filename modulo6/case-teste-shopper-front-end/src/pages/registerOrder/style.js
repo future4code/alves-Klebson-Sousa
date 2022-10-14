@@ -26,6 +26,7 @@ export const Form = styled.form`
     justify-content: space-evenly;
     width: 40%;
     gap: 10px;
+    margin-top: 20px;
 `
 
 export const ButtonStyled =styled(Button)`

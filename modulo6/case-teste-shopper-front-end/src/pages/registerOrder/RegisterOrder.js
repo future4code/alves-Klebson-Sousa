@@ -1,37 +1,74 @@
-import { useState } from "react"
-import { Form, Main, ButtonStyled, InputMaterial } from "./styled"
+import axios from "axios";
+import { useState } from "react";
+import { BASE_URL } from "../../constants/baseUrl";
+import { Form, Main, ButtonStyled, InputMaterial } from "./style";
+import useForm from "../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
+import { goToProductsPage } from "../../routes/cordinator";
 
 const RegisterOrder = () => {
-    const [name, setName] = useState("")
-    const [date, setDate] = useState("")
+  const { form, handleInputChange, clear } = useForm({
+    name: "",
+    deliveryDate: "",
+  });
+  const navigate = useNavigate();
 
-    // onSubmitRegister = (event) => {
-    //     event.preventDefault()
-    // }
-    // onSubmit={onSubmitRegister}
+  const onSubmitRegister = (event) => {
+    event.preventDefault();
+    createOrder(form, clear);
+    // console.log(form.deliveryDate)
+  };
 
-    return(
-        <Main>
-            <p>Cadastre seu nome e uma data de entrega</p>
-            <Form >
-                <InputMaterial 
-                id="outlined-basic" 
-                label="Nome completo" 
-                type={"text"}
-                variant="outlined"
-                />
-        
-                <InputMaterial
-                id="outlined-basic"              
-                type="date"
-                variant="outlined"               
-                
-                />                
-                
-                <ButtonStyled type="submit">criar</ButtonStyled>
-            </Form>
-        </Main>
-    )
-}
+  const createOrder = async () => {
+    const newForm = {
+      ...form,
+      deliveryDate: form.deliveryDate.replaceAll("-", "/")
+    };
 
-export default RegisterOrder
+    await axios
+      .post(`${BASE_URL}/client/register`, newForm)
+      .then((res) => {        
+        localStorage.setItem("orderId", res.data.id);
+        alert(`Boas compras ${res.data.name}`);
+        goToProductsPage(navigate);
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
+  };
+
+  return (
+    <Main>
+      <p>Cadastre seu nome e uma data de entrega</p>
+      <Form onSubmit={onSubmitRegister}>
+        <InputMaterial
+          id="outlined-basic"
+          label="Nome"
+          name="name"
+          type={"text"}
+          placeholder={"digite seu nome completo"}
+          variant="outlined"
+          value={form.name}
+          onChange={handleInputChange}
+          required
+        />
+
+        <InputMaterial
+          id="outlined-basic"
+          name="deliveryDate"
+          // label="date"
+          type="date"
+          placeholder={"Data da entrega"}
+          variant="outlined"
+          value={form.deliveryDate}
+          onChange={handleInputChange}
+          required
+        />
+
+        <ButtonStyled type="submit">criar</ButtonStyled>
+      </Form>
+    </Main>
+  );
+};
+
+export default RegisterOrder;

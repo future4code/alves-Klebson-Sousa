@@ -6,15 +6,23 @@ export const Container = styled.li`
   flex-direction: column;
   justify-content: space-between;
   margin-top: 1em;
-  width: 150px;
-  align-items: center;
+  width: 18rem;
+  height: 23vh;
+  /* align-items: center; */
 `;
 
+export const DivButton = styled.div`
+  width: 100%;
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+`
+
 export const ButtonADD = styled.button`
-  padding: 2px 0.75rem;
-  font-size: 0.75rem;
-  height: 1.6rem;
-  margin: 5px;
+  padding: 0.35rem;
+  width: 8.813rem;
+  font-size: 1.5rem;  
+  margin: 0.313rem;
   border-width: 1px;
   display: flex;
   align-items: center;
@@ -31,22 +39,20 @@ export const ButtonADD = styled.button`
 `;
 
 export const Price = styled.p`
-  color: rgb(45, 167, 122);
-  line-height: 1;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0px;
+  color: rgb(45, 167, 122);    
+  font-size: 1.6rem;
+  margin-left: 1.3rem;
 `;
 export const Quantity = styled.p`
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   color: #666;
   margin: 5px;
 `;
 
-export const Title = styled.p`
+export const Title = styled.h3`
   margin: 0px;
   text-transform: capitalize;
-  font-size: 0.625rem;
+  font-size: 0.95rem;
   color: #666;
   text-align: center;
   margin: 5px;

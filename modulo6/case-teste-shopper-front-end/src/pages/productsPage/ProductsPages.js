@@ -1,13 +1,17 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import ProductCard from "../../components/ProductCard";
 import { BASE_URL } from "../../constants/baseUrl";
-import { ContainerSection } from "./productsPage.styled"
+import GlobalStateContext from "../../global/GlobalStateContext";
+import OrderSummary from "../orderSummary/OrderSummary";
+import { ContainerSection } from "./style"
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
 
+  const {aaddToCart, cart} = useContext(GlobalStateContext)
+  
   useEffect(() => {
     axios
       .get(`${BASE_URL}/products`)
@@ -26,10 +30,15 @@ const ProductsPage = () => {
         <button>Crie sua lista de compras</button>
       </header>
       <ul>
-        {products.map((product) => {
-          return <ProductCard product={product} key={product.id} />;
+        {products.map((product) => {          
+          return <ProductCard 
+          product={product} 
+          key={product.id} 
+          aaddToCart={aaddToCart}
+          />;
         })}
       </ul>
+      <OrderSummary cart={cart}/>
     </ContainerSection>
   );
 };

@@ -17,7 +17,7 @@ export class ClientDatabase extends BaseDatabase {
         return clientDB
     }
 
-    public findByNameByDate = async (name: string, delivery_date: string): Promise<IClientDB | undefined> => {
+    public findByNameByDate = async (name: string, delivery_date: Date): Promise<IClientDB | undefined> => {
         const result: IClientDB[] = await BaseDatabase
         .connection(ClientDatabase.TABLE_CLIENTS)
         .select()

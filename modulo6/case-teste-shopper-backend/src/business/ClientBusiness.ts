@@ -29,23 +29,30 @@ export class ClientBusiness {
       throw new ParamsError("Parâmetro 'name' inválido: deve ser uma string");
     }
 
+    console.log("deliveryDate", deliveryDate)
+
     const deliveryAtDate = new Date(deliveryDate);
+
+    console.log("deliveryAtDate", deliveryAtDate)
+
 
     if (!deliveryAtDate.getDate()) {
       throw new RequestError(
-        "Parâmetro 'deliveryDate' inválido: deve ser aaaa/mm/dd"
+        "Parâmetro 'data' inválido: deve ser aaaa/mm/dd"
       );
     }
-
     const deliveryDateAlreadyExists =
-      await this.clientDatabase.findByNameByDate(name, deliveryDate);
-
+    await this.clientDatabase.findByNameByDate(name, deliveryAtDate);
+    
     if (deliveryDateAlreadyExists) {
       const date = compareDates(deliveryDateAlreadyExists.delivery_date);
+      console.log("date", date)
       if (date === deliveryDate) {
         throw new ConflictError("Já existe um pedido para essa data.");
+        
       }
     }
+    
 
     const id = this.idGenerator.generate();
 
@@ -55,6 +62,8 @@ export class ClientBusiness {
 
     const response: IMessageOutputDTO = {
       message: "Dados inseridos com sucesso",
+      id,
+      name
     };
 
     return response;

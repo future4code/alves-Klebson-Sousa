@@ -31,5 +31,13 @@ Content-Type: application/json
     ]
 }
 
+### Deletar produtos
+DELETE  http://localhost:3003/client/product/delete/001
+Content-Type: application/json
+
+{    
+   "productId": "020eb3d0-9448-469a-891f-79b4a3494f02"
+}
+
 
 

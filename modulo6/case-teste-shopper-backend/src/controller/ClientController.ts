@@ -58,4 +58,18 @@ export class ClientController {
             res.status(error.statusCode || 500).send({message: error.message})
         }
     }
+    public deleteProduct = async (req: Request, res: Response) => {
+        try {
+            const productId = req.body.productId
+            const orderId = req.params.orderId
+           
+
+            const response = await this.clientBusiness.deleteProduct(productId, orderId )
+            
+            res.status(200).send(response)
+            
+        } catch (error: any) {
+            res.status(error.statusCode || 500).send({message: error.message})
+        }
+    }
 }

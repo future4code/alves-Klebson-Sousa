@@ -7,12 +7,3 @@ import { productRouter } from "./router/productRouter";
 app.use("/client", clientRouter)
 app.use("/products", productRouter)
 
-
-// app.get("/products", async (req, res) => {
-//     const result = await new BaseDatabase()
-//       .connection()
-//       .select("*")
-//       .from("Products_Stock");
-//       res.send(result)
-//   });
-  

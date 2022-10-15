@@ -17,20 +17,6 @@ export class ProductController {
         } catch (error: any) {
             res.status(error.statusCode || 500).send({message: error.message})
         }
-    }
-
+    }  
     
-
-    public getListPurchases = async (req: Request, res: Response) => {
-        try {
-            
-
-            // const response = await this.productBusiness.createShoppingList()
-            
-            // res.status(200).send(response)
-            
-        } catch (error: any) {
-            res.status(error.statusCode || 500).send({message: error.message})
-        }
-    }
 }

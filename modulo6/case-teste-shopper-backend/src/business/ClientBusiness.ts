@@ -91,6 +91,7 @@ export class ClientBusiness {
     }
       return {
         ...product,
+        id: this.idGenerator.generate(),
         price: 0,
         subTotal: 0
       }
@@ -111,7 +112,7 @@ export class ClientBusiness {
     
     for (let product of products) {
       const orderProduct: IProductsClientDB = {
-        id:this.idGenerator.generate(),
+        id: product.id,
         product_name: product.productName,
         quantity: product.quantity,
         order_id: idClient
@@ -185,5 +186,35 @@ export class ClientBusiness {
     }
 
     return OrderClient;
+  }
+  public deleteProduct = async (productId: string, orderId: string) => {    
+
+   const IdOrder = await this.clientDatabase.findClientById(orderId)
+
+   if (!IdOrder) {
+    throw new NotFoundError("Lista de compras não encontrada")
+
+   }
+
+   const product = await this.clientDatabase.findProductById(productId)
+
+   if(!product) {
+    throw new NotFoundError("Produto não não existe na sua lista")
+   }
+
+   await this.clientDatabase.deleteProductById(product.id, IdOrder.id)
+
+   const stock = await this.productDatabase.findByProductName(product.product_name)      
+     
+      
+      if (stock) {
+        const newqtyStock = stock.qty_stock + product.quantity       
+        
+        await this.productDatabase.updateProductStock(newqtyStock, stock.id)
+      }
+
+      
+   return {message: "Produto deletado"}
+    
   };
 }

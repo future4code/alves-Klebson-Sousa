@@ -1,44 +1,37 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useEffect, useState } from "react";
+import Header from "../../components/Header";
 import ProductCard from "../../components/ProductCard";
-import { BASE_URL } from "../../constants/baseUrl";
 import GlobalStateContext from "../../global/GlobalStateContext";
+import { useProtectedPage } from "../../hooks/useProtetedPage";
 import OrderSummary from "../orderSummary/OrderSummary";
-import { ContainerSection } from "./style"
+import { ContainerSection } from "./style";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([]);
+  const { aaddToCart, cart, productsStock, products, removeFormCart } =
+    useContext(GlobalStateContext);
 
-  const {aaddToCart, cart} = useContext(GlobalStateContext)
-  
+    useProtectedPage()
+
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/products`)
-      .then((res) => {
-        setProducts(res.data.products);
-      })
-      .catch((error) => {
-        console.log(error.res);
-      });
+    productsStock();
   }, []);
 
   return (
     <ContainerSection>
-      <header>
-        <h1>Logo</h1>
-        <button>Crie sua lista de compras</button>
-      </header>
+      <Header title={"Boas Compras"} backP />
       <ul>
-        {products.map((product) => {          
-          return <ProductCard 
-          product={product} 
-          key={product.id} 
-          aaddToCart={aaddToCart}
-          />;
+        {products.map((product) => {
+          return (
+            <ProductCard
+              product={product}
+              key={product.id}
+              aaddToCart={aaddToCart}
+            />
+          );
         })}
-      </ul>
-      <OrderSummary cart={cart}/>
+      </ul>      
     </ContainerSection>
   );
 };

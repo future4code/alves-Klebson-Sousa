@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { goToRegisterOrder } from "../routes/cordinator"
+import { goToHomePage, goToRegisterOrder } from "../routes/cordinator"
 
 export const useProtectedPage = () => {
     const navigate = useNavigate()
@@ -10,7 +10,7 @@ export const useProtectedPage = () => {
     useEffect(() => {
 
         if (!orderId) {
-            goToRegisterOrder(navigate)
+            goToHomePage(navigate)
         }
 
     }, [])

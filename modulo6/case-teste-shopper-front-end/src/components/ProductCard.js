@@ -1,8 +1,16 @@
 import React from "react";
-import { Container, ButtonADD, Price, Quantity, Title, DivButton} from "./productCartStyle"
-
+import {
+  Container,
+  ButtonADD,
+  Price,
+  Quantity,
+  Title,
+  DivButton,
+  ButtonOrder,
+} from "./productCartStyle";
 
 const ProductCard = ({ product, aaddToCart }) => {
+  
 
   return (
     <Container>
@@ -17,7 +25,6 @@ const ProductCard = ({ product, aaddToCart }) => {
       <DivButton>
         <ButtonADD onClick={() => aaddToCart(product)}>+ Adicionar</ButtonADD>
       </DivButton>
-      
     </Container>
   );
 };

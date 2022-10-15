@@ -96,6 +96,7 @@ export interface ICreateOrderOutputDTO {
     order: {
         id: string,
         products: {
+            id: string
             productName: string,    
             quantity: number 
             price:number           

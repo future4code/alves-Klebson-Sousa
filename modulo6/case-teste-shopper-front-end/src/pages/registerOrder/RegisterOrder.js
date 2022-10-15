@@ -25,16 +25,25 @@ const RegisterOrder = () => {
       deliveryDate: form.deliveryDate.replaceAll("-", "/")
     };
 
+    const orderId = localStorage.getItem("orderId")
+
     await axios
       .post(`${BASE_URL}/client/register`, newForm)
       .then((res) => {        
         localStorage.setItem("orderId", res.data.id);
+        
         alert(`Boas compras ${res.data.name}`);
         goToProductsPage(navigate);
+        
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        alert(error.response.data.message); 
+        if (orderId) {
+        window.confirm("Deseja acessar-la?")
+         return goToProductsPage(navigate)        
+      }       
       });
+      
   };
 
   return (

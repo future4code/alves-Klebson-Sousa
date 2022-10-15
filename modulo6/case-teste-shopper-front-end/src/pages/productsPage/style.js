@@ -11,16 +11,16 @@ export const ContainerSection = styled.section`
   header {
     display: flex;
     justify-content: space-between;
-    padding: 1.35rem;
+    padding: 1.35em;
     margin-left: 2.813rem;
     h1 {
         color: rgb(45, 167, 122);
     }
     button {
-      margin-right: 15.375rem;
+      margin-right: 30%;
       border-radius: 1.563rem;
       padding: 0.625rem;
-      font-size: 0.9rem;
+      font-size: 0.9em;
       width: 7.5rem;
       cursor: pointer;
       border: none;

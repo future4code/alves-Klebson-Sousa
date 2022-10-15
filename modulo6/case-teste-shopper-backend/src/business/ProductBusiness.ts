@@ -33,18 +33,5 @@ export class ProductBusiness {
         return response
 
     }
-
-    // public getListPurchases = async ():Promise<IGetPurchasesListOutputDTO> => {
-        
-    //     const purchasesDB = await this.productDataBase.selectPurchasesList()
-
-    //     const clientDB = await
-
-    //     purchasesDB = product
-
-
-
-    //     return response
-
-    // }
+    
 }

@@ -37,6 +37,25 @@ export const ButtonADD = styled.button`
     color: rgb(255, 255, 255);
   }
 `;
+export const ButtonOrder = styled.button`
+  /* padding: 0.35rem; */
+  width: 12.813rem;
+  font-size: 1.2rem;  
+  margin: 0.313rem;
+  border-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3.125rem;
+  border: solid rgb(45, 167, 122) 1.5px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(45, 167, 122);
+  cursor: pointer;
+  :hover {
+    background-color: rgb(45, 167, 122);
+    color: rgb(255, 255, 255);
+  }
+`;
 
 export const Price = styled.p`
   color: rgb(45, 167, 122);    

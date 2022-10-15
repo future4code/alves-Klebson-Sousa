@@ -34,11 +34,11 @@ export class ProductDatabase extends BaseDatabase {
         WHERE id = ${ id };`)       
     }
 
-    public findByProductName = async (productName: string): Promise<IProductDB | undefined> => {
+    public findByProductName = async (name: string): Promise<IProductDB | undefined> => {
         const result = await BaseDatabase
             .connection(ProductDatabase.TABLE_PRODUCT)
             .select()
-            .where({ name:productName })           
+            .where({ name })           
 
         return result[0]
     }

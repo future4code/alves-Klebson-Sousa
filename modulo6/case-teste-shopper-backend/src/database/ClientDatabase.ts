@@ -45,12 +45,20 @@ export class ClientDatabase extends BaseDatabase {
         return result[0] 
     }
 
-    public findClientById = async (id: string): Promise<IClientDB | undefined> => {
+    public findClientById = async (id: string): Promise<IClientDB | undefined> => {             
         const result: IClientDB[] = await BaseDatabase
         .connection(ClientDatabase.TABLE_CLIENTS)
         .select()
-        .where({ id })        
+        .where({ id })
 
+        return result[0]
+    }
+
+    public findProductById = async (id: string): Promise<IProductsClientDB | undefined> => {
+        const result: IProductsClientDB[] = await BaseDatabase
+        .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+        .select()
+        .where({ id })              
         return result[0]
     }
 
@@ -79,5 +87,13 @@ export class ClientDatabase extends BaseDatabase {
         const productDb = await BaseDatabase
             .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
             .insert(orderProduct)
+    }
+
+    public deleteProductById = async (id: string, orderId: string): Promise<void> => {
+        await BaseDatabase
+            .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+            .delete()
+            .where({id, order_id:orderId})
+            
     }
 }

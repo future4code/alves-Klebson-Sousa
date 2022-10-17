@@ -6,7 +6,7 @@ import { goToProductsPage } from "../../routes/cordinator";
 import { ContainerSection, DivTitle, TitleOrder, TotalOrder, ButtonFinish } from "./style";
 
 const OrderSummary = () => {
-  const { cart, removeFormCart } = useContext(GlobalStateContext);
+  const { cart, removeFormCart, listPurchase } = useContext(GlobalStateContext);
 
   const navigate = useNavigate();
 
@@ -30,14 +30,18 @@ const OrderSummary = () => {
       </DivTitle>
 
       {cart.map((purchase) => {
-        return (
-          <OrderCartItem
-            key={purchase.name}
+        
+       
+         return (<OrderCartItem
+            key={purchase.name
+            }
             purchase={purchase}
             removeFormCart={removeFormCart}
+            listPurchase={listPurchase}
           />
-        );
+         )
       })}
+
 
       <TotalOrder>Total: {calculateTotal()}</TotalOrder>
       <ButtonFinish>Finalizar Pedido</ButtonFinish>

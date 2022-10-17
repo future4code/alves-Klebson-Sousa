@@ -29,12 +29,7 @@ export class ClientBusiness {
       throw new ParamsError("Parâmetro 'name' inválido: deve ser uma string");
     }
 
-    console.log("deliveryDate", deliveryDate)
-
     const deliveryAtDate = new Date(deliveryDate);
-
-    console.log("deliveryAtDate", deliveryAtDate)
-
 
     if (!deliveryAtDate.getDate()) {
       throw new RequestError(
@@ -46,7 +41,6 @@ export class ClientBusiness {
     
     if (deliveryDateAlreadyExists) {
       const date = compareDates(deliveryDateAlreadyExists.delivery_date);
-      console.log("date", date)
       if (date === deliveryDate) {
         throw new ConflictError("Já existe um pedido para essa data.");
         
@@ -187,6 +181,7 @@ export class ClientBusiness {
 
     return OrderClient;
   }
+  
   public deleteProduct = async (productId: string, orderId: string) => {    
 
    const IdOrder = await this.clientDatabase.findClientById(orderId)
@@ -202,13 +197,45 @@ export class ClientBusiness {
     throw new NotFoundError("Produto não não existe na sua lista")
    }
 
-   await this.clientDatabase.deleteProductById(product.id, IdOrder.id)
+   await this.clientDatabase.deleteProductById(product.id, orderId)
 
    const stock = await this.productDatabase.findByProductName(product.product_name)      
      
       
       if (stock) {
         const newqtyStock = stock.qty_stock + product.quantity       
+        
+        await this.productDatabase.updateProductStock(newqtyStock, stock.id)
+      }
+
+      
+   return {message: "Produto deletado"}
+    
+  };
+
+  public deleteProducts = async (productName: string, orderId: string) => {    
+
+   const IdOrder = await this.clientDatabase.findClientById(orderId)
+
+   if (!IdOrder) {
+    throw new NotFoundError("Lista de compras não encontrada")
+
+   }
+
+   const product = await this.clientDatabase.findProductByName(productName)
+   
+   if(!product) {
+    throw new NotFoundError("Produto não não existe na sua lista")
+   }
+
+   await this.clientDatabase.deleteProductByName(productName, product.order_id)
+
+   const stock = await this.productDatabase.findByProductName(product.product_name)      
+     
+      
+      if (stock) {
+        const newqtyStock = stock.qty_stock + product.quantity   
+        console.log("stock", stock.qty_stock, "product.quantity ", product.quantity )    
         
         await this.productDatabase.updateProductStock(newqtyStock, stock.id)
       }

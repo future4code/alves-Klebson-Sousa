@@ -9,7 +9,7 @@ import OrderSummary from "../orderSummary/OrderSummary";
 import { ContainerSection } from "./style";
 
 const ProductsPage = () => {
-  const { aaddToCart, cart, productsStock, products, removeFormCart } =
+  const { aaddToCart, productsStock, products } =
     useContext(GlobalStateContext);
 
     useProtectedPage()

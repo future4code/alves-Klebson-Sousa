@@ -5,18 +5,22 @@ export const MainLi = styled.li`
     flex-direction: column;
     background-color: rgb(213, 235, 227);
     div {
+        height: 8vh;
         display: flex;
         justify-content: space-between;
         margin: 20px;
         color: rgb(45, 167, 122);
         button {
             width: 10% ;
-            height: 2%;
+            height: 35%;
             font-size: 1.5em;
             background-color: transparent;
             border: none;
             margin: 10px;
             text-align: center;
+            :hover {
+                font-size: 2rem;
+            }
         }
     }
     h3 {
@@ -26,15 +30,22 @@ export const MainLi = styled.li`
 export const Container = styled.span`
     display: flex;
     justify-content: space-evenly;
-    
+    margin-bottom: 10px;    
 `
 
-const OrderCartItem = ({purchase, removeFormCart}) => {
+const OrderCartItem = ({purchase, removeFormCart, listPurchase}) => {
+    const listPurchases = listPurchase.map((purchases) => {
+        return {
+            id: purchases.idProduct,
+            name: purchases.productName
+        }
+    })    
+    
     return(
         <MainLi>
             <hr/>
             <div>
-                <h3>{purchase.name} X</h3>
+                <h3>{purchase.name}</h3>
                 <button onClick={()=> removeFormCart(purchase)}> x </button>
             </div>
 

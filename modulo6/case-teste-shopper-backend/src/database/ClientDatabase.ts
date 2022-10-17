@@ -62,6 +62,15 @@ export class ClientDatabase extends BaseDatabase {
         return result[0]
     }
 
+    public findProductByName = async (product_name: string): Promise<IProductsClientDB | undefined> => {
+       
+        const result: IProductsClientDB[] = await BaseDatabase
+        .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+        .select()
+        .where({ product_name })              
+        return result[0]
+    }
+    
     public getListPurchases = async (id: string): Promise<any> => {
         const result = await BaseDatabase
         .connection.raw(`
@@ -84,16 +93,25 @@ export class ClientDatabase extends BaseDatabase {
     }
 
     public insertProductOnOrder = async (orderProduct: IProductsClientDB): Promise<void> => {
-        const productDb = await BaseDatabase
+        await BaseDatabase
             .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
             .insert(orderProduct)
     }
 
-    public deleteProductById = async (id: string, orderId: string): Promise<void> => {
+    public deleteProductById = async (id: string, order_id: string): Promise<void> => {
+       
         await BaseDatabase
             .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
             .delete()
-            .where({id, order_id:orderId})
+            .where({id, order_id})
+            
+    }
+    public deleteProductByName = async (product_name: string, order_id: string): Promise<void> => {
+        console.log(product_name)
+        await BaseDatabase
+            .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+            .delete()
+            .where({product_name, order_id})
             
     }
 }

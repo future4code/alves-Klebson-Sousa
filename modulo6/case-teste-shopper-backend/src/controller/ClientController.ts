@@ -60,11 +60,26 @@ export class ClientController {
     }
     public deleteProduct = async (req: Request, res: Response) => {
         try {
-            const productId = req.body.productId
+            const productId= req.body.productId
+            const OrderId = req.params.orderId
+           
+
+            const response = await this.clientBusiness.deleteProduct(productId, OrderId )
+            
+            res.status(200).send(response)
+            
+        } catch (error: any) {
+            res.status(error.statusCode || 500).send({message: error.message})
+        }
+    }
+
+    public deleteProductName = async (req: Request, res: Response) => {
+        try {
+            const productName = req.body.productName
             const orderId = req.params.orderId
            
 
-            const response = await this.clientBusiness.deleteProduct(productId, orderId )
+            const response = await this.clientBusiness.deleteProducts(productName, orderId )
             
             res.status(200).send(response)
             

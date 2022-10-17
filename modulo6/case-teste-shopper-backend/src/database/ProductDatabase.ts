@@ -42,6 +42,7 @@ export class ProductDatabase extends BaseDatabase {
 
         return result[0]
     }
+  
 
     public findQuantityProductByName = async (productName: string): Promise<number | undefined> => {
         const result = await BaseDatabase

@@ -22,7 +22,7 @@ Content-Type: application/json
     "listPurchase": [
         {
             "productName": "AZEITE PORTUGUÊS EXTRA VIRGEM GALLO 500ML",
-            "quantity": 10
+            "quantity": 1
         },
         {
             "productName": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L",
@@ -36,7 +36,7 @@ DELETE  http://localhost:3003/client/product/delete/001
 Content-Type: application/json
 
 {    
-   "productId": "020eb3d0-9448-469a-891f-79b4a3494f02"
+   "productId": "f0ee0b2a-c466-4103-a549-a22377d4ecdd"
 }
 
 

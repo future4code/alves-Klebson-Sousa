@@ -76,8 +76,7 @@ export class ClientController {
     public deleteProductName = async (req: Request, res: Response) => {
         try {
             const productName = req.body.productName
-            const orderId = req.params.orderId
-           
+            const orderId = req.params.orderId           
 
             const response = await this.clientBusiness.deleteProducts(productName, orderId )
             

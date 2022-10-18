@@ -1,5 +1,5 @@
 export interface IProductsClientDB {   
-    id: string,
+    id: number,
     product_name: string,
     quantity: number,
     order_id: string,
@@ -12,7 +12,7 @@ export interface IPurchaseDTO {
 
 export class ProductsClient {
     constructor(
-        private id: string,
+        private id: number,
         private clientName: string,             
         private deliveryDate: Date,             
         private listPurchases: IPurchaseDTO[]
@@ -21,7 +21,7 @@ export class ProductsClient {
     public getId = () => {
         return this.id
     }
-    public removeId = (idToRemove: string) => {
+    public removeId = (idToRemove: number) => {
         return this.id !== idToRemove
     }
 
@@ -64,7 +64,7 @@ export interface IOrderInputDTO {
 }
 
 export interface IlistPurchaseDTO {
-    idProduct: string,
+    idProduct: number,
     productName: string,
     price: number,
     quantity: number,
@@ -96,7 +96,6 @@ export interface ICreateOrderOutputDTO {
     order: {
         id: string,
         products: {
-            id: string
             productName: string,    
             quantity: number 
             price:number           

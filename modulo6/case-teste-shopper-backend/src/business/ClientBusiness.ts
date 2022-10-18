@@ -84,8 +84,7 @@ export class ClientBusiness {
         throw new ParamsError("Quantidade de product inválida! A quantidade mínima é 1")
     }
       return {
-        ...product,
-        id: this.idGenerator.generate(),
+        ...product,        
         price: 0,
         subTotal: 0
       }
@@ -105,13 +104,16 @@ export class ClientBusiness {
     }
     
     for (let product of products) {
+      const stock = await this.productDatabase.findByProductName(product.productName)
+      if (!stock) {
+        throw new NotFoundError("Produto não existe")
+      }
       const orderProduct: IProductsClientDB = {
-        id: product.id,
+        id: stock.id,
         product_name: product.productName,
         quantity: product.quantity,
         order_id: idClient
       }
-      const stock = await this.productDatabase.findByProductName(product.productName)
       
       const qtyStock = stock?.qty_stock
       
@@ -196,8 +198,13 @@ export class ClientBusiness {
    if(!product) {
     throw new NotFoundError("Produto não não existe na sua lista")
    }
+   const countQuantity = await this.clientDatabase.selectQuantityById(product.id)
+   if (!countQuantity){
+    throw new NotFoundError()
+   }
+   console.log("countQuantity", countQuantity)
 
-   await this.clientDatabase.deleteProductById(product.id, orderId)
+  //  await this.clientDatabase.deleteProductById(product.id, orderId)
 
    const stock = await this.productDatabase.findByProductName(product.product_name)      
      
@@ -223,19 +230,34 @@ export class ClientBusiness {
    }
 
    const product = await this.clientDatabase.findProductByName(productName)
-   
+
    if(!product) {
     throw new NotFoundError("Produto não não existe na sua lista")
    }
 
-   await this.clientDatabase.deleteProductByName(productName, product.order_id)
+   const countQuantity = await this.clientDatabase.selectQuantity(productName)
 
+   
+  //  const countQuantity = await this.clientDatabase.selectQuantity(productName)
+  //  console.log("countQuantity", countQuantity)
+
+  //  if(countQuantity && countQuantity > 1) {
+  //   const count = countQuantity * product?.quantity
+  //   console.log("count", count)
+  //  }
+   
+  //  console.log("product.quantity", product.quantity)
+  //  if (product) {
+  //   const newQuantity = product.quantity -=1
+  //   // await this.clientDatabase.deleteProductByName(productName, orderId)
+  //  }
+   
+   
    const stock = await this.productDatabase.findByProductName(product.product_name)      
      
       
       if (stock) {
         const newqtyStock = stock.qty_stock + product.quantity   
-        console.log("stock", stock.qty_stock, "product.quantity ", product.quantity )    
         
         await this.productDatabase.updateProductStock(newqtyStock, stock.id)
       }

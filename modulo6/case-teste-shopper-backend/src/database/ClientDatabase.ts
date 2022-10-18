@@ -67,8 +67,29 @@ export class ClientDatabase extends BaseDatabase {
         const result: IProductsClientDB[] = await BaseDatabase
         .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
         .select()
-        .where({ product_name })              
+        .where({ product_name })  
+                  
         return result[0]
+    }
+    public selectQuantity = async (product_name: string): Promise<number | undefined> => {
+       
+        const result: any= await BaseDatabase
+        .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+        .select()
+        .sum("quantity")
+        .where({ product_name })  
+         console.log(result[0].quantity)    
+        return result[0].quantity as number
+    }
+    public selectQuantityById = async (id: number): Promise<number | undefined> => {
+       
+        const result: any= await BaseDatabase
+        .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
+        
+        .sum("quantity")
+        .where({ id })  
+          
+        return result[0] as number
     }
     
     public getListPurchases = async (id: string): Promise<any> => {
@@ -98,7 +119,7 @@ export class ClientDatabase extends BaseDatabase {
             .insert(orderProduct)
     }
 
-    public deleteProductById = async (id: string, order_id: string): Promise<void> => {
+    public deleteProductById = async (id: number, order_id: string): Promise<void> => {
        
         await BaseDatabase
             .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
@@ -107,11 +128,28 @@ export class ClientDatabase extends BaseDatabase {
             
     }
     public deleteProductByName = async (product_name: string, order_id: string): Promise<void> => {
-        console.log(product_name)
+     
         await BaseDatabase
             .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
             .delete()
             .where({product_name, order_id})
             
+    }
+
+    //Atualizar o banco com -1 se o produto for > 1
+    //Receber id da order, productName e quantity 
+
+    public updateProductClients = async (quantity: number, product_name: string): Promise<void> => {
+        await BaseDatabase
+        .connection.raw(`UPDATE Products_Clients
+        SET quantity = ${quantity}
+        WHERE product_name = ${ product_name };
+        `)       
+    }
+    public updateProductStock = async (qtyStock: number, id: number): Promise<void> => {
+        await BaseDatabase
+        .connection.raw(`UPDATE Products_Stock
+        SET qty_stock = ${qtyStock}
+        WHERE id = ${ id };`)       
     }
 }

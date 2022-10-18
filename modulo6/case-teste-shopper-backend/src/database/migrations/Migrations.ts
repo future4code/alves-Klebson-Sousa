@@ -47,7 +47,7 @@ class Migrations extends BaseDatabase {
           );          
 
           CREATE TABLE IF NOT EXISTS ${ClientDatabase.TABLE_ORDER_PRODUCT} (	
-            id VARCHAR(255) NOT NULL,	
+            id INT NOT NULL,	
             product_name VARCHAR(255) NOT NULL,    
             quantity INT,
             order_id VARCHAR(255) NOT NULL,

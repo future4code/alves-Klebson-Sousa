@@ -33,20 +33,21 @@ export const Container = styled.span`
     margin-bottom: 10px;    
 `
 
-const OrderCartItem = ({purchase, removeFormCart, listPurchase}) => {
+const OrderCartItem = ({purchase, listPurchase, removeFromCart}) => {
     const listPurchases = listPurchase.map((purchases) => {
         return {
             id: purchases.idProduct,
             name: purchases.productName
         }
-    })    
+    })
+    // const removeFromCart = allProductsPurchase.removeFormCart    
     
     return(
         <MainLi>
             <hr/>
             <div>
                 <h3>{purchase.name}</h3>
-                <button onClick={()=> removeFormCart(purchase)}> x </button>
+                <button onClick={()=> removeFromCart(purchase)}> x </button>
             </div>
 
             <Container>

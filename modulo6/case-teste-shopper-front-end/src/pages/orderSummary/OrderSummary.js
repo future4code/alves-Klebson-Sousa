@@ -6,7 +6,7 @@ import { goToProductsPage } from "../../routes/cordinator";
 import { ContainerSection, DivTitle, TitleOrder, TotalOrder, ButtonFinish } from "./style";
 
 const OrderSummary = () => {
-  const { cart, removeFormCart, listPurchase } = useContext(GlobalStateContext);
+  const { cart, removeFromCart, listPurchase } = useContext(GlobalStateContext);
 
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const OrderSummary = () => {
             key={purchase.name
             }
             purchase={purchase}
-            removeFormCart={removeFormCart}
+            removeFromCart={removeFromCart}
             listPurchase={listPurchase}
           />
          )

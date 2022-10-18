@@ -9,8 +9,6 @@ const GlobalState = (props) => {
   const [products, setProducts] = useState([]);
   const [listPurchase, setListPurchase] = useState([]);
   // console.log("listPurchase", listPurchase);
-  console.log("cart", cart);
-
   const orderId = localStorage.getItem("orderId");
 
   useEffect(() => {
@@ -83,9 +81,12 @@ const GlobalState = (props) => {
       });
   };
 
-  const removeFormCart = (products) => {
+  const removeFromCart = (products) => {
     const body = {
-      productName: products.name,
+      data: {
+        productName: products.name
+      }
+      
     };
     console.log(products.name)
 
@@ -104,7 +105,7 @@ const GlobalState = (props) => {
       setCart(newCart);
     }
 
-    console.log(body.productName);
+    console.log(orderId);
     // console.log(orderId, "pro", purchaseToRemove);
 
     axios
@@ -124,7 +125,7 @@ const GlobalState = (props) => {
     productsStock,
     products,
     setProducts,
-    removeFormCart,
+    removeFromCart,
     listPurchase,
   };
 

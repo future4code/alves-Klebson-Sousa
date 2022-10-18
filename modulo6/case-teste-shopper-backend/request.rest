@@ -21,12 +21,12 @@ Content-Type: application/json
 {    
     "listPurchase": [
         {
-            "productName": "AZEITE PORTUGUÊS EXTRA VIRGEM GALLO 500ML",
+            "productName": "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
             "quantity": 1
         },
         {
             "productName": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L",
-            "quantity": 5
+            "quantity": 1
         }
     ]
 }
@@ -36,7 +36,15 @@ DELETE  http://localhost:3003/client/product/delete/001
 Content-Type: application/json
 
 {    
-   "productId": "f0ee0b2a-c466-4103-a549-a22377d4ecdd"
+   "productId": 36
+}
+
+### Deletar produtos
+DELETE  http://localhost:3003/client/products/delete/001
+Content-Type: application/json
+
+{    
+   "productName": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L"
 }
 
 

@@ -371,28 +371,28 @@ export const order: IProductsClientDB[] = [
     {
         id: 36,
         product_name: "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
-        quantity: 5,
+        quantity: 1,
         order_id: "001"
     },
 
     {
         id: 98,
         product_name: "DESODORANTE AEROSOL REXONA ANTIBACTERIANO + INVISIBLE PROTECTION FEMININO 150ML",
-        quantity: 10,
+        quantity: 1,
         order_id: "001"
     },
 
     {
         id: 78,
         product_name: "REFRIGERANTE ANTARCTICA GUARANÁ 2L",
-        quantity: 15,
+        quantity: 1,
         order_id: "002"
     },
 
     {
         id: 66,
         product_name: "CREME DE TRATAMENTO ELSEVE OLÉO EXTRAORDINÁRIO 300G",
-        quantity: 10,
+        quantity: 1,
         order_id: "002"
     }
 ]

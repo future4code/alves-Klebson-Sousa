@@ -33,14 +33,7 @@ export const Container = styled.span`
     margin-bottom: 10px;    
 `
 
-const OrderCartItem = ({purchase, listPurchase, removeFromCart}) => {
-    const listPurchases = listPurchase.map((purchases) => {
-        return {
-            id: purchases.idProduct,
-            name: purchases.productName
-        }
-    })
-    // const removeFromCart = allProductsPurchase.removeFormCart    
+const OrderCartItem = ({purchase, listProducts, removeFromCart}) => { 
     
     return(
         <MainLi>

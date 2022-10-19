@@ -4,12 +4,16 @@ export const ContainerHeader = styled.div`
     display: flex;
     height: 15vh;
     width: 100%;
+    border: none;
     align-items: center;
-    justify-content: space-around;    
+    justify-content: space-between;  
+    border-bottom: solid 1px #ddd;
+    background: #fff;
+    background-image: linear-gradient(to bottom, #fff 30%, #fff 60%, #002d62 317%);
     img {
-        width: 100px;
+        width: 260px;
         height: 80px;
-
+        background: transparent;
     }
 `
 export const Title = styled.h2`

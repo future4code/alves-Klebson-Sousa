@@ -6,21 +6,9 @@ import { goToProductsPage } from "../../routes/cordinator";
 import { ContainerSection, DivTitle, TitleOrder, TotalOrder, ButtonFinish } from "./style";
 
 const OrderSummary = () => {
-  const { cart, removeFromCart, listPurchase } = useContext(GlobalStateContext);
+  const { cart, removeFromCart, listProducts, total, confirmeOrder } = useContext(GlobalStateContext);
 
-  const navigate = useNavigate();
-
-  const calculateTotal = () => {
-    const total = cart.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-    return total.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    });
-  };
-  
+  const navigate = useNavigate();  
 
   return (
     <ContainerSection>
@@ -29,22 +17,24 @@ const OrderSummary = () => {
         <TitleOrder>Resumo do pedido</TitleOrder>
       </DivTitle>
 
-      {cart.map((purchase) => {
-        
+      {cart.map((purchase) => {        
        
          return (<OrderCartItem
             key={purchase.name
             }
             purchase={purchase}
             removeFromCart={removeFromCart}
-            listPurchase={listPurchase}
+            listProducts={listProducts}
           />
          )
       })}
 
 
-      <TotalOrder>Total: {calculateTotal()}</TotalOrder>
-      <ButtonFinish>Finalizar Pedido</ButtonFinish>
+      <TotalOrder>Total: {total.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    })}</TotalOrder>
+      <ButtonFinish onClick={confirmeOrder}>Finalizar Pedido</ButtonFinish>
     </ContainerSection>
   );
 };

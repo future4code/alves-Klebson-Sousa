@@ -8,7 +8,9 @@ export const Container = styled.li`
   margin-top: 1em;
   width: 18rem;
   height: 23vh;
-  /* align-items: center; */
+  box-shadow: 8px 8px 5px rgb(139, 135, 236);
+  border: solid 0.5px rgb(139, 135, 236);
+  border-radius: 10px;
 `;
 
 export const DivButton = styled.div`

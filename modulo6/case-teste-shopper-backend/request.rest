@@ -21,11 +21,11 @@ Content-Type: application/json
 {    
     "listPurchase": [
         {
-            "productName": "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
+            "name": "TOALHA DE PAPEL SCOTT DURAMAX C/ 1UN",
             "quantity": 1
         },
         {
-            "productName": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L",
+            "name": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L",
             "quantity": 1
         }
     ]
@@ -36,7 +36,8 @@ DELETE  http://localhost:3003/client/product/delete/001
 Content-Type: application/json
 
 {    
-   "productId": 36
+   "productId": 36,
+   "quantity": 1
 }
 
 ### Deletar produtos

@@ -61,10 +61,11 @@ export class ClientController {
     public deleteProduct = async (req: Request, res: Response) => {
         try {
             const productId= req.body.productId
+            const quantity= req.body.quantity
             const OrderId = req.params.orderId
            
 
-            const response = await this.clientBusiness.deleteProduct(productId, OrderId )
+            const response = await this.clientBusiness.deleteProduct(productId, quantity, OrderId )
             
             res.status(200).send(response)
             

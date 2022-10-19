@@ -91,7 +91,7 @@ export class ClientBusiness {
     })
 
     for (let product of products) {
-      const values = await this.clientDatabase.getPriceQuantity(product.productName)
+      const values = await this.clientDatabase.getPriceQuantity(product.name)
       
       if (values && values.qty_stock === 0) {
         throw new NotFoundError("Produto esgotado")
@@ -104,13 +104,13 @@ export class ClientBusiness {
     }
     
     for (let product of products) {
-      const stock = await this.productDatabase.findByProductName(product.productName)
+      const stock = await this.productDatabase.findByProductName(product.name)
       if (!stock) {
         throw new NotFoundError("Produto não existe")
       }
       const orderProduct: IProductsClientDB = {
         id: stock.id,
-        product_name: product.productName,
+        product_name: product.name,
         quantity: product.quantity,
         order_id: idClient
       }
@@ -120,8 +120,14 @@ export class ClientBusiness {
       if (qtyStock && qtyStock < product.quantity) {
         throw new ConflictError("Quantidade do pedido acima da quantidade em estoque")
       }
+      
+      const productClient = await this.clientDatabase.findProductById(stock.id)
+      
+      if (productClient?.id) {
+        const newQuantity = productClient.quantity + product.quantity
+        await this.clientDatabase.updateProductPurchase(newQuantity, productClient.id)
 
-      await this.clientDatabase.insertProductOnOrder(orderProduct)
+      } else  await this.clientDatabase.insertProductOnOrder(orderProduct)      
       
       if (stock) {
         const newqtyStock = stock.qty_stock - product.quantity
@@ -184,37 +190,36 @@ export class ClientBusiness {
     return OrderClient;
   }
   
-  public deleteProduct = async (productId: string, orderId: string) => {    
+  public deleteProduct = async (productId: number, quantity: number, orderId: string, ) => {    
 
    const IdOrder = await this.clientDatabase.findClientById(orderId)
 
    if (!IdOrder) {
     throw new NotFoundError("Lista de compras não encontrada")
-
    }
 
    const product = await this.clientDatabase.findProductById(productId)
+   
+   if (product?.quantity && product.quantity < quantity) {
+    throw new ConflictError("Quantidade inexistente no carrinho")
+   }
 
    if(!product) {
     throw new NotFoundError("Produto não não existe na sua lista")
    }
-   const countQuantity = await this.clientDatabase.selectQuantityById(product.id)
-   if (!countQuantity){
-    throw new NotFoundError()
-   }
-   console.log("countQuantity", countQuantity)
-
-  //  await this.clientDatabase.deleteProductById(product.id, orderId)
+   
+   if (product.quantity > 1){
+    const newQuantity = product.quantity - quantity
+        await this.clientDatabase.updateProductPurchase(newQuantity, product.id)
+   } else await this.clientDatabase.deleteProductById(product.id, orderId)   
 
    const stock = await this.productDatabase.findByProductName(product.product_name)      
-     
       
       if (stock) {
-        const newqtyStock = stock.qty_stock + product.quantity       
+        const newqtyStock = stock.qty_stock + quantity      
         
         await this.productDatabase.updateProductStock(newqtyStock, stock.id)
       }
-
       
    return {message: "Produto deletado"}
     
@@ -235,23 +240,7 @@ export class ClientBusiness {
     throw new NotFoundError("Produto não não existe na sua lista")
    }
 
-   const countQuantity = await this.clientDatabase.selectQuantity(productName)
-
-   
-  //  const countQuantity = await this.clientDatabase.selectQuantity(productName)
-  //  console.log("countQuantity", countQuantity)
-
-  //  if(countQuantity && countQuantity > 1) {
-  //   const count = countQuantity * product?.quantity
-  //   console.log("count", count)
-  //  }
-   
-  //  console.log("product.quantity", product.quantity)
-  //  if (product) {
-  //   const newQuantity = product.quantity -=1
-  //   // await this.clientDatabase.deleteProductByName(productName, orderId)
-  //  }
-   
+   const countQuantity = await this.clientDatabase.selectQuantity(productName)   
    
    const stock = await this.productDatabase.findByProductName(product.product_name)      
      

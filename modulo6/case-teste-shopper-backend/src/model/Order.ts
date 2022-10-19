@@ -58,7 +58,7 @@ export class ProductsClient {
 // }
 export interface IOrderInputDTO {     
     listPurchase: {
-        productName: string,    
+        name: string,    
         quantity: number
     }[]
 }
@@ -96,7 +96,7 @@ export interface ICreateOrderOutputDTO {
     order: {
         id: string,
         products: {
-            productName: string,    
+            name: string,    
             quantity: number 
             price:number           
         }[],

@@ -54,7 +54,7 @@ export class ClientDatabase extends BaseDatabase {
         return result[0]
     }
 
-    public findProductById = async (id: string): Promise<IProductsClientDB | undefined> => {
+    public findProductById = async (id: number): Promise<IProductsClientDB | undefined> => {
         const result: IProductsClientDB[] = await BaseDatabase
         .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
         .select()
@@ -89,7 +89,7 @@ export class ClientDatabase extends BaseDatabase {
         .sum("quantity")
         .where({ id })  
           
-        return result[0] as number
+        return result[0]['sum(`quantity`)'] as number
     }
     
     public getListPurchases = async (id: string): Promise<any> => {
@@ -146,10 +146,10 @@ export class ClientDatabase extends BaseDatabase {
         WHERE product_name = ${ product_name };
         `)       
     }
-    public updateProductStock = async (qtyStock: number, id: number): Promise<void> => {
+    public updateProductPurchase = async (quantity: number, id: number): Promise<void> => {
         await BaseDatabase
-        .connection.raw(`UPDATE Products_Stock
-        SET qty_stock = ${qtyStock}
+        .connection.raw(`UPDATE Products_Clients
+        SET quantity = ${quantity}
         WHERE id = ${ id };`)       
     }
 }

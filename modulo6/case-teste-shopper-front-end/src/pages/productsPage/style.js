@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const ContainerSection = styled.section`
   ul {
     display: flex;
-    width: 100%;
-    border: solid black 1px;    
+    width: 100%;       
     justify-content: space-evenly;
     flex-wrap: wrap;
   }

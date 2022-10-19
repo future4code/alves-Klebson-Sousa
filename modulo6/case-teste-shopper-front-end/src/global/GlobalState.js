@@ -7,14 +7,36 @@ import GlobalStateContext from "./GlobalStateContext";
 const GlobalState = (props) => {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const [listPurchase, setListPurchase] = useState([]);
-  // console.log("listPurchase", listPurchase);
+  const [listProducts, setListProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [confirmedOrderPopup, setConfirmedOrderPopup] = useState({
+    isActive:false,
+    summary: {
+      id: null,
+      products: null,
+      total: null
+    }
+  });
+
   const orderId = localStorage.getItem("orderId");
 
   useEffect(() => {
+    
+    calculateTotal();
+  }, [cart]);
+
+  useEffect(() => {
     productsStock();
-    getListpurchase(orderId);
-  }, []);
+    getListpurchase();
+  }, [])
+
+  const calculateTotal = () => {
+    const total = cart.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    setTotal(total);
+  };
 
   const productsStock = () => {
     axios
@@ -27,68 +49,35 @@ const GlobalState = (props) => {
       });
   };
 
-  const getListpurchase = (orderId) => {
-    axios
-      .get(`${BASE_URL}/client/show-order/${orderId}`)
-      .then((res) => {
-        setListPurchase(res.data.listPurchase);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-
   const aaddToCart = (addList) => {
     const foundIndex = cart.findIndex(
       (listInCart) => listInCart.name === addList.name
     );
+    if (foundIndex >= 0) {
+      const newCart = [...cart];
+      newCart[foundIndex].quantity += 1;
+      setCart(newCart);
+    } else {
+      const newCart = [...cart];
+      const newListPurchase = {
+        name: addList.name,
+        price: addList.price,
+        id: addList.id,
+        quantity: 1,
+      };
+      newCart.push(newListPurchase);
+      setCart(newCart);
+    }
 
-    const body = {
-      listPurchase: [
-        {
-          productName: addList.name,
-          quantity: 1,
-        },
-      ],
-    };
-
-    const orderId = localStorage.getItem("orderId");
-
-    axios
-      .post(`${BASE_URL}/client/order-purchase/${orderId}`, body)
-      .then((res) => {
-        setCart(res.data.order.products);
-        productsStock();
-        for (let product of res.data.order.products)
-          if (foundIndex >= 0) {
-            const newCart = [...cart];
-            newCart[foundIndex].quantity += 1;
-            setCart(newCart);
-          } else {
-            const newCart = [...cart];
-            const newListPurchase = {
-              name: product.productName,
-              price: product.price,
-              id: product.id,
-              quantity: 1,
-            };
-            newCart.push(newListPurchase);
-            setCart(newCart);
-          }
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
   };
 
   const removeFromCart = (products) => {
     const body = {
       data: {
-        productName: products.name
-      }
-      
+        productId: products.id,
+        quantity: 1,
+      },
     };
-    console.log(products.name)
 
     if (products.quantity > 1) {
       const newCart = cart.map((product) => {
@@ -105,18 +94,58 @@ const GlobalState = (props) => {
       setCart(newCart);
     }
 
-    console.log(orderId);
-    // console.log(orderId, "pro", purchaseToRemove);
-
     axios
-      .delete(`${BASE_URL}/client/products/delete/${orderId}`, body)
-      .then((res) => {
-        getListpurchase(orderId);
-      })
+      .delete(`${BASE_URL}/client/product/delete/${orderId}`, body)
+      .then((res) => {})
       .catch((error) => {
         console.log(error.response.data);
       });
   };
+
+  const confirmeOrder = async () => {
+    try {
+      const body = {
+        listPurchase: cart
+      };
+
+      const response = await axios.post(
+        `${BASE_URL}/client/order-purchase/${orderId}`,
+        body
+      )
+
+      setConfirmedOrderPopup({
+        isActive:true,
+        summary: response.data.order
+      })
+
+      setCart([])
+      productsStock();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const getListpurchase = () => {
+    axios
+      .get(`${BASE_URL}/client/show-order/${orderId}`)
+      .then((res) => {
+        setListProducts(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  const closePopup = () => {
+    setConfirmedOrderPopup({
+      isActive:false,
+      summary: {
+        id: null,
+        products: null,
+        total: null
+      }
+    })
+  }
 
   const data = {
     cart,
@@ -126,7 +155,11 @@ const GlobalState = (props) => {
     products,
     setProducts,
     removeFromCart,
-    listPurchase,
+    listProducts,
+    total,
+    confirmeOrder,
+    confirmedOrderPopup,
+    closePopup
   };
 
   return (

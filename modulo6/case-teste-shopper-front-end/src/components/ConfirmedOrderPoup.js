@@ -1,9 +1,10 @@
 import { useContext } from "react"
 import GlobalStateContext from "../global/GlobalStateContext"
 import { ClosePopup, ContainerSection } from "./confirmedOrderStyle"
-import OrderCartItem from "./OrderCartItem"
 
-const ConfirmedOrderPopup = ({order, closePopup}) => {
+const ConfirmedOrderPopup = () => {
+    const {confirmedOrderPopupState, closePopup} = useContext(GlobalStateContext)
+    const order = confirmedOrderPopupState.summary
 
     return (
         <ContainerSection>

@@ -190,7 +190,7 @@ export class ClientBusiness {
     return OrderClient;
   }
   
-  public deleteProduct = async (productId: number, quantity: number, orderId: string, ) => {    
+  public deleteProduct = async (idProduct: number, quantity: number, orderId: string, ) => {    
 
    const IdOrder = await this.clientDatabase.findClientById(orderId)
 
@@ -198,7 +198,7 @@ export class ClientBusiness {
     throw new NotFoundError("Lista de compras não encontrada")
    }
 
-   const product = await this.clientDatabase.findProductById(productId)
+   const product = await this.clientDatabase.findProductById(idProduct)
    
    if (product?.quantity && product.quantity < quantity) {
     throw new ConflictError("Quantidade inexistente no carrinho")

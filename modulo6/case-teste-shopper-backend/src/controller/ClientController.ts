@@ -60,7 +60,7 @@ export class ClientController {
     }
     public deleteProduct = async (req: Request, res: Response) => {
         try {
-            const productId= req.body.productId
+            const productId= req.body.idProduct
             const quantity= req.body.quantity
             const OrderId = req.params.orderId
            

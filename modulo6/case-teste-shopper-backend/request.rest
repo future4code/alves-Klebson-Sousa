@@ -36,7 +36,7 @@ DELETE  http://localhost:3003/client/product/delete/001
 Content-Type: application/json
 
 {    
-   "productId": 36,
+   "idProduct": 36,
    "quantity": 1
 }
 

@@ -11,7 +11,7 @@ const Router = () => {
                 <Route index element={<HomePage/>}/>
                 <Route path='/products' element={<ProductsPage/>}/>
                 <Route path='/client/register' element={<RegisterOrder/>}/>                
-                <Route path='/client/order-purchase/:id' element={<OrderSummary/>}/>
+                {/* <Route path='/client/order-purchase/:id' element={<OrderSummary/>}/> */}
             </Routes>
         </BrowserRouter>
     )

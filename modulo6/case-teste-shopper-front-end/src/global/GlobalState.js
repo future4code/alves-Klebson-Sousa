@@ -7,28 +7,38 @@ import GlobalStateContext from "./GlobalStateContext";
 const GlobalState = (props) => {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
-  const [listProducts, setListProducts] = useState([]);
+  const [listsPurchase, setListsPurchase] = useState([]);
   const [total, setTotal] = useState(0);
-  const [confirmedOrderPopup, setConfirmedOrderPopup] = useState({
-    isActive:false,
+  const [popuptCartState, setPopuptCartState] = useState(false);
+  const [confirmedOrderPopupState, setConfirmedOrderPopupState] = useState({
+    isActive: false,
     summary: {
       id: null,
       products: null,
-      total: null
-    }
+      total: null,
+    },
   });
+  const popupCart = () => {
+    setPopuptCartState(true);
+  };
+
+  const hideCart = () => {
+    if (popuptCartState || cart.length <= 1) setPopuptCartState(false);
+  };
+
+  console.log(cart.length);
+  console.log(popuptCartState);
 
   const orderId = localStorage.getItem("orderId");
 
   useEffect(() => {
-    
     calculateTotal();
   }, [cart]);
 
   useEffect(() => {
     productsStock();
     getListpurchase();
-  }, [])
+  }, []);
 
   const calculateTotal = () => {
     const total = cart.reduce(
@@ -68,17 +78,9 @@ const GlobalState = (props) => {
       newCart.push(newListPurchase);
       setCart(newCart);
     }
-
   };
 
   const removeFromCart = (products) => {
-    const body = {
-      data: {
-        productId: products.id,
-        quantity: 1,
-      },
-    };
-
     if (products.quantity > 1) {
       const newCart = cart.map((product) => {
         if (product.name === products.name) {
@@ -91,37 +93,47 @@ const GlobalState = (props) => {
       const newCart = cart.filter((product) => {
         return product.name !== products.name;
       });
+      // if (newCart.length === 0)
       setCart(newCart);
     }
-
-    axios
-      .delete(`${BASE_URL}/client/product/delete/${orderId}`, body)
-      .then((res) => {})
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+   
   };
 
   const confirmeOrder = async () => {
     try {
       const body = {
-        listPurchase: cart
+        listPurchase: cart,
       };
 
       const response = await axios.post(
         `${BASE_URL}/client/order-purchase/${orderId}`,
         body
-      )
+      );
 
-      setConfirmedOrderPopup({
-        isActive:true,
-        summary: response.data.order
-      })
+      setConfirmedOrderPopupState({
+        isActive: true,
+        summary: response.data.order,
+      });
 
-      setCart([])
+      setCart([]);
       productsStock();
+      setPopuptCartState(false);
     } catch (error) {
-      console.log(error.response);
+      alert(error.response);
+    }
+  };
+
+  const removeFromDatabase = async () => {
+    try {
+      for (let product of listsPurchase.listPurchase)
+        await axios.delete(`${BASE_URL}/client/product/delete/${orderId}`, {
+          data: {
+            idProduct: product.idProduct,
+            quantity: product.quantity,
+          },
+        });
+    } catch (error) {
+      console.log(error.response.data);
     }
   };
 
@@ -129,7 +141,7 @@ const GlobalState = (props) => {
     axios
       .get(`${BASE_URL}/client/show-order/${orderId}`)
       .then((res) => {
-        setListProducts(res.data);
+        setListsPurchase(res.data);
       })
       .catch((error) => {
         console.log(error.response);
@@ -137,29 +149,32 @@ const GlobalState = (props) => {
   };
 
   const closePopup = () => {
-    setConfirmedOrderPopup({
-      isActive:false,
+    setConfirmedOrderPopupState({
+      isActive: false,
       summary: {
         id: null,
         products: null,
-        total: null
-      }
-    })
-  }
+        total: null,
+      },
+    });
+  };
 
   const data = {
     cart,
-    setCart,
     aaddToCart,
     productsStock,
     products,
-    setProducts,
     removeFromCart,
-    listProducts,
+    listsPurchase,
     total,
     confirmeOrder,
-    confirmedOrderPopup,
-    closePopup
+    confirmedOrderPopupState,
+    closePopup,
+    removeFromDatabase,
+    popupCart,
+    popuptCartState,
+    setPopuptCartState,
+    hideCart,
   };
 
   return (

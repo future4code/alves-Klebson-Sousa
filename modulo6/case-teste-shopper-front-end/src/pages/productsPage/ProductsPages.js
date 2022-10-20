@@ -1,6 +1,5 @@
-import axios from "axios";
 import React, { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ConfirmedOrderPopup from "../../components/ConfirmedOrderPoup";
 import Header from "../../components/Header";
 import ProductCard from "../../components/ProductCard";
@@ -10,7 +9,7 @@ import OrderSummary from "../orderSummary/OrderSummary";
 import { ContainerSection } from "./style";
 
 const ProductsPage = () => {
-  const { aaddToCart, productsStock, products, confirmedOrderPopup, closePopup } =
+  const { productsStock, products, confirmedOrderPopupState, closePopup } =
     useContext(GlobalStateContext);
 
     useProtectedPage()
@@ -28,14 +27,14 @@ const ProductsPage = () => {
             <ProductCard
               product={product}
               key={product.id}
-              aaddToCart={aaddToCart}
             />
           );
         })}
       </ul>
-      { confirmedOrderPopup.isActive 
+      <OrderSummary/>
+      { confirmedOrderPopupState.isActive 
       && <ConfirmedOrderPopup 
-      order={confirmedOrderPopup.summary}
+      order={confirmedOrderPopupState.summary}
       closePopup={closePopup}
       />  
       }

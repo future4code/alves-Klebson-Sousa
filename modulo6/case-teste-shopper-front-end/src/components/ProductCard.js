@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import GlobalStateContext from "../global/GlobalStateContext";
 import {
   Container,
   ButtonADD,
@@ -9,8 +10,8 @@ import {
   ButtonOrder,
 } from "./productCartStyle";
 
-const ProductCard = ({ product, aaddToCart }) => {
-  
+const ProductCard = ({ product }) => {
+  const {aaddToCart} = useContext(GlobalStateContext)
 
   return (
     <Container>

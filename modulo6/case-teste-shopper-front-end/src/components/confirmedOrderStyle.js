@@ -7,9 +7,17 @@ export const ContainerSection = styled.section`
   left: 50%;
   transform: translate(-50%, -50%);
   width: auto;
-  /* height: 20%; */
+  height: 50vh;
   background-color: white;
   font-family: "Lato";
+  overflow: auto;
+  h2 {
+    margin: 5px 5px 0px;
+  }
+  h3 {
+    font-weight: 400;
+    margin: 5px;
+  }
   p {
     font-size: 17px;
     font-weight: 300;

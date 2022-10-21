@@ -5,12 +5,16 @@ export const Container = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 1em;
+  margin-top: 1.5em;
   width: 18rem;
   height: 23vh;
   box-shadow: 8px 8px 5px rgb(139, 135, 236);
   border: solid 0.5px rgb(139, 135, 236);
   border-radius: 10px;
+  @media screen and (min-device-width: 540px) and (max-device-width: 926px) {
+    height: 13.4rem; 
+    width: 30%;
+  }
 `;
 
 export const DivButton = styled.div`

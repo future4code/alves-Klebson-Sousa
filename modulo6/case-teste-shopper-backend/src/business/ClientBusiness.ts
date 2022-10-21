@@ -66,9 +66,9 @@ export class ClientBusiness {
   public createListPurchases = async (input: IOrderInputDTO, idClient: string) => {
     const listPurchase = input.listPurchase
 
-    const idOrder = await this.clientDatabase.findClientById(idClient)
+    const orderClient = await this.clientDatabase.findClientById(idClient)
 
-    if (!idOrder) {
+    if (!orderClient) {
       throw new NotFoundError("Pedido inexistente")
     }
     
@@ -142,6 +142,7 @@ export class ClientBusiness {
       message: "Lista criada com sucesso",
       order: {
         id:idClient,
+        deliveryDate: orderClient.delivery_date,
         products,
         total: +total.toFixed(2)
       }

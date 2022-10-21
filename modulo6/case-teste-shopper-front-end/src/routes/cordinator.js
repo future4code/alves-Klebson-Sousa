@@ -7,7 +7,3 @@ export const goToRegisterOrder = (navigate) => {
 export const goToProductsPage = (navigate) => {
     navigate('/products')
 }
-export const goToOrderSummary = (navigate, id) => {
-    navigate(`/client/order-purchase/${id}`)
-}
-

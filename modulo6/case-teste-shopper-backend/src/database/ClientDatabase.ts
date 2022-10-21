@@ -26,16 +26,7 @@ export class ClientDatabase extends BaseDatabase {
 
         return result[0]
     } 
-
-    public findByName = async (name: string): Promise<IClientDB | undefined> => {
-        const result: IClientDB[] = await BaseDatabase
-        .connection(ClientDatabase.TABLE_CLIENTS)
-        .select()
-        .where({ name })        
-
-        return result[0]
-    }
-
+    
     public getPriceQuantity = async (name: string): Promise<{price: number, qty_stock: number} | undefined> => {
         const result: any[] = await BaseDatabase
         .connection(ProductDatabase.TABLE_PRODUCT)
@@ -81,17 +72,7 @@ export class ClientDatabase extends BaseDatabase {
          console.log(result[0].quantity)    
         return result[0].quantity as number
     }
-    public selectQuantityById = async (id: number): Promise<number | undefined> => {
-       
-        const result: any= await BaseDatabase
-        .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
         
-        .sum("quantity")
-        .where({ id })  
-          
-        return result[0]['sum(`quantity`)'] as number
-    }
-    
     public getListPurchases = async (id: string): Promise<any> => {
         const result = await BaseDatabase
         .connection.raw(`
@@ -127,25 +108,7 @@ export class ClientDatabase extends BaseDatabase {
             .where({id, order_id})
             
     }
-    public deleteProductByName = async (product_name: string, order_id: string): Promise<void> => {
-     
-        await BaseDatabase
-            .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
-            .delete()
-            .where({product_name, order_id})
-            
-    }
-
-    //Atualizar o banco com -1 se o produto for > 1
-    //Receber id da order, productName e quantity 
-
-    public updateProductClients = async (quantity: number, product_name: string): Promise<void> => {
-        await BaseDatabase
-        .connection.raw(`UPDATE Products_Clients
-        SET quantity = ${quantity}
-        WHERE product_name = ${ product_name };
-        `)       
-    }
+    
     public updateProductPurchase = async (quantity: number, id: number): Promise<void> => {
         await BaseDatabase
         .connection.raw(`UPDATE Products_Clients

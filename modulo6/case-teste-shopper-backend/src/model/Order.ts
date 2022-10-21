@@ -39,23 +39,11 @@ export class ProductsClient {
     public getListPurchases = () => {
         return this.listPurchases
     }      
-    public setListPurchases = (newListPurchases: IPurchaseDTO[]) => {
-        return this.listPurchases = newListPurchases
-    }      
-    public addPurchase = (newPurchase: IPurchaseDTO) => {
-        return this.listPurchases.push(newPurchase)
-    }      
-    public removePurchase = (purchaseToRemove: IPurchaseDTO) => {
-        return this.listPurchases.filter(purcahse => purcahse !== purchaseToRemove)
-    }      
+        
+         
     
 }
 
-// export interface IOrderInputDTO { 
-//     idOrder: string,
-//     productName: string,    
-//     quantity: number     
-// }
 export interface IOrderInputDTO {     
     listPurchase: {
         name: string,    
@@ -95,6 +83,7 @@ export interface ICreateOrderOutputDTO {
     message: "Lista criada com sucesso",
     order: {
         id: string,
+        deliveryDate: Date,
         products: {
             name: string,    
             quantity: number 

@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import GlobalStateContext from "../global/GlobalStateContext"
-import { MainLi, Container } from "./orderCartItemStyle"
+import { MainLi, Container, ButtonRemove } from "./orderCartItemStyle"
+import IconTrashCan from "../assets/IconTrashCan.png"
 
 const OrderCartItem = ({purchase}) => { 
     const {removeFromCart} = useContext(GlobalStateContext)
@@ -10,7 +11,7 @@ const OrderCartItem = ({purchase}) => {
             <hr/>
             <div>
                 <h3>{purchase.name}</h3>
-                <button onClick={()=> removeFromCart(purchase)}> x </button>
+                <ButtonRemove onClick={()=> removeFromCart(purchase)} src={IconTrashCan}></ButtonRemove>
             </div>
 
             <Container>

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { createGlobalStyle } from 'styled-components'
-import { CssBaseline } from '@mui/material';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -12,13 +11,24 @@ const GlobalStyle = createGlobalStyle`
     ul, li{
       list-style-type: none;
     }
+    html, body, #root {
+      max-height: 100vh;
+      max-width: 100vw;
+
+      width: 100%;
+      height: 100%;
+    }
+    *, button, input {
+      border: 0;
+      background: none;
+      font-family: "Lato";
+    }
   }
 `
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <CssBaseline/> */}
     <GlobalStyle/>
     <App />
   </React.StrictMode>

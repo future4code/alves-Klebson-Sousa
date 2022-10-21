@@ -24,10 +24,7 @@ const GlobalState = (props) => {
 
   const hideCart = () => {
     if (popuptCartState || cart.length <= 1) setPopuptCartState(false);
-  };
-
-  console.log(cart.length);
-  console.log(popuptCartState);
+  }
 
   const orderId = localStorage.getItem("orderId");
 
@@ -112,7 +109,7 @@ const GlobalState = (props) => {
 
       setConfirmedOrderPopupState({
         isActive: true,
-        summary: response.data.order,
+        summary: response.data
       });
 
       setCart([]);

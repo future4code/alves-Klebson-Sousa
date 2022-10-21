@@ -27,30 +27,11 @@ export class Product {
 
     public getQtyStock = () => {
         return this.qtyStock
-    }    
-    public setQtyStock = (newQtyStock: number) => {
-        return this.qtyStock = newQtyStock
-    }     
+    }   
+       
 }
-
-// export interface IProductsInputDTO {
-//     id: number,   
-//     name: string,
-//     price: number,
-//     qty_stock: number
-// }
 
 export interface IGetProductsOutputDTO {
     message: string,
     products: Product[]
 }
-
-// export interface ILoginInputDTO {
-//     email: string,
-//     password: string
-// }
-
-// export interface ILoginOutputDTO {
-//     message: string,
-//     token: string
-// }

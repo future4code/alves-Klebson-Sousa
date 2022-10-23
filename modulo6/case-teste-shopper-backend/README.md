@@ -1,23 +1,14 @@
 ## TESTE TÉCNICO
-Olá, candidato(a)!
-Primeiro gostaríamos de agradecer por seu interesse em fazer parte do time de desenvolvimento 
-da Shopper.com.br. 
-Abaixo vamos descrever um teste técnico onde queremos avaliar o que você conhece sobre 
-desenvolvimento de software. 
-Você vai criar um formulário simples de cadastro de pedidos de supermercado. O sistema deve ser 
-escrito em Python ou Javascript (node.js e/ou react.js).
-Quando terminar os requisitos, nos avise para que você possa nos apresentar seu código e 
-responder algumas perguntas sobre suas decisões. 
-Além da funcionalidade, avaliaremos principalmente organização e clareza no código, lembre-se 
-que um programador lê mais código do que escreve, então códigos limpos e bem estruturados 
-facilitam a vida de todos. 
-Junto desse documento você receberá o arquivo products.csv , que é uma lista com produtos 
+Esse é um case de teste da Shopper.com.br
+criado para avaliar meus conhecimentos sobre desenvolvimento de software. 
+A proposta é criar um formulário simples de cadastro de pedidos de supermercado.
+Junto desse documento recebi um arquivo products.csv , que é uma lista com produtos 
 disponíveis e seus respectivos preços e estoque com as seguintes definições:
 - id = id do produto
 - name = nome do produto
 - price = preço do produto em reais. 
 - qty_stock = quantidade em estoque
-### Abaixo listamos os requisitos que seu sistema deve atender:
+### Abaixo estão os requisitos que o sistema deve atender:
 1- O sistema deve ter um formulário de cadastro de pedidos
 
 2- O usuário deve entrar com Nome do Cliente, Data de Entrega e uma lista de compras 
@@ -42,3 +33,12 @@ produto e a quantidade em estoque.
 
 Te desejamos um ótimo trabalho e, caso tenha qualquer dúvida, fique à vontade para entrar em 
 contato conosco.
+
+### Tecnologias usadas:
+<div style="display: inline_block">
+  <img aline="center" width="100px" height="45px" alt="JAVASCRIPT" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-             badge&logo=javascript&logoColor=black" />
+  <img aline="center" width="100px" height="45px" alt="REACT" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img aline="center" width="100px" height="45px" alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img aline="center" width="100px" height="45px" alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img aline="center" width="100px" height="45px" alt="TYPESCRIPT" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+</div>

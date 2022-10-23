@@ -26,9 +26,7 @@ const OrderSummary = () => {
 
   useEffect(() => {
     if (cart.length < 1) setPopuptCartState(false);    
-  }, [cart])
-  
-  
+  }, [cart])  
 
   return (
     <ContainerSection>

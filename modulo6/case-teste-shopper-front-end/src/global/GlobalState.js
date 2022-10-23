@@ -52,7 +52,7 @@ const GlobalState = (props) => {
         setProducts(res.data.products);
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response);
       });
   };
 
@@ -90,7 +90,6 @@ const GlobalState = (props) => {
       const newCart = cart.filter((product) => {
         return product.name !== products.name;
       });
-      // if (newCart.length === 0)
       setCart(newCart);
     }
    
@@ -130,7 +129,7 @@ const GlobalState = (props) => {
           },
         });
     } catch (error) {
-      console.log(error.response.data);
+      alert(error.response.data);
     }
   };
 
@@ -141,7 +140,7 @@ const GlobalState = (props) => {
         setListsPurchase(res.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response);
       });
   };
 

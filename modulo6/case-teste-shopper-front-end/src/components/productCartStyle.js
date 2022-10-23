@@ -44,7 +44,6 @@ export const ButtonADD = styled.button`
   }
 `;
 export const ButtonOrder = styled.button`
-  /* padding: 0.35rem; */
   width: 12.813rem;
   font-size: 1.2rem;  
   margin: 0.313rem;

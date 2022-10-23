@@ -39,10 +39,8 @@ export const DivTitle = styled.div`
   padding: 0.625rem;
   margin-top: 5px;
   display: flex;
-  /* grid-template-columns: 24px 1fr 24px; */
   justify-content: space-between;
   width: 100%;
-  /* border: solid black 1px; */
   @media screen and (min-device-width: 320px) and (max-device-width: 520px) {
     padding: 0.3rem;
   }
@@ -50,10 +48,8 @@ export const DivTitle = styled.div`
 `;
 
 export const CartButton = styled.img`
-  /* border: solid black 1px; */
   width: 5vh;
   height: 5vh;
-  /* margin-top: 5px; */
   :hover {
     cursor: pointer;
     transform: scale(1.2);

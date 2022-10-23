@@ -1,6 +1,5 @@
 import { Client, IClientDB } from "../model/Client";
-import { IGetPurchasesByUserDTO, IProductsClientDB } from "../model/Order";
-import { IProductDB } from "../model/Products";
+import { IProductsClientDB } from "../model/Order";
 import { BaseDatabase } from "./BaseDatabase";
 import { ProductDatabase } from "./ProductDatabase";
 
@@ -68,8 +67,7 @@ export class ClientDatabase extends BaseDatabase {
         .connection(ClientDatabase.TABLE_ORDER_PRODUCT)
         .select()
         .sum("quantity")
-        .where({ product_name })  
-         console.log(result[0].quantity)    
+        .where({ product_name })      
         return result[0].quantity as number
     }
         

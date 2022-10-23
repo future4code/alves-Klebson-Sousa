@@ -1,7 +1,7 @@
-### Test
+### Pegar Produtos do estoque
 GET http://localhost:3003/products
 
-### Inserir dados do client
+### Criar ordem
 POST http://localhost:3003/client/register
 Content-Type: application/json
 
@@ -40,13 +40,6 @@ Content-Type: application/json
    "quantity": 1
 }
 
-### Deletar produtos
-DELETE  http://localhost:3003/client/products/delete/001
-Content-Type: application/json
-
-{    
-   "productName": "BEBIDA À BASE DE SOJA ADES LARANJA ZERO 1L"
-}
 
 
 

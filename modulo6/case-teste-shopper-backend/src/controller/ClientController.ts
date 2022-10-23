@@ -19,7 +19,6 @@ export class ClientController {
             const response = await this.clientBusiness.registerOrder(input)
             res.status(201).send(response)
         } catch (error) {
-            console.log(error)
             if(error instanceof BaseError) {
                 return res.status(error.statusCode).send({message: error.message})
             }
@@ -66,20 +65,6 @@ export class ClientController {
            
 
             const response = await this.clientBusiness.deleteProduct(productId, quantity, OrderId )
-            
-            res.status(200).send(response)
-            
-        } catch (error: any) {
-            res.status(error.statusCode || 500).send({message: error.message})
-        }
-    }
-
-    public deleteProductName = async (req: Request, res: Response) => {
-        try {
-            const productName = req.body.productName
-            const orderId = req.params.orderId           
-
-            const response = await this.clientBusiness.deleteProducts(productName, orderId )
             
             res.status(200).send(response)
             

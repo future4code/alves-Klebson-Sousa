@@ -7,7 +7,6 @@ import { ParamsError } from "../errors/ParamsError";
 import { RequestError } from "../errors/RequestError";
 import { Client, IMessageOutputDTO, ISignupInputDTO } from "../model/Client";
 import { ICreateOrderOutputDTO, IOrderInputDTO, IProductsClientDB, IPurchasesByUserDTO } from "../model/Order";
-import { Product } from "../model/Products";
 import { compareDates } from "../services/formatDate";
 import { IdGenerator } from "../services/IdGenerator";
 
@@ -225,35 +224,5 @@ export class ClientBusiness {
    return {message: "Produto deletado"}
     
   };
-
-  public deleteProducts = async (productName: string, orderId: string) => {    
-
-   const IdOrder = await this.clientDatabase.findClientById(orderId)
-
-   if (!IdOrder) {
-    throw new NotFoundError("Lista de compras não encontrada")
-
-   }
-
-   const product = await this.clientDatabase.findProductByName(productName)
-
-   if(!product) {
-    throw new NotFoundError("Produto não não existe na sua lista")
-   }
-
-   const countQuantity = await this.clientDatabase.selectQuantity(productName)   
-   
-   const stock = await this.productDatabase.findByProductName(product.product_name)      
-     
-      
-      if (stock) {
-        const newqtyStock = stock.qty_stock + product.quantity   
-        
-        await this.productDatabase.updateProductStock(newqtyStock, stock.id)
-      }
-
-      
-   return {message: "Produto deletado"}
-    
-  };
+ 
 }

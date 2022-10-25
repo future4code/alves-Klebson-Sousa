@@ -51,14 +51,17 @@ export class Order {
 
   public setOrderItems = (newOrderItems: IOrderItem[]) => {
     this.orderItems = newOrderItems;
+    this.total = this.calculateTotal()
   };
 
   public addOrderItem = (newOrderItem: IOrderItem) => {
     this.orderItems.push(newOrderItem);
+    this.total = this.calculateTotal()
   };
 
   public removeOrdemItem = (idToremove: string) => {
-    this.orderItems.filter((orderItem) => orderItem.id !== idToremove);
+    this.orderItems = this.orderItems.filter((orderItem) => orderItem.id !== idToremove);
+    this.total = this.calculateTotal()
   };
 
 public getTotal = () => {

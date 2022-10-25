@@ -1,44 +1,84 @@
-export interface IOrdersDB {
-    id: string
+export interface IOrderDB {
+  id: string;
 }
-export interface IOrdersDB {
-    id : string,
-    pizza_name: string,
-    quantity: number,
-    order_id: string
+export interface IOrderItemDB {
+  id: string;
+  pizza_name: string;
+  quantity: number;
+  order_id: string;
 }
 
 export interface IOrderItem {
-    id : string,
-    pizza_name: string,
-    quantity: number,
-    order_id: string
+  id: string;
+  pizza_name: string;
+  quantity: number;
+  price: number;
+  order_id: string;
+}
+
+export interface IOrderResume {
+  id: string;
+    pizzas: {
+      name: string;
+      price: number;
+      quantity: number;
+    }[];
+    total: number;
 }
 
 export class Order {
-    constructor(
-        private id: string,
-        private orderItems: IOrderItem[]
-    ) {}
+  private total: number = 0
+  constructor(
+    private id: string, 
+    private orderItems: IOrderItem[],
+    ){
+      this.total = this.calculateTotal()
+    } 
 
-    public getId = () => {
-        return this.id
-    }
-    
-    public getOrderItems = () => {
-        return this.orderItems
-    }
+    private calculateTotal = () => {
+    const total = this.orderItems.reduce(
+      (acc, pizza) => acc + (pizza.price * pizza.quantity), 0)
+      return total
+  };
 
-    public setOrderItems = (newOrderItems: IOrderItem[]) => {
-        this.orderItems = newOrderItems
-    }
+  public getId = () => {
+    return this.id;
+  };
 
-    public addOrderItem = (newOrderItem: IOrderItem) => {
-        this.orderItems.push(newOrderItem)
-    }
+  public getOrderItems = () => {
+    return this.orderItems;
+  };
 
-    public removeOrdemItem = (idToremove: string) => {
-        this.orderItems.filter(orderItem => orderItem.id !== idToremove)
-    }
+  public setOrderItems = (newOrderItems: IOrderItem[]) => {
+    this.orderItems = newOrderItems;
+  };
+
+  public addOrderItem = (newOrderItem: IOrderItem) => {
+    this.orderItems.push(newOrderItem);
+  };
+
+  public removeOrdemItem = (idToremove: string) => {
+    this.orderItems.filter((orderItem) => orderItem.id !== idToremove);
+  };
+
+public getTotal = () => {
+  return this.total
+}
+  
 }
 
+export interface ICreateOrderInputDTO {
+  pizzas: {
+    name: string;
+    quantity: number;
+  }[];
+}
+
+export interface ICreateOrderOutputDTO {
+  message: string;
+  order: IOrderResume
+}
+
+export interface IGetOrdersOutputDTO {
+  orders: IOrderResume[]
+}

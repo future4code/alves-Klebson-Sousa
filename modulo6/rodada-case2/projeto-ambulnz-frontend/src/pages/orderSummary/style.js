@@ -16,6 +16,14 @@ export const ContainerSection = styled.section`
     display: flex;
     flex-direction: column;
 
+    @media (min-width: 280px) and (max-width: 420px) {
+        width: 90%;
+    }
+
+    @media (min-width: 620px) and (max-width: 980px) {
+        height: 30%;
+    }
+
     h1 {
         font-size: 1.5rem;
         text-align: center;

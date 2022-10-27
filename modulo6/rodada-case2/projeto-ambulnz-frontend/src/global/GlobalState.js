@@ -88,7 +88,7 @@ const GlobalState = ({ children }) => {
     const res = await axios.post(`${BASE_URL}/orders`, body)
     setOrderSuccessPopupState({
       isActive: true,
-    summary: res.data.order
+    summary: res.data
     })
     setCart([])
 
@@ -96,6 +96,24 @@ const GlobalState = ({ children }) => {
       alert(error.response.data.message)
     }    
    
+  }  
+
+  const priceFormated = (price) => {
+    const formated = price.toLocaleString(
+      "pt-br", { style: "currency", currency: "USD" }
+      );
+      return formated
+  };
+
+  const closePopup = () => {
+    setOrderSuccessPopupState({
+      isActive: false,
+      summary: {
+        id: null,
+        pizzas: null,
+        total: null
+      }
+    })
   }
 
   const data = {
@@ -106,7 +124,9 @@ const GlobalState = ({ children }) => {
     calculateTotal,
     total,
     confirmOrder,
-    orderSuccessPopupState
+    orderSuccessPopupState,
+    closePopup,
+    priceFormated
   };
 
   return (

@@ -7,7 +7,7 @@ import { goToPizzasMenuPage } from "../../routes/coordinator";
 import { ContainerSection, MainContainer } from "./style";
 
 function OrderSummary() {
-  const { cart, total, confirmOrder, orderSuccessPopupState } = useContext(GlobalStateContext);
+  const { cart, total, confirmOrder, orderSuccessPopupState, priceFormated } = useContext(GlobalStateContext);
 
   const navigate = useNavigate();
 
@@ -21,10 +21,7 @@ function OrderSummary() {
         })}
         <h2>
           Total:{" "}
-          {total.toLocaleString("pt-br", {
-            style: "currency",
-            currency: "USD",
-          })}
+          {priceFormated(total)}
         </h2>
         <button onClick={confirmOrder}>Confirmar pedido</button>
       </ContainerSection>

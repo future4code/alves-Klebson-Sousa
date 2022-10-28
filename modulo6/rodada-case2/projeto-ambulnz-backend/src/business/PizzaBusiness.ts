@@ -21,6 +21,7 @@ export class PizzaBusiness {
             const pizza = new Pizza(
                     pizzaDB.name,
                     pizzaDB.price,
+                    pizzaDB.image_url,
                     []
                 )
             const ingredients = await this.pizzaDatabase.getIngredients(pizzaDB.name)
@@ -36,6 +37,7 @@ export class PizzaBusiness {
             pizzas: pizzas.map((pizza) => ({
                 name: pizza.getName(),
                 price: pizza.getprice(),
+                imageUrl: pizza.getImageUrl(),
                 ingredients: pizza.getIngredients()
             }))
         }
@@ -57,6 +59,7 @@ export class PizzaBusiness {
                 const pizza = {
                     name: pizzaDB.name,
                     price: pizzaDB.price,
+                    imageUrl: pizzaDB.image_url,
                     ingredients: [pizzaDB.ingredient_name]
                 }
 

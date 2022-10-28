@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS Amb_Pizzas;
 
 CREATE TABLE IF NOT EXISTS Amb_Pizzas (
 	name VARCHAR(255) PRIMARY KEY,
-    price DECIMAL(3,2) NOT NULL
+    price DECIMAL(3,2) NOT NULL,
+    image_url VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Amb_Ingredients (

@@ -37,7 +37,8 @@ class Migrations extends BaseDatabase {
     
     CREATE TABLE IF NOT EXISTS ${PizzaDatabase.TABLE_PIZZAS} (
         name VARCHAR(255) PRIMARY KEY,
-        price DECIMAL(3,2) NOT NULL
+        price DECIMAL(3,2) NOT NULL,
+        image_url VARCHAR(255) NOT NULL
     );
     
     CREATE TABLE IF NOT EXISTS ${PizzaDatabase.TABLE_INGREDIENTS} (

@@ -2,7 +2,8 @@
 
 export interface IPizzaDB {
     name: string,
-    price: number
+    price: number,
+    image_url: string
 }
 
 export interface IIngredientsDB {
@@ -18,6 +19,7 @@ export class Pizza {
     constructor(
         private name: string,
         private price: number,
+        private imageUrl: string,
         private ingredients: string[]
     ) {}
 
@@ -27,6 +29,10 @@ export class Pizza {
     
     public getprice = () => {
         return this.price
+    }
+    
+    public getImageUrl = () => {
+        return this.imageUrl
     }
 
     public getIngredients = () => {
@@ -39,6 +45,10 @@ export class Pizza {
 
     public setPrice = (newPrice: number) => {
         this.price = newPrice
+    }
+
+    public setImageUrl = (newImageUrl: string) => {
+        this.imageUrl = newImageUrl
     }
 
     public setIngredients = (newIngredients: string[]) => {
@@ -59,6 +69,7 @@ export interface IGetPizzasOutputDTO {
     pizzas: {
         name: string,
         price: number,
+        imageUrl: string,
         ingredients: string[]
     }[]
 }

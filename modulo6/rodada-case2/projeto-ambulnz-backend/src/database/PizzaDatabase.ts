@@ -9,7 +9,8 @@ export class PizzaDatabase extends BaseDatabase {
     public toPizzaDBModel = (pizza: Pizza): IPizzaDB => {
         return {
             name: pizza.getName(),
-            price: pizza.getprice()
+            price: pizza.getprice(),
+            image_url: pizza.getImageUrl()
         }
     }
 

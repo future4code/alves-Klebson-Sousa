@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.main`
-    border: solid green 1px;
     width: 100vw;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     justify-content: center;
+    /* overflow: auto; */
 `
 export const ContainerSection = styled.section`
     border: solid black 1px;
     margin-top: 2.5rem;
     width: 80%;
     padding: 3% 4%;
-    height: 40%;
+    /* height: auto; */
     display: flex;
     flex-direction: column;
 

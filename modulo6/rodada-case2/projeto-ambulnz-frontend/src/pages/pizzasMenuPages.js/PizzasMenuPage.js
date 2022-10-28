@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 import PizzaCard from "../../components/PizzaCard";
 import { GlobalStateContext } from "../../global/GlobalContex";
 import { goToOrderSummaryCard } from "../../routes/coordinator";
@@ -12,6 +13,7 @@ function PizzasMenuPage() {
 
   return (
     <ContainerSection>
+      <Header/>
       <button onClick={() => goToOrderSummaryCard(navigate)}>Cart</button>
       <ul>
         {pizzas.map((pizza) => {

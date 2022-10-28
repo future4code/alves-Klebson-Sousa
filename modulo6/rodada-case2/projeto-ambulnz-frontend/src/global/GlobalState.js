@@ -15,6 +15,7 @@ const GlobalState = ({ children }) => {
       total: null
     }
   })
+
   useEffect(() => {
     axios
       .get(`${BASE_URL}/pizzas`)
@@ -45,6 +46,7 @@ const GlobalState = ({ children }) => {
       const newPizza = {
         name: pizzaToAdd.name,
         price: pizzaToAdd.price,
+        imageUrl: pizzaToAdd.imageUrl,
         quantity: 1,
       };
 

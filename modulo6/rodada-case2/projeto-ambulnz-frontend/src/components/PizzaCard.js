@@ -8,6 +8,7 @@ function PizzaCard({ pizza }) {
   return (
     <Container>
       <h3>{pizza.name}</h3>
+      <img src={pizza.imageUrl} alt="Imagen de pizza"/>
       <p className="card-price">{priceFormated(pizza.price)}</p>
       <p>
         {pizza.ingredients.map((item) => {

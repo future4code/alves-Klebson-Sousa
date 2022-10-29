@@ -1,39 +1,83 @@
 import styled from "styled-components";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import restaurant from "./../../assets/restaurant.jpg";
+
+export const GoTOBack = styled(ArrowBackIosNewIcon)`
+  cursor: pointer;
+  :hover {
+    border-radius: 50%;
+    color: #f5f5fb;
+    background-color: #f13c3c;
+  }
+`;
 
 export const MainContainer = styled.main`
-    width: 100vw;
-    /* height: 100vh; */
-    display: flex;
-    justify-content: center;
-    /* overflow: auto; */
-`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  background-image: url(${restaurant});
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
 export const ContainerSection = styled.section`
-    border: solid black 1px;
-    margin-top: 2.5rem;
-    width: 80%;
-    padding: 3% 4%;
-    /* height: auto; */
-    display: flex;
-    flex-direction: column;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  max-width: 80%;
+  max-height: 80vh;
+  padding: 3% 4%;
+  /* overflow: auto; */
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  background-color: rgba(255, 250, 250, 0.37);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
 
-    @media (min-width: 280px) and (max-width: 420px) {
-        width: 90%;
-    }
+  div {
+    overflow: auto;
+    max-height: 500px;
 
-    @media (min-width: 620px) and (max-width: 980px) {
-        height: 30%;
+    ::-webkit-scrollbar {
+      background-color: transparent;
     }
+  }
 
-    h1 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
+  @media (min-width: 280px) and (max-width: 420px) {
+    width: 90%;
+  }
 
-    h2 {
-        text-align: end;
-    }
+  @media (min-width: 620px) and (max-width: 980px) {
+    height: 30%;
+  }
 
-    button {
-        margin-top: 2%;
-    }
-`
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    text-align: end;
+    margin-top: 10px;
+  }
+`;
+
+export const ButtonConfirm = styled.button`
+  margin-top: 10px;
+  /* padding: 05px; */
+  width: 12.5rem;
+  font-size: 1.5rem;
+  color: blue;
+  background-color: transparent;
+  border: none;
+  border-bottom: blue solid 2px;
+  cursor: pointer;
+  :hover {
+    font-weight: bolder;
+    border-bottom: blue solid 4px;
+  }
+`;

@@ -4,28 +4,35 @@ import OrderItemCard from "../../components/OrderItemCard";
 import OrderSuccessPopup from "../../components/OrderSuccessPopup";
 import { GlobalStateContext } from "../../global/GlobalContex";
 import { goToPizzasMenuPage } from "../../routes/coordinator";
-import { ContainerSection, MainContainer } from "./style";
+import {
+  ButtonConfirm,
+  ContainerSection,
+  GoTOBack,
+  MainContainer,
+  Posterimg,
+} from "./style";
+import restaurant from "./../../assets/restaurant.jpg";
 
 function OrderSummary() {
-  const { cart, total, confirmOrder, orderSuccessPopupState, priceFormated } = useContext(GlobalStateContext);
+  const { cart, total, confirmOrder, orderSuccessPopupState, priceFormated } =
+    useContext(GlobalStateContext);
 
   const navigate = useNavigate();
 
   return (
     <MainContainer>
       <ContainerSection>
-        <button onClick={() => goToPizzasMenuPage(navigate)}>retornar</button>
+        <GoTOBack onClick={() => goToPizzasMenuPage(navigate)} />
         <h1>Resumo do Pedido</h1>
-        {cart.map((pizza) => {
-          return <OrderItemCard key={pizza.name} pizza={pizza} />;
-        })}
-        <h2>
-          Total:{" "}
-          {priceFormated(total)}
-        </h2>
-        <button onClick={confirmOrder}>Confirmar pedido</button>
+        <div>
+          {cart.map((pizza) => {
+            return <OrderItemCard key={pizza.name} pizza={pizza} />;
+          })}
+        </div>
+        <h2>Total: {priceFormated(total)}</h2>
+        <ButtonConfirm onClick={confirmOrder}>Confirmar pedido</ButtonConfirm>
       </ContainerSection>
-          {orderSuccessPopupState.isActive && <OrderSuccessPopup/>}
+      {orderSuccessPopupState.isActive && <OrderSuccessPopup />}
     </MainContainer>
   );
 }

@@ -14,9 +14,7 @@ export const ContainerLi = styled.li`
   }
 
   button {
-    margin-bottom: 10px;
-    /* width: auto;
-    height: auto; */
+    margin-bottom: 0.625rem;
     border: none;
     font-size: 2rem;
     color: blue;
@@ -24,6 +22,11 @@ export const ContainerLi = styled.li`
     cursor: pointer;
     :hover {
       font-weight: bolder;
+    }
+
+    :active {
+      font-size: 2.5rem;
+      margin-bottom: 0.125rem;
     }
   }
 `;
@@ -35,10 +38,8 @@ export const Section1 = styled.section`
 `;
 export const Section2 = styled.section`
   display: flex;
+  align-items: center;
   width: 20%;
-  /* align-items: center;
-  justify-items: center; */
-  /* border: solid black 1px; */
 
   div {
     display: flex;

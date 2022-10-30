@@ -21,7 +21,7 @@ function OrderSummary() {
 
   return (
     <MainContainer>
-      <ContainerSection>
+      {cart ? <ContainerSection>
         <GoTOBack onClick={() => goToPizzasMenuPage(navigate)} />
         <h1>Resumo do Pedido</h1>
         <div>
@@ -31,7 +31,10 @@ function OrderSummary() {
         </div>
         <h2>Total: {priceFormated(total)}</h2>
         <ButtonConfirm onClick={confirmOrder}>Confirmar pedido</ButtonConfirm>
-      </ContainerSection>
+      </ContainerSection> : 
+      <div>
+        <h2>Carregando...</h2>
+        </div>}
       {orderSuccessPopupState.isActive && <OrderSuccessPopup />}
     </MainContainer>
   );

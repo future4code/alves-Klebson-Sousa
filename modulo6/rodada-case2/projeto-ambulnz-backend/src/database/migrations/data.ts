@@ -10,49 +10,50 @@ export const pizzasSeed: IPizzaDB[] = [
   {
     "name": "Margherita",
     "price": 28.9,
-    "image_url": "https://i.postimg.cc/pXSNmHS0/marguerita.jpg"
+    "image_url": "https://i.postimg.cc/52gr541C/marguerita.jpg"
   },
   {
     "name": "Bufala",
     "price": 30.9,
-    "image_url": "https://i.postimg.cc/FHKjBtsQ/pizza-Bufala.jpg"
+    "image_url": "https://i.postimg.cc/HnCxw443/pizza-Bufala2.jpg"
   },
   {
     "name": "Romana",
     "price": 25.9,
-    "image_url": "https://i.postimg.cc/T2qg22K6/pizza-Romana.jpg"
+    "image_url": "https://i.postimg.cc/SK2NHtgD/Romana.jpg"
   },
   {
     "name": "Diavola",
     "price": 23.8,
-    "image_url": "https://i.postimg.cc/LXv97W8r/pizza-Diavola.jpg"
+    "image_url": "https://i.postimg.cc/mg1v4fGz/pizza-Diavola.jpg"
   },
   {
     "name": "4 queijos",
     "price": 22.5,
-    "image_url": "https://i.postimg.cc/44SZ9V7b/pizza4-Queijos.jpg"
+    "image_url": "https://i.postimg.cc/kGwS1p5f/pizza4-Queijos2.jpg"
   },
   {
     "name": "Bianca",
     "price": 22.2,
-    "image_url": "https://i.postimg.cc/VkPxqRYM/pizza-Bianca.jpg"
+    "image_url": "https://i.postimg.cc/CLztCT5P/pizza-Bianca2.jpg"
   },
   {
     "name": "Portuguesa",
     "price": 25.8,
-    "image_url": "https://i.postimg.cc/rwJqzbSz/pizza-Portuguesa.jpg"
+    "image_url": "https://i.postimg.cc/L8Pb7tzj/pizza-Portuguesa.jpg"
   },
   {
     "name": "Calabreza",
     "price": 25.8,
-    "image_url": "https://i.postimg.cc/v8WkQn7Z/pizza-Calabreza.jpg"
+    "image_url": "https://i.postimg.cc/ydLQ9vHC/pizza-Calabreza2.jpg"
   },
   {
     "name": "Alla Moda",
     "price": 23.5,
-    "image_url": "https://i.postimg.cc/hGDPrgS9/pizza-Alla-Moda.jpg"
+    "image_url": "https://i.postimg.cc/wxb4jf2h/pizza-Alla-Moda.jpg"
   }
 ]
+
 
 export const ingredientsSeed: IIngredientsDB[] = [
   {
@@ -74,7 +75,7 @@ export const ingredientsSeed: IIngredientsDB[] = [
     name: "oil"
   },
   {
-    name: "spicy salami"
+    name: "spicy-salami"
   },
   {
     name: "ovo cozido"
@@ -93,6 +94,12 @@ export const ingredientsSeed: IIngredientsDB[] = [
   },
   {
     name: "salaminho Italiano"
+  },
+  {
+    name: "presunto"
+  },
+  {
+    name: "provolone"
   }
 ];
 
@@ -155,7 +162,7 @@ export const pizzasIngredientsSeed: IPizzasIngredientsDB[] = [
   },
   {
     pizza_name: "Diavola",
-    ingredient_name: "spicy salami"
+    ingredient_name: "spicy-salami"
   },
   {
     pizza_name: "Bianca",

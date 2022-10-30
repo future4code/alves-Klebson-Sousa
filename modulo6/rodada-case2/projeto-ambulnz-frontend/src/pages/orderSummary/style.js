@@ -8,6 +8,13 @@ export const GoTOBack = styled(ArrowBackIosNewIcon)`
     border-radius: 50%;
     color: #f5f5fb;
     background-color: #f13c3c;
+    box-shadow: 0 5px 0;
+  }
+
+  :active {
+    position: relative;
+    top: 5px;
+    box-shadow: none;
   }
 `;
 
@@ -67,17 +74,24 @@ export const ContainerSection = styled.section`
 `;
 
 export const ButtonConfirm = styled.button`
-  margin-top: 10px;
+  margin-top: 0.625rem;
   /* padding: 05px; */
   width: 12.5rem;
   font-size: 1.5rem;
   color: blue;
   background-color: transparent;
   border: none;
-  border-bottom: blue solid 2px;
+  border-bottom: blue solid 0.125rem;
   cursor: pointer;
+  
   :hover {
     font-weight: bolder;
-    border-bottom: blue solid 4px;
+    border-bottom: blue solid 0.250rem;
+    margin-top: 0.5rem;
+  }
+
+  :active {
+    position: relative;
+    top: 5px;
   }
 `;

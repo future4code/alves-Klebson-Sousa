@@ -1,11 +1,20 @@
-import fornalias from "./../assets/fornalias.jpg"
-import { ContainerHeader } from "./headerStyle"
+import { ButtonCart, ContainerHeader, ImgLogo, LoginButton, SignupButton } from "./headerStyle"
+import { useNavigate } from "react-router-dom";
+import { goToOrderSummaryCard } from "../routes/coordinator";
+import pizzaLogo from "./../assets/pizzaLogo.png"
+import Cart from "./../assets/Cart.png"
 
 function Header() {
-    return(
+
+  const navigate = useNavigate()
+
+  return(
         <ContainerHeader>
-            <img src={fornalias} alt="Fornália de pizza"/>
+            <ImgLogo src={pizzaLogo} alt="Fornália de pizza"/>
             <h1>Pizza Al Forno</h1>
+            <SignupButton>Signup</SignupButton>
+            <LoginButton>Login</LoginButton>
+            <ButtonCart onClick={() => goToOrderSummaryCard(navigate)} src={Cart} title="carrinho"/>
         </ContainerHeader>
     )
 }

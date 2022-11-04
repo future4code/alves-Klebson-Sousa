@@ -83,3 +83,8 @@ export interface IInsertPizzaInputDTO {
     }[],
     token: string
 }
+
+export interface IDeletePizzaInputDTO {
+    token: string,
+    name: string
+}

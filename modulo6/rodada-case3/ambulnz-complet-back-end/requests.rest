@@ -6,9 +6,9 @@ Post http://localhost:3003/api/user/signup
 Content-Type: application/json
 
 {
-  "name": "Astrodev",
-  "email": "astrodev@gmail.com",
-  "password": "123456"
+  "name": "Fulano",
+  "email": "fulano@gmail.com",
+  "password": "qwerty00"
 }
 
 ###
@@ -18,24 +18,43 @@ POST http://localhost:3003/api/user/login
 Content-Type: application/json
 
 {
-    "email": "astrodev@gmail.com",
-    "password": "123456"
+  "email": "astrodev@gmail.com",
+  "password": "123456"
 }
 
-# # login do usuário
-# # @name login
-# POST http://localhost:3003/api/user/login
-# Content-Type: application/json
+### Inserir pizzas
+@token = {{login.response.body.token}}
+POST http://localhost:3003/api/pizzas/insert
+Content-Type: application/json
+Authorization: {{token}}
 
-# {
-#     "email": "astrodev@gmail.com",
-#     "password": "123456"
-# }
+{
+  "name": "Margherita",
+  "price": 28.9,
+  "imageUrl": "https://i.postimg.cc/52gr541C/marguerita.jpg",
+  "ingredients":[
+    {
+      "name": "oregano"
+    },
+    {
+      "name": "tomato"
+    },
+    {
+      "name": "mozzarella"
+    }
+  ]
+}
 
+### Deletar pizza
+DELETE  http://localhost:3003/api/pizzas/delete
+Content-Type: application/json
+Authorization: {{token}}
 
+{
+  "name": "Margherita"
+}
 
 ### Get Pizzas
-@token = {{login.response.body.token}}
 GET http://localhost:3003/api/pizzas
 
 ### Get Pizzas

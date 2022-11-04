@@ -20,3 +20,4 @@ const pizzaController = new PizzaController(
 pizzaRouter.get("/", pizzaController.getPizzas)
 pizzaRouter.get("/v2", pizzaController.getPizzasV2)
 pizzaRouter.post("/insert", pizzaController.insertPizza)
+pizzaRouter.delete("/delete", pizzaController.deletePizza)

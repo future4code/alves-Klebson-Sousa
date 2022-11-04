@@ -11,7 +11,6 @@ import {
   MainContainer,
   Posterimg,
 } from "./style";
-import restaurant from "./../../assets/restaurant.jpg";
 
 function OrderSummary() {
   const { cart, total, confirmOrder, orderSuccessPopupState, priceFormated } =

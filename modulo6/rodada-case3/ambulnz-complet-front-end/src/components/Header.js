@@ -1,10 +1,10 @@
 import { ButtonCart, ContainerHeader, ImgLogo, LoginButton, SignupButton } from "./headerStyle"
 import { useNavigate } from "react-router-dom";
-import { goToOrderSummaryCard } from "../routes/coordinator";
+import { goToLogin, goToOrderSummaryCard } from "../routes/coordinator";
 import pizzaLogo from "./../assets/pizzaLogo.png"
 import Cart from "./../assets/Cart.png"
 
-function Header() {
+function Header({back}) {
 
   const navigate = useNavigate()
 
@@ -12,8 +12,8 @@ function Header() {
         <ContainerHeader>
             <ImgLogo src={pizzaLogo} alt="Fornália de pizza"/>
             <h1>Pizza Al Forno</h1>
-            <SignupButton>Signup</SignupButton>
-            <LoginButton>Login</LoginButton>
+            <SignupButton >Signup</SignupButton>
+            {back && <LoginButton onClick={() => goToLogin(navigate)}>Login</LoginButton>}
             <ButtonCart onClick={() => goToOrderSummaryCard(navigate)} src={Cart} title="carrinho"/>
         </ContainerHeader>
     )

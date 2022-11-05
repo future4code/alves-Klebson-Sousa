@@ -8,7 +8,6 @@ function HomePage() {
         <div>
             <Header back/>
             <h1>Pizzas para todos os gostos <br/>De vários sabores</h1>
-            <button onClick={() => goToPizzasMenuPage(navigate)}>entrar</button>
 
         </div>
     )

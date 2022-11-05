@@ -46,9 +46,9 @@ export const ButtonStyled = styled(ButtonBase)`
     :hover {
       border-radius: 0.938rem;
       color: white;
-      box-shadow: rgb(208, 4, 4) 0px 0px 37px 10px;
-      -webkit-box-shadow: rgb(208, 4, 4) 0px 0px 37px 10px;
-      -moz-box-shadow: rgb(208, 4, 4) 0px 0px 37px 10px;
+      box-shadow: rgb(208, 4, 4) 0px 0px 20px 0px;
+      -webkit-box-shadow: rgb(208, 4, 4) 0px 0px 20px 0px;
+      -moz-box-shadow: rgb(208, 4, 4) 0px 0px 20px 0px;
     }
 
     :active {

@@ -20,7 +20,7 @@ export const LoginButton = styled.button`
   width: 6.25rem;
   height: 3.125rem;
   padding: 0.625rem 0.313rem;
-  margin: auto 0;
+  margin-right: 1.25rem;
   font-size: 1.5rem;
   text-decoration: underline;
   border: none;

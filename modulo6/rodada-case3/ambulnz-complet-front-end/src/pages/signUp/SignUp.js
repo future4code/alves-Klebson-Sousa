@@ -13,6 +13,9 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { BASE_URL } from "../../constants/baseUrl";
+import { goToAdminPage, goToSignUpAddress } from "../../routes/coordinator";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function SignUp() {
   const { form, onChangeForm, clean } = useForm({
@@ -26,14 +29,7 @@ function SignUp() {
   const [showCheckPassword, setShowCheckPassword] = useState(false);
   const [checKErrorPassword, setCheckErrorPassword] = useState(false);
 
-  const cpfFormat = (value) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1");
-  };
+  const navigate = useNavigate()
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -55,11 +51,31 @@ function SignUp() {
   const createUser = async () => {
     await axios
       .post(`${BASE_URL}/user/signup`, form)
-      .then((response) => {
-        console.log(response.data);
+      .then((res) => {
+        localStorage.setItem("token", res.data.token)
+        if(res.data.user.role === "NORMAL"){
+          goToSignUpAddress(navigate)
+          Swal.fire({
+            title: `Olá ${res.data.user.name}! Cadastre um endereço de entrega.`,
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+        } else goToAdminPage(navigate)
       })
       .catch((error) => {
-        console.log(error.response);
+        Swal.fire({
+          title: error.response.data.message,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
       });
   };
   return (
@@ -69,7 +85,7 @@ function SignUp() {
         <Form onSubmit={onSubmitForm}>
           <ShowInput
             id="outlined-basic"
-            label={"Nome"}
+            label={"Nome e Sobrenome"}
             name="name"
             type={"text"}
             placeholder={"Digite seu nome"}

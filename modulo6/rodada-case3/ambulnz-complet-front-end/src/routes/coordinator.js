@@ -13,6 +13,9 @@ export const goToBack = (navigate) => {
 export const goToSignUp = (navigate) => {
     navigate('/api/signUp')
 }
+export const goToSignUpAddress = (navigate) => {
+    navigate('/api/signUpAddress')
+}
 export const goToLogin = (navigate) => {
     navigate('/api/login')
 }

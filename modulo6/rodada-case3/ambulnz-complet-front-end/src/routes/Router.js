@@ -5,6 +5,7 @@ import PizzasMenuPage from "../pages/pizzasMenuPages.js/PizzasMenuPage"
 import Login from "../pages/login/Login"
 import SignUp from "../pages/signUp/SignUp"
 import AdminPage from "../pages/adminPage/AdminPage"
+import SignUpAddress from "../pages/signUpAddress/SignUpAddress"
 
 
 const Router = () => {
@@ -14,6 +15,7 @@ const Router = () => {
                 <Route index element={<HomePage/>}/>
                 <Route path='/api/login' element={<Login/>}/>
                 <Route path='/api/signUp' element={<SignUp/>}/>
+                <Route path='/api/signUpAddress' element={<SignUpAddress/>}/>
                 <Route path='/api/admin' element={<AdminPage/>}/>
                 <Route path='/api/menu' element={<PizzasMenuPage/>}/>
                 <Route path='/api/orders' element={<OrderSummary/>}/>

@@ -14,6 +14,7 @@ export const ContainerHeader = styled.header`
 
 export const ImgLogo = styled.img`
   width: 7.5rem;
+  margin-left: 0.3125rem;
 `;
 export const LoginButton = styled.button`
   background-color: transparent;
@@ -40,7 +41,7 @@ export const LoginButton = styled.button`
 `;
 export const SignupButton = styled.button`
   background-color: transparent;
-  width: 6.25rem;
+  width: 8rem;
   height: 3.125rem;
   padding: 0.625rem 0.313rem;
   margin: auto 10px auto;

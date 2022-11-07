@@ -19,4 +19,5 @@ const userController = new UserController(
 )
 
 userRouter.post("/signup", userController.signup)
+userRouter.put("/address", userController.address)
 userRouter.post("/login", userController.login)

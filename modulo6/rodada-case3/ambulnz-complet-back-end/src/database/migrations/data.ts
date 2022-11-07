@@ -1,3 +1,4 @@
+import { IAddressDB } from "../../models/Address";
 import {
   IIngredientsDB,
   IPizzaDB,
@@ -21,6 +22,18 @@ export const users: IUserDB[] = [
       password: "$2a$12$PULtVNlAll87D6E8pR/0HO9vbzVDPaUMA89rc5cNmYoAAepbwmkcO", // qwerty00
       role: USER_ROLES.NORMAL
   }
+]
+
+export const address: IAddressDB[] = [
+  {
+    "user_id": "102",
+    "street": "R. Afonso Braz",
+    "number": "177",
+    "neighbourhood": "Vila N. Conceição",
+    "city": "São Paulo",
+    "state": "SP",
+    "complement": "72"
+}
 ]
 
 export const pizzasSeed: IPizzaDB[] = [

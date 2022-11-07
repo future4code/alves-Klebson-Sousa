@@ -2,13 +2,28 @@
 GET http://localhost:3003/api/ping
 
 ### Criar usuário
+# @name signup
 Post http://localhost:3003/api/user/signup
 Content-Type: application/json
 
 {
-  "name": "Fulano",
-  "email": "fulano@gmail.com",
-  "password": "qwerty00"
+  "name": "Cicrano",
+  "email": "cicrano@gmail.com",
+  "password": "123456"
+}
+### Cadastrar endereço
+@token1 = {{signup.response.body.token}}
+Put http://localhost:3003/api/user/address
+Content-Type: application/json
+Authorization: {{token1}}
+
+{
+    "street": "R. Afonso Braz",
+    "number": "177",
+    "neighbourhood": "Vila N. Conceição",
+    "city": "São Paulo",
+    "state": "SP",
+    "complement": "72"
 }
 
 ###
@@ -18,7 +33,7 @@ POST http://localhost:3003/api/user/login
 Content-Type: application/json
 
 {
-  "email": "astrodev@gmail.com",
+  "email": "cicrano@gmail.com",
   "password": "123456"
 }
 

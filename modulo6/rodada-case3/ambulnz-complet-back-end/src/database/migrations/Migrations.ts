@@ -2,7 +2,7 @@ import { BaseDatabase } from "../BaseDatabase";
 import { OrderDatabase } from "../OrderDatabase";
 import { PizzaDatabase } from "../PizzaDatabase";
 import { UserDatabase } from "../UserDatabase";
-import { ingredientsSeed, pizzasIngredientsSeed, pizzasSeed, users } from "./data";
+import { address, ingredientsSeed, pizzasIngredientsSeed, pizzasSeed, users } from "./data";
 
 class Migrations extends BaseDatabase {
   execute = async () => {
@@ -32,6 +32,7 @@ class Migrations extends BaseDatabase {
     await BaseDatabase.connection.raw(`
     DROP TABLE IF EXISTS ${OrderDatabase.TABLE_ORDER_ITEMS};
     DROP TABLE IF EXISTS ${OrderDatabase.TABLE_ORDERS};
+    DROP TABLE IF EXISTS ${UserDatabase.TABLE_ADDRESS};
     DROP TABLE IF EXISTS ${UserDatabase.TABLE_USERS};
     DROP TABLE IF EXISTS ${PizzaDatabase.TABLE_PIZZAS_INGREDIENTS};
     DROP TABLE IF EXISTS ${PizzaDatabase.TABLE_INGREDIENTS};
@@ -43,6 +44,17 @@ class Migrations extends BaseDatabase {
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         role ENUM("NORMAL", "ADMIN") DEFAULT "NORMAL" NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS ${UserDatabase.TABLE_ADDRESS} (
+      user_id VARCHAR(255) PRIMARY KEY,
+        street VARCHAR(255) NOT NULL,
+        number VARCHAR(255) NOT NULL,
+        neighbourhood VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        state VARCHAR(255) NOT NULL,
+        complement VARCHAR(255),
+        FOREIGN KEY (user_id) REFERENCES Amb2_User (id)
     );
     
     CREATE TABLE IF NOT EXISTS ${PizzaDatabase.TABLE_PIZZAS} (
@@ -80,6 +92,9 @@ class Migrations extends BaseDatabase {
   insertData = async () => {
     await BaseDatabase.connection(UserDatabase.TABLE_USERS).insert(
       users
+    );
+    await BaseDatabase.connection(UserDatabase.TABLE_ADDRESS).insert(
+      address
     );
     await BaseDatabase.connection(PizzaDatabase.TABLE_PIZZAS).insert(
       pizzasSeed

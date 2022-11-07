@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS Amb2_Order_Items;
 DROP TABLE IF EXISTS Amb2_Orders;
+DROP TABLE IF EXISTS Amb2_Address;
 DROP TABLE IF EXISTS Amb2_User;
 DROP TABLE IF EXISTS Amb2_Pizzas_Ingredients;
 DROP TABLE IF EXISTS Amb2_Ingredients;
@@ -13,6 +14,17 @@ CREATE TABLE IF NOT EXISTS Amb2_User (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM("NORMAL", "ADMIN") DEFAULT "NORMAL" NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Amb2_Address (
+	user_id VARCHAR(255) PRIMARY KEY,
+    street VARCHAR(255) NOT NULL,
+    number VARCHAR(255) NOT NULL,
+    neighbourhood VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    complement VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES Amb2_User (id)
 );
 
 CREATE TABLE IF NOT EXISTS Amb2_Pizzas (

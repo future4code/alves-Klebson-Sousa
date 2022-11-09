@@ -83,7 +83,22 @@ export class PizzaBusiness {
     return { message: "Pizza inserida com sucesso!" };
   };
 
-  public getPizzas = async (): Promise<IGetPizzasOutputDTO> => {
+  public getPizzas = async (token: string): Promise<IGetPizzasOutputDTO> => {
+
+    const payload = this.authenticator.getTokenPayload(token)
+
+    if (!payload) {
+      throw new ParamsError("Token inválido!");
+    }
+
+    const userId = payload.id;
+
+    const addressDB = await this.userDatabase.findAddressById(userId);
+
+    if (!addressDB) {
+      throw new ParamsError("Não autorizado!");
+    }
+
     const pizzasDB = await this.pizzaDatabase.getPizzas();
 
     const pizzas: Pizza[] = [];
@@ -114,35 +129,7 @@ export class PizzaBusiness {
 
     return response;
   };
-
-  public getPizzasV2 = async () => {
-    const pizzasFormatted = await this.pizzaDatabase.getPizzasFormatted();
-
-    const pizzas: any = [];
-
-    for (let pizzaDB of pizzasFormatted) {
-      const pizzaAlreadyOnArray = pizzas.find(
-        (pizza: any) => pizza.name === pizzaDB.name
-      );
-
-      if (pizzaAlreadyOnArray) {
-        pizzaAlreadyOnArray.ingredients.push(pizzaDB.ingredient_name);
-      } else {
-        const pizza = {
-          name: pizzaDB.name,
-          price: pizzaDB.price,
-          imageUrl: pizzaDB.image_url,
-          ingredients: [pizzaDB.ingredient_name],
-        };
-
-        pizzas.push(pizza);
-      }
-
-      return {
-        pizzas,
-      };
-    }
-  };
+ 
 
   public deletePizza = async (input: IDeletePizzaInputDTO) => {
     const { token, name } = input;

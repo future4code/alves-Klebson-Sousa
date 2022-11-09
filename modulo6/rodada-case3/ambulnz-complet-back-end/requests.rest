@@ -71,6 +71,7 @@ Authorization: {{token}}
 
 ### Get Pizzas
 GET http://localhost:3003/api/pizzas
+Authorization: {{token}}
 
 ### Get Pizzas
 GET http://localhost:3003/api/pizzas/v2

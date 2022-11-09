@@ -101,8 +101,6 @@ export class UserBusiness {
 
     const payload = this.authenticator.getTokenPayload(token);
 
-    console.log(payload)
-
     if (!payload) {
       throw new ParamsError("Token inválido");
     }
@@ -236,7 +234,7 @@ export class UserBusiness {
 
     const response: ILoginOutputDTO = {
       token,
-      message: `Bem vindo ${user.getName()}`,
+      message: `Seja bem vindo ${user.getName()}`,
       user: {
         id: user.getId(),
         name: user.getName(),

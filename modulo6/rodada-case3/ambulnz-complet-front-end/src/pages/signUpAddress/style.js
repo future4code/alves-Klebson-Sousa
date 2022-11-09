@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material"
+import { ButtonBase, TextField } from "@mui/material"
 import styled from "styled-components"
 
 export const MainContainer = styled.main`
@@ -21,6 +21,7 @@ export const Main = styled.div`
    
    h2 {
     text-align: center;
+    margin-top: 10px;
    }
 `
 
@@ -36,3 +37,25 @@ export const Form = styled.form`
 export const ShowInput = styled(TextField)`
     width: 100%;
 `
+export const ButtonStyled = styled(ButtonBase)`
+  && {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    background: red;
+    cursor: pointer;
+    border-radius: 0.938rem;
+    :hover {
+      border-radius: 0.938rem;
+      color: white;
+      box-shadow: rgb(208, 4, 4) 0px 0px 20px 0px;
+      -webkit-box-shadow: rgb(208, 4, 4) 0px 0px 20px 0px;
+      -moz-box-shadow: rgb(208, 4, 4) 0px 0px 20px 0px;
+    }
+
+    :active {
+      position: relative;
+      top: 5px;
+    }
+  }
+`;

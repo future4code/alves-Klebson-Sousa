@@ -17,8 +17,13 @@ const GlobalState = ({ children }) => {
   })
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
     axios
-      .get(`${BASE_URL}/pizzas`)
+      .get(`${BASE_URL}/pizzas`, {
+        headers: {
+          Authorization: token
+        }
+      })
       .then((res) => {
         setPizzas(res.data.pizzas);
       })

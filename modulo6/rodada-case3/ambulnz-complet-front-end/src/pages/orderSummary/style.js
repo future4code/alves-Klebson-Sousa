@@ -35,7 +35,6 @@ export const ContainerSection = styled.section`
   max-width: 80%;
   max-height: 80vh;
   padding: 3% 4%;
-  /* overflow: auto; */
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(10px) saturate(180%);
@@ -75,7 +74,6 @@ export const ContainerSection = styled.section`
 
 export const ButtonConfirm = styled.button`
   margin-top: 0.625rem;
-  /* padding: 05px; */
   width: 12.5rem;
   font-size: 1.5rem;
   color: blue;

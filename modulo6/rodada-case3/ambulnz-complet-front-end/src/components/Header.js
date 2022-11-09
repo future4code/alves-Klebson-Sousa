@@ -1,23 +1,29 @@
-import { ButtonCart, ContainerHeader, ImgLogo, LoginButton, SignupButton } from "./headerStyle"
+import { ButtonCart, ContainerHeader, GoTOBack, GoToHome, ImgLogo, LoginButton, LogoutButton, SignupButton } from "./headerStyle"
 import { useNavigate } from "react-router-dom";
-import { goToHomePage, goToLogin, goToOrderSummaryCard, goToSignUp } from "../routes/coordinator";
+import { goToBack, goToHomePage, goToLogin, goToOrderSummaryCard, goToPizzasMenuPage, goToSignUp } from "../routes/coordinator";
 import pizzaLogo from "./../assets/pizzaLogo.png"
 import Cart from "./../assets/Cart.png"
 
-import { SvgIcon } from "@mui/material";
-
-function Header({back, back2, back3}) {
+function Header({back, back2, back4}) {
 
   const navigate = useNavigate()
+  const token = localStorage.getItem("token")
+  const logout = () => {
+    localStorage.removeItem("token")
+    goToHomePage(navigate)
+  }
+        
 
   return(
         <ContainerHeader>
+            {back4 && <GoTOBack onClick={() => goToBack(navigate)} />}
             <ImgLogo src={pizzaLogo} alt="Fornália de pizza"/>
-            <h1>Pizza Al Forno</h1>
+            <h1>Pizza na Brasa</h1>
             {back && <SignupButton onClick={() => goToSignUp(navigate)}>Sign-Up</SignupButton>}
-            {back && <LoginButton onClick={() => goToLogin(navigate)}>Login</LoginButton>}
-            {back3 && <button onClick={() => goToHomePage(navigate)}>Home</button>}
+            {token? (back && <LoginButton onClick={() => goToPizzasMenuPage(navigate)}>Login</LoginButton>): (back && <LoginButton onClick={() => goToLogin(navigate)}>Login</LoginButton>)}
+            {back2 && <GoToHome onClick={() => goToHomePage(navigate)} />}
             {back2 && <ButtonCart onClick={() => goToOrderSummaryCard(navigate)} src={Cart} title="carrinho"/>}
+            {back2 && <LogoutButton onClick={logout} />}
         </ContainerHeader>
     )
 }

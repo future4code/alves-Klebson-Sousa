@@ -1,13 +1,25 @@
 import styled from "styled-components";
 import { IconButton, ButtonBase, TextField } from "@mui/material";
+import PizzasHome from "../../assets/Pizza_with_olive_and_onion.jpg";
 
 export const MainContainer = styled.main`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+
+  background-image: url(${PizzasHome});
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media (min-width: 300px) and (max-width: 500px) {
     padding: 1.25rem;
-`
+  }
+`;
 export const Main = styled.section`
+  position: absolute;
+  top: 130px;
   padding: 0.625rem;
   width: 30%;
   min-width: 360px;
@@ -20,6 +32,8 @@ export const Main = styled.section`
 
   h2 {
     text-align: center;
+    margin-top: 10px;
+    color: white;
   }
 `;
 export const Form = styled.form`
@@ -30,18 +44,26 @@ export const Form = styled.form`
   justify-content: space-evenly;
 `;
 
+export const DeliveryImg = styled.img`
+  width: 240px;
+  height: 200px;
+  margin-top: 30px;
+`;
+
 export const ShowInput = styled(TextField)`
-    && {
-        width: 100%;
-    }
-`
+  && {
+    width: 100%;
+    border: solid lightgray 1px;
+    background-color: #eaacac;
+    border-radius: 5px;
+  }
+`;
 export const ButtonStyled = styled(ButtonBase)`
   && {
     width: 100%;
     padding: 10px;
     font-size: 1.5rem;
     background: red;
-    cursor: pointer;
     border-radius: 0.938rem;
     :hover {
       border-radius: 0.938rem;
@@ -59,13 +81,14 @@ export const ButtonStyled = styled(ButtonBase)`
 `;
 
 export const ShowButton = styled(IconButton)`
-    && {
-        width: auto;
-    }
-`
+  && {
+    width: auto;
+    color: #fff;
+  }
+`;
 
 export const DivPassword = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

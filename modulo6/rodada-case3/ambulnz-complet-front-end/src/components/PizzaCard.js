@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { GlobalStateContext } from "../global/GlobalContex";
 import { AddCartButton, Container, ImageCard, Ingrdients } from "./pizzaCardStyle";
-import AddCart from "./../assets/AddCart.png"
+// import AddCart from "./../assets/AddCart.png"
 
 function PizzaCard({ pizza }) {
   const { addToCart, priceFormated } = useContext(GlobalStateContext);
@@ -16,7 +16,7 @@ function PizzaCard({ pizza }) {
           return <span key={item}>{item}; </span>;
         })}
       </Ingrdients>
-      <AddCartButton onClick={() => addToCart(pizza)} src={AddCart} title="carrinho"/>
+      <AddCartButton onClick={() => addToCart(pizza)} />
     </Container>
   );
 }

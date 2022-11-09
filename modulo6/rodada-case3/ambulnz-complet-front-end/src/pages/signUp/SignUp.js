@@ -16,9 +16,10 @@ import { BASE_URL } from "../../constants/baseUrl";
 import { goToAdminPage, goToSignUpAddress } from "../../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Header from "../../components/Header"
 
 function SignUp() {
-  const { form, onChangeForm, clean } = useForm({
+  const { form, onChangeForm, clear } = useForm({
     name: "",
     email: "",
     password: "",
@@ -29,7 +30,7 @@ function SignUp() {
   const [showCheckPassword, setShowCheckPassword] = useState(false);
   const [checKErrorPassword, setCheckErrorPassword] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -52,34 +53,36 @@ function SignUp() {
     await axios
       .post(`${BASE_URL}/user/signup`, form)
       .then((res) => {
-        localStorage.setItem("token", res.data.token)
-        if(res.data.user.role === "NORMAL"){
-          goToSignUpAddress(navigate)
+        localStorage.setItem("token", res.data.token);
+        clear();
+        if (res.data.user.role === "NORMAL") {
+          goToSignUpAddress(navigate);
           Swal.fire({
             title: `Olá ${res.data.user.name}! Cadastre um endereço de entrega.`,
             showClass: {
-              popup: 'animate__animated animate__fadeInDown'
+              popup: "animate__animated animate__fadeInDown",
             },
             hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
-        } else goToAdminPage(navigate)
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        } else goToAdminPage(navigate);
       })
       .catch((error) => {
         Swal.fire({
           title: error.response.data.message,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        })
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
       });
   };
   return (
     <MainContainer>
+        <Header back4 />
       <Main>
         <h2>Cadastrar</h2>
         <Form onSubmit={onSubmitForm}>
@@ -92,6 +95,7 @@ function SignUp() {
             variant="outlined"
             value={form.name}
             onChange={onChangeForm}
+            required
           />
 
           <ShowInput

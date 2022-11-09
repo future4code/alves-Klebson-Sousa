@@ -12,9 +12,15 @@ const GlobalStyle = createGlobalStyle`
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   ul, li {
     list-style: none;
   }
+  
+  
 `
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

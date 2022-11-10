@@ -23,7 +23,7 @@ function PizzasMenuPage() {
     
   return (
     <ContainerSection>
-      <Header back2 />
+      <Header back2 back3/>
       <InputSearch
         placeholder="Pesquisa"
         value={inputText}

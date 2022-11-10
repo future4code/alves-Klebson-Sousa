@@ -17,7 +17,7 @@ const Router = () => {
                 <Route path='/api/signUp' element={<SignUp/>}/>
                 <Route path='/api/signUpAddress' element={<SignUpAddress/>}/>
                 <Route path='/api/admin' element={<AdminPage/>}/>
-                <Route path='/api/menu' element={<PizzasMenuPage/>}/>
+                <Route path='/api/pizzas/menu' element={<PizzasMenuPage/>}/>
                 <Route path='/api/orders' element={<OrderSummary/>}/>
             </Routes>
         </BrowserRouter>

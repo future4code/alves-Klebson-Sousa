@@ -19,7 +19,7 @@ const GlobalState = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token")
     axios
-      .get(`${BASE_URL}/pizzas`, {
+      .get(`${BASE_URL}/pizzas/menu`, {
         headers: {
           Authorization: token
         }
@@ -28,7 +28,6 @@ const GlobalState = ({ children }) => {
         setPizzas(res.data.pizzas);
       })
       .catch((error) => {
-        console.log(error.response);
       });
   }, []);
 

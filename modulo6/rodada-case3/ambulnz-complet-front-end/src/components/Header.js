@@ -4,7 +4,7 @@ import { goToBack, goToHomePage, goToLogin, goToOrderSummaryCard, goToPizzasMenu
 import pizzaLogo from "./../assets/pizzaLogo.png"
 import Cart from "./../assets/Cart.png"
 
-function Header({back, back2, back4}) {
+function Header({back, back2, back3, back4}) {
 
   const navigate = useNavigate()
   const token = localStorage.getItem("token")
@@ -22,7 +22,7 @@ function Header({back, back2, back4}) {
             {back && <SignupButton onClick={() => goToSignUp(navigate)}>Sign-Up</SignupButton>}
             {token? (back && <LoginButton onClick={() => goToPizzasMenuPage(navigate)}>Login</LoginButton>): (back && <LoginButton onClick={() => goToLogin(navigate)}>Login</LoginButton>)}
             {back2 && <GoToHome onClick={() => goToHomePage(navigate)} />}
-            {back2 && <ButtonCart onClick={() => goToOrderSummaryCard(navigate)} src={Cart} title="carrinho"/>}
+            {back3 && <ButtonCart onClick={() => goToOrderSummaryCard(navigate)} src={Cart} title="carrinho"/>}
             {back2 && <LogoutButton onClick={logout} />}
         </ContainerHeader>
     )

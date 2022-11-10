@@ -5,7 +5,7 @@ export const goToAdminPage = (navigate) => {
     navigate('/api/admin')
 }
 export const goToPizzasMenuPage = (navigate) => {
-    navigate('/api/menu')
+    navigate('/api/pizzas/menu')
 }
 export const goToBack = (navigate) => {
     navigate(-1)

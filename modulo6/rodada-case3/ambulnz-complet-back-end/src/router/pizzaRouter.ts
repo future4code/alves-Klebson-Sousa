@@ -18,5 +18,7 @@ const pizzaController = new PizzaController(
 )
 
 pizzaRouter.get("/", pizzaController.getPizzas)
+pizzaRouter.get("/ingredients", pizzaController.getIngredients)
+pizzaRouter.get("/menu", pizzaController.getPizzasMenu)
 pizzaRouter.post("/insert", pizzaController.insertPizza)
 pizzaRouter.delete("/delete", pizzaController.deletePizza)

@@ -33,9 +33,17 @@ POST http://localhost:3003/api/user/login
 Content-Type: application/json
 
 {
-  "email": "cicrano@gmail.com",
+  "email": "astrodev@gmail.com",
   "password": "123456"
 }
+
+### Get Pizzas
+GET http://localhost:3003/api/pizzas
+Authorization: {{token}}
+
+### Get Ingredientes
+GET http://localhost:3003/api/pizzas/ingredients
+Authorization: {{token}}
 
 ### Inserir pizzas
 @token = {{login.response.body.token}}
@@ -44,18 +52,15 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "Margherita",
-  "price": 28.9,
-  "imageUrl": "https://i.postimg.cc/52gr541C/marguerita.jpg",
+  "name": "Brigadeiro",
+  "price": 24.90,
+  "imageUrl": "https://i.postimg.cc/bYG9NCCp/pizza-Brigadeiro1.jpg",
   "ingredients":[
     {
-      "name": "oregano"
+      "ingredientName": "chocolate"
     },
     {
-      "name": "tomato"
-    },
-    {
-      "name": "mozzarella"
+      "ingredientName": "trufas"
     }
   ]
 }
@@ -66,11 +71,11 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-  "name": "Margherita"
+  "name": "Brigadeiro"
 }
 
-### Get Pizzas
-GET http://localhost:3003/api/pizzas
+### Get Pizzas do menu
+GET http://localhost:3003/api/pizzas/menu
 Authorization: {{token}}
 
 ### Get Pizzas

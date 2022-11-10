@@ -5,6 +5,7 @@ import { ParamsError } from "../errors/ParamsError";
 import { IdGenerator } from "../services/IdGenerator";
 import {
   IDeletePizzaInputDTO,
+  IGetPizzasMenuOutputDTO,
   IGetPizzasOutputDTO,
   IInsertPizzaInputDTO,
   IPizzaDB,
@@ -14,6 +15,7 @@ import {
 import { Authenticator } from "../services/Authenticator";
 import { UserDatabase } from "../database/UserDatabase";
 import { USER_ROLES } from "../models/User";
+import { Console } from "console";
 
 export class PizzaBusiness {
   constructor(
@@ -58,23 +60,23 @@ export class PizzaBusiness {
 
     for (let ingredient of ingredients) {
       const ingredientsExist = await this.pizzaDatabase.findIngredientsByName(
-        ingredient.name
+        ingredient.ingredientName
       );
 
       if (ingredientsExist && !pizzaDB) {
         const pizzaIngredients: IPizzasIngredientsDB = {
           pizza_name: pizza.name,
-          ingredient_name: ingredient.name,
+          ingredient_name: ingredient.ingredientName,
         };
         await this.pizzaDatabase.insertPizzaIngredients(pizzaIngredients);
       } else {
         const ingredientsDB = {
-          name: ingredient.name,
+          name: ingredient.ingredientName,
         };
         await this.pizzaDatabase.insertIngredients(ingredientsDB);
         const pizzaIngredients: IPizzasIngredientsDB = {
           pizza_name: pizza.name,
-          ingredient_name: ingredient.name,
+          ingredient_name: ingredient.ingredientName,
         };
         await this.pizzaDatabase.insertPizzaIngredients(pizzaIngredients);
       }
@@ -83,7 +85,9 @@ export class PizzaBusiness {
     return { message: "Pizza inserida com sucesso!" };
   };
 
-  public getPizzas = async (token: string): Promise<IGetPizzasOutputDTO> => {
+  // Ingredientes do estoque do Administrador
+
+  public getIngredients = async (token: string) => {
 
     const payload = this.authenticator.getTokenPayload(token)
 
@@ -94,8 +98,74 @@ export class PizzaBusiness {
     const userId = payload.id;
 
     const addressDB = await this.userDatabase.findAddressById(userId);
+    
 
-    if (!addressDB) {
+    if (payload.role === USER_ROLES.NORMAL && !addressDB) {
+      throw new ParamsError("Não autorizado!");
+    }
+
+    const ingredientsDB = await this.pizzaDatabase.getIngredients();    
+
+    // const response: IGetPizzasOutputDTO = {
+    //   message: "Pizzas retornadas com sucesso!",
+    //   pizzas: pizzasDB.map((pizza) => ({
+    //     name: pizza.name,
+    //     price: pizza.price,
+    //     imageUrl: pizza.image_url
+    //   })),
+    // };
+
+    return ingredientsDB;
+    // return response;
+  };
+
+  // Pizza do estoque do Administrador
+
+  public getPizzas = async (token: string) => {
+
+    const payload = this.authenticator.getTokenPayload(token)
+
+    if (!payload) {
+      throw new ParamsError("Token inválido!");
+    }
+
+    const userId = payload.id;
+
+    const addressDB = await this.userDatabase.findAddressById(userId);
+    
+
+    if (payload.role === USER_ROLES.NORMAL && !addressDB) {
+      throw new ParamsError("Não autorizado!");
+    }
+
+    const pizzasDB = await this.pizzaDatabase.getPizzas();    
+
+    const response: IGetPizzasOutputDTO = {
+      message: "Pizzas retornadas com sucesso!",
+      pizzas: pizzasDB.map((pizza) => ({
+        name: pizza.name,
+        price: pizza.price,
+        imageUrl: pizza.image_url
+      })),
+    };
+
+    return response;
+  };
+
+  public getPizzasMenu = async (token: string): Promise<IGetPizzasMenuOutputDTO> => {
+
+    const payload = this.authenticator.getTokenPayload(token)
+
+    if (!payload) {
+      throw new ParamsError("Token inválido!");
+    }
+
+    const userId = payload.id;
+
+    const addressDB = await this.userDatabase.findAddressById(userId);
+    
+
+    if (payload.role === USER_ROLES.NORMAL && !addressDB) {
       throw new ParamsError("Não autorizado!");
     }
 
@@ -110,14 +180,14 @@ export class PizzaBusiness {
         pizzaDB.image_url,
         []
       );
-      const ingredients = await this.pizzaDatabase.getIngredients(pizzaDB.name);
+      const ingredients = await this.pizzaDatabase.getIngredientsPizza(pizzaDB.name);
 
       pizza.setIngredients(ingredients);
 
       pizzas.push(pizza);
     }
 
-    const response: IGetPizzasOutputDTO = {
+    const response: IGetPizzasMenuOutputDTO = {
       message: "Pizzas retornadas com sucesso!",
       pizzas: pizzas.map((pizza) => ({
         name: pizza.getName(),

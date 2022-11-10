@@ -64,7 +64,7 @@ export class Pizza {
     }
 }
 
-export interface IGetPizzasOutputDTO {
+export interface IGetPizzasMenuOutputDTO {
     message: string,
     pizzas: {
         name: string,
@@ -73,13 +73,21 @@ export interface IGetPizzasOutputDTO {
         ingredients: string[]
     }[]
 }
+export interface IGetPizzasOutputDTO {
+    message: string,
+    pizzas: {
+        name: string,
+        price: number,
+        imageUrl: string        
+    }[]
+}
 
 export interface IInsertPizzaInputDTO {
     name: string,
     price: number,
     imageUrl: string,
     ingredients: {
-        name: string
+        ingredientName: string
     }[],
     token: string
 }

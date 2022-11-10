@@ -30,12 +30,49 @@ export class PizzaController {
         }
     }
 
+    // Ingredientes do estoque do Administrador
+    
+    public getIngredients = async (req: Request, res: Response) => {
+        try {
+            const token = req.headers.authorization as string
+
+            const response = await this.pizzaBusiness.getIngredients(token)
+            res.status(200).send(response)
+
+        } catch (error) {
+            console.log(error)
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao buscar Ingredientes no estoque" })
+        }
+    }
+
+    // Pizza do estoque do Administrador
     
     public getPizzas = async (req: Request, res: Response) => {
         try {
             const token = req.headers.authorization as string
 
             const response = await this.pizzaBusiness.getPizzas(token)
+            res.status(200).send(response)
+
+        } catch (error) {
+            console.log(error)
+            if (error instanceof BaseError) {
+                return res.status(error.statusCode).send({ message: error.message })
+            }
+            res.status(500).send({ message: "Erro inesperado ao buscar pizzas no estoque" })
+        }
+    }
+
+    // Menu pronto par o cliente
+
+    public getPizzasMenu = async (req: Request, res: Response) => {
+        try {
+            const token = req.headers.authorization as string
+
+            const response = await this.pizzaBusiness.getPizzasMenu(token)
             res.status(200).send(response)
 
         } catch (error) {

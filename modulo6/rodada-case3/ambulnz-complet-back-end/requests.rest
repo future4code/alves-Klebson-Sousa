@@ -1,0 +1,103 @@
+### Ping
+GET http://localhost:3003/api/ping
+
+### Criar usuário
+# @name signup
+Post http://localhost:3003/api/user/signup
+Content-Type: application/json
+
+{
+  "name": "Cicrano",
+  "email": "cicrano@gmail.com",
+  "password": "123456"
+}
+### Cadastrar endereço
+@token1 = {{signup.response.body.token}}
+Put http://localhost:3003/api/user/address
+Content-Type: application/json
+Authorization: {{token1}}
+
+{
+    "street": "R. Afonso Braz",
+    "number": "177",
+    "neighbourhood": "Vila N. Conceição",
+    "city": "São Paulo",
+    "state": "SP",
+    "complement": "72"
+}
+
+###
+# login do usuário
+# @name login
+POST http://localhost:3003/api/user/login
+Content-Type: application/json
+
+{
+  "email": "astrodev@gmail.com",
+  "password": "123456"
+}
+
+### Get Pizzas
+GET http://localhost:3003/api/pizzas
+Authorization: {{token}}
+
+### Get Ingredientes
+GET http://localhost:3003/api/pizzas/ingredients
+Authorization: {{token}}
+
+### Inserir pizzas
+@token = {{login.response.body.token}}
+POST http://localhost:3003/api/pizzas/insert
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Brigadeiro",
+  "price": 24.90,
+  "imageUrl": "https://i.postimg.cc/bYG9NCCp/pizza-Brigadeiro1.jpg",
+  "ingredients":[
+    {
+      "ingredientName": "chocolate"
+    },
+    {
+      "ingredientName": "trufas"
+    }
+  ]
+}
+
+### Deletar pizza
+DELETE  http://localhost:3003/api/pizzas/delete
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Brigadeiro"
+}
+
+### Get Pizzas do menu
+GET http://localhost:3003/api/pizzas/menu
+Authorization: {{token}}
+
+### Get Pizzas
+GET http://localhost:3003/api/pizzas/v2
+
+### Create order
+Post http://localhost:3003/api/orders/create
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "pizzas":[
+    {
+        "name":"Margherita",
+        "quantity": 10
+    }, 
+    {
+        "name":"Bufala",
+        "quantity": 5
+    } 
+   ]
+}
+
+### Get Orders
+GET http://localhost:3003/api/orders

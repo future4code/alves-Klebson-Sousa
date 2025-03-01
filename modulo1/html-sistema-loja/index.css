@@ -1,0 +1,96 @@
+/*  Página inicial */
+header {
+    background-color: cadetblue;
+}
+
+body {
+    background-color: rgb(223, 221, 221);
+}
+
+.redes-sociais {
+    font-size: xx-small;
+    text-align: end;
+}
+
+.redes-sociais img {
+    width: 15px;
+}
+
+.h1 {
+    text-align: center;
+}
+
+.h1 img {
+    width: 50px;
+}
+
+.pagina-inicial a {
+    color: black;
+    font-size: xx-small;
+}
+
+.pagina-inicial {
+    text-align: right;
+}
+
+.nome-produtos {
+    background-color: aqua;
+}
+
+.produtos img{
+    width: 50px;
+    margin-left: 50px;
+}
+
+/* Conrtrole de estoque */
+.controle-estoque {
+    
+    text-align:right;
+}
+
+.controle-estoque a {
+    color: black;
+    font-size: xx-small;
+}
+
+#titulo {
+    text-align: center;
+}
+
+.produto1 {
+    background-color: aqua;
+    text-align: justify;
+}
+
+.produto1 img {
+    width: 50px;
+}
+
+.produto1 td {
+    background-color: yellow;
+    text-align: justify;
+}
+
+/*  Pagina de funcionários */
+.titulo1 {
+    text-align: center;
+}
+
+#link-funcionários {
+    text-align: right;
+    font-size: xx-small;
+}
+
+#link-funcionários a {
+    color: black;
+}
+
+/*  Pagina adicionar produto */
+#link-adicionar {
+    text-align: right;
+    font-size: xx-small;
+}
+
+#link-adicionar a {
+    color: black;
+}

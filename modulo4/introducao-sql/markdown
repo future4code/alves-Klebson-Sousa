@@ -1,0 +1,23 @@
+# **Exercícios**
+### 1. 
+### a) VARCHAR(n) semelhante a strings mas precisamos definir o número máximo de caracteres; NOT NULL significa que este campo não pode ficar vazio.
+### b) SHOW DATABASES me mostrou informações que eu tenho no meu banco de dados, SHOW TABLES me mostrou a tabela existente no meu banco de dados.
+### c) DESCRIBE Actor me mostrou todas as informações da minha tabela Actor.
+
+### 2. 
+### a) insert into Actor (id, name, salary, birth_date, gender)
+### VALUES ("001", "Tony Ramos", 400000, "1948-08-25", "male");
+### insert into Actor (id, name, salary, birth_date, gender)
+### VALUES ("002", "Glória Pires", 1200000, "1963-08-23", "gender");
+### b) Erro 1062 Entrada duplicada 002 Chave Primaria, ele não aceita dois ou mais id iguais.
+### c) Erro 1136. A contagem de colunas, não correspondem a contagem dos valores, ou seja, foi fornecido 3 colunas e adicionados 4 valores.
+## d) Código 1364. Nome do campo não tem valor padrão. N verdade faltou inserir a coluna name e o programa confunde o segundo valor que seria atribuído ao salário que é um float com o nome que é varchar.
+### e) Erro 1292. Valor data incorreto. O valor data de nascimento tem que vir dentro de aspas para formato date.
+### f) Erro 1062 entrada duplicada 003 para chave Primária, ele não aceita dois ou mais id iguais.
+### 3. 
+### a) select * from Actor
+### where gender = "female";
+### b) select name, salary from Actor
+### where name = "Tony Ramos";
+### c) Toda vez que deixo de inserir o valor deixando só uma aspas vazia ou coloco um valor inexistente, ele me retorna vazio.
+### d) 

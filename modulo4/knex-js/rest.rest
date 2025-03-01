@@ -1,0 +1,42 @@
+POST http://localhost:3003/actor/create
+Content-Type: application/json
+
+{
+   "name": "Adão",
+    "salary": 5000,
+    "birth_date": "1990-02-20",
+    "gender": "male",
+    "favorite_ice_cream_flavor": "chocolate"
+}
+
+
+### 
+GET  http://localhost:3003/actor/001
+
+### 
+GET  http://localhost:3003/actor/count?gender=male
+
+###
+PUT http://localhost:3003/actors/salary
+Content-Type: application/json
+
+{
+    "id": "1661383695800",
+    "salary": 107889   
+}
+
+###
+DELETE http://localhost:3003/actor/delete/1661383695800
+
+
+###
+POST http://localhost:3003/film/create
+Content-Type: application/json
+
+{
+    "name": "Bora Bora",
+    "synopsis": "KKKKKKKKK",
+    "launch_date": "2019-01-01",
+    "evaluation": 3,
+    "playing_limit_date": "2030-01-01"
+}

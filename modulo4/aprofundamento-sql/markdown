@@ -1,0 +1,117 @@
+### Exercício 1
+a) Vai remover da tabela de atores a coluna salary.
+b) Vai modificar o nome da coluna genger para "sex" com uma string de no máximo 6 caracteres
+c) Vai modificar a coluna genger para uma string de 255 caracteres
+d) ALTER TABLE Actor 
+CHANGE gender gender VARCHAR(100);
+```
+SELECT * FROM Table;
+```
+
+
+### Exercício 2
+a) UPDATE Actor
+SET name = "Moacyr Franco", 
+birth_date = "1936-10-05"
+WHERE id = 003;
+b) UPDATE Actor
+SET name = "JULIANA PAES"
+WHERE name = "Juliana Paes";
+c) UPDATE Actor 
+SET 
+name = "Alfredo",
+salary = 500000,
+birth_date = "1980-12-30",
+gender = "male"
+WHERE id = 005;
+d) UPDATE Actor 
+SET 
+name = "Ana",
+salary = 500000,
+birth_date = "1980-12-30",
+gender = "female"
+WHERE id = 10; coloquei um id inesistente e me retornou ok, mas zero linhas alteradas.
+
+```
+SELECT * FROM Table;
+```
+
+
+### Exercício 3
+a) DELETE FROM Actor WHERE name = "Fernanda Montenegro";
+
+b) DELETE FROM Actor 
+WHERE gender = "male" and 
+salary > 1000000;
+
+### Exercício 4
+a) SELECT MAX(salary) 
+From Actor;
+b) SELECT Min(salary) 
+From Actor
+WHERE gender = "female";
+c) select COUNT(*)
+FROM Actor
+WHERE gender = "female";
+d) SELECT SUM(salary)
+FROM Actor;
+
+### Exercício 5
+a) Essa query retornou a contagem por gender female e male, separadamente
+b) SELECT name, id FROM Actor
+ORDER BY name desc;
+c) SELECT * FROM Actor
+ORDER BY salary;
+d) SELECT * FROM Actor
+ORDER BY salary desc
+LIMIT 3; 
+e) SELECT AVG(salary), gender
+FROM Actor
+GROUP BY gender;
+
+### Exercício 6
+a) ALTER TABLE Films
+ADD playing_limit_date DATE;
+b) ALTER TABLE Films
+CHANGE evaluation evaluation FLOAT;
+c) UPDATE Films
+SET playing_limit_date = "2010-05-30"
+WHERE id = 5;
+UPDATE Films
+SET playing_limit_date = "2022-10-30"
+WHERE id = 6;
+d) DELETE FROM Films
+WHERE id = 2;
+Dá status ok, mas zero linhas auteradas
+
+### Exercício 7
+a) SELECT * FROM Films
+WHERE evaluation > 7.5;
+5
+b) SELECT AVG(evaluation)
+FROM Films;
+8.6
+c) SELECT COUNT(*) FROM Films 
+WHERE playing_limit_date > CURDATE();
+1
+d) SELECT COUNT(*) FROM Films
+WHERE launch_date > CURDATE();
+0
+e) SELECT MAX(evaluation) FROM Films;
+10
+f)SELECT MIN(evaluation) FROM Films;
+7
+
+### Exercício 8
+a) SELECT * FROM Films
+ORDER BY name;
+b) SELECT * FROM Films
+ORDER BY name DESC
+LIMIT 5;
+c) SELECT * FROM Films
+WHERE launch_date < curdate()
+ORDER BY launch_date DESC
+limit 3;
+d) SELECT * FROM Films
+ORDER BY evaluation DESC
+limit 3;

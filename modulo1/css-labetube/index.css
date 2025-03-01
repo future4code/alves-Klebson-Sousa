@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+}   
+
+body {
+    background-color: darkgray;
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr 50px;
+    background-image: url(./nova1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+/* Cabeçalho */
+header {
+    background-color: orange;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: start;
+    padding: 1rem;
+}
+
+
+
+header input {    
+    grid-column: 3/4;
+    height: 25px;
+    /* text-align: left;
+    align-items: center;
+    display: flex;
+    justify-content: center; */
+}
+
+/* Videos */
+section {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    
+}
+
+.divVideo {    
+    width: 300px;
+    border: 1px solid black;
+}
+
+.divVideo img {
+    width: 300px;
+}
+.divVideo video {
+    width: 100%;
+}
+
+.divVideo p { 
+    margin-left: 10px;
+    color: antiquewhite;
+    
+}
+
+/* Roda Pé */
+footer {
+    display: flex;
+    background-color: grey;
+    align-items: center;
+}
+
+footer h3 {
+    font-style: italic;
+    margin: 10px;
+    color: aliceblue;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    body {
+        background-image: url(./nova.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    /* .divVideo {
+        width: 150px;
+    } */
+    .divVideo p {
+        color: rgb(243, 62, 49);
+    }
+    section {
+        justify-content: center;
+    }
+    footer {
+        background-color: black;
+        height: 80px;
+        align-self: center;
+    }
+}
